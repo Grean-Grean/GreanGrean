@@ -1,5 +1,7 @@
 import { Button, Modal, Form } from "react-bootstrap";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { signIn, signOut } from './SignInRedux'
 
 const SignIn = (props) => {
 
@@ -8,6 +10,11 @@ const SignIn = (props) => {
         email: '',
         password: ''
     })
+
+    //리덕스 가지고 오기
+    const isUserSignIn = useSelector(state => state.completed.iscompleted)
+    //dispatch -> redux 조작
+    const dispatch = useDispatch()
 
     //입력시 user state에 저장
     const handleChangeState = (e) => {
@@ -22,6 +29,7 @@ const SignIn = (props) => {
     const clickLogIn = () => {
         //나중에 서버에 보내주기
         console.log(user)
+        dispatch(signIn())
         props.onHide()
     }
 
