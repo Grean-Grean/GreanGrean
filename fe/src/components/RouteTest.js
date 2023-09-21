@@ -8,7 +8,12 @@ const RouteTest = () => {
             <Link to={'/'}>Main</Link>
             <br />
             <Link to={'/shop'}>Shop</Link>
+            <br />
+            <Link to={'/product'}>상품등록</Link>
+            <br />
+            <Link to={'/mypage/:id'}>상품등록</Link>
+
         </div>
     )
 }
-export default RouteTest
+export default RouteTest;

@@ -1,4 +1,4 @@
-import ProductList from "./ProductList"
+import ProductList from "../product/ProductList"
 import SearchBar from "./SearchBar"
 
 //임시 더미 데이터
