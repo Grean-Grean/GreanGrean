@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Routers from './router/routers';
 
-import Main from './components/main/Main';
-import Shop from './components/shop/shop';
-import ProductDetail from './components/shop/ProductDetail';
 
 import RouteTest from './components/RouteTest';
 
@@ -17,12 +15,7 @@ function App() {
       <div className="App" >
         <Header />
 
-        <Routes>
-          <Route path='/' element={<Main />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/product/:id' element={<ProductDetail />} />
-        </Routes>
-
+        <Routers />
         <RouteTest />
         <Footer />
       </div>
