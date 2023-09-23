@@ -30,10 +30,14 @@ const Header = () => {
 
             {isUserSignIn ? //로그인 했으면 로그아웃 하게 해주기
                 <>
+                    <Button variant="primary" onClick={() => navigate('/mypage')} style={{ margin: 3 }}>
+                        마이페이지
+                    </Button>
                     <Button variant="primary" onClick={logOut}>로그아웃</Button>
                 </>
                 :      // 로그인, 회원가입 보여주지 말기
                 <>
+
                     <Button variant="primary" onClick={() => setSignInShow(true)} style={{ margin: 3 }}>
                         로그인
                     </Button>
