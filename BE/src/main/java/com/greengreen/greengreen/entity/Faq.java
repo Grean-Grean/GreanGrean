@@ -13,4 +13,8 @@ public class Faq {
 
     @Column(name = "faq_content")
     private String fagContent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
 }

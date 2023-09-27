@@ -19,4 +19,15 @@ public class User {
 
     @Column(name = "user_nick_name", length = 20)
     private String userNickName;
-}
+
+    @OneToMany(mappedBy="faq")
+    private List<Faq> faqList;
+
+    @OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+    private List<Product> productList;
+
+    @OneToMany(mappedBy="review", cascade=CascadeType.ALL)
+    private List<Review> reviewList;
+
+    @OneToMany(mappedBy="purchase", cascade=CascadeType.ALL)
+    private List<Purchase> purchaseList;

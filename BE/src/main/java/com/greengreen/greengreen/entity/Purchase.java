@@ -26,4 +26,12 @@ public class Purchase {
 
     @Column(name = "purchase_state")
     private String purchaseState;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "productId")
+    private Product product;
 }

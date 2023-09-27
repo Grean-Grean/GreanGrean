@@ -29,4 +29,16 @@ public class Product {
 
     @Column(name = "product_category")
     private Enum productCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @OneToMany(mappedBy="review", cascade=CascadeType.ALL)
+    @JoinColumn(name = "reviewId")
+    private Review review;
+
+    @OneToMany(mappedBy="purchase", cascade=CascadeType.ALL)
+    @JoinColumn(name = "purchaseId")
+    private Purchase purchase;
 }
