@@ -47,6 +47,10 @@ dependencies {
 
 	// Security
 //	testImplementation 'org.springframework.security:spring-security-test'
+
+	// 암호화
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-crypto'
 }
 
 tasks.named('test') {
