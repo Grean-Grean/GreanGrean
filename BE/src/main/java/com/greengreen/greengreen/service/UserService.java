@@ -1,13 +1,16 @@
 package com.greengreen.greengreen.service;
 
+import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.dto.response.LoginResDto;
 
 public interface UserService {
 
-    public void singUp(User user);
+    public void singUp(UserRegistReqDto userRegistReqDto);
 
-    InfoValidationResDto nickNameCheck(String userNickName);
+    public InfoValidationResDto nickNameCheck(String userNickName);
 
-    InfoValidationResDto emailCheck(String userEmail);
+    public InfoValidationResDto emailCheck(String userEmail);
+
+    public LoginResDto login(String userEmail, String userPassword);
 }
