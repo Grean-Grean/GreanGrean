@@ -36,7 +36,7 @@ public class Purchase {
     private String purchasePhoneNumber;
 
     @Column(name = "purchase_state", nullable = false)
-    private String purchaseState;
+    private String purchaseStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")

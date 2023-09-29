@@ -40,7 +40,7 @@ public class Product {
     private LocalDateTime productCreateTime;
 
     @Column(name = "product_category", nullable = false)
-    private Enum productCategory;
+    private String productCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
