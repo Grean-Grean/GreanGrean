@@ -8,5 +8,8 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class LoginResDto {
-    
+
+    private Long userId;
+    private String userNickName;
+
 }

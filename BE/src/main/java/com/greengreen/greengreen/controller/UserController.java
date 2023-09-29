@@ -1,9 +1,11 @@
 package com.greengreen.greengreen.controller;
 
 import com.greengreen.greengreen.dto.request.EmailCheckReqDto;
+import com.greengreen.greengreen.dto.request.LoginReqDto;
 import com.greengreen.greengreen.dto.request.NickNameCheckReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
+import com.greengreen.greengreen.dto.response.LoginResDto;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +52,13 @@ public class UserController {
     }
 
     // 로그인
-//    @PostMapping("/login")
-//    public ResponseEntity<>
+    @PostMapping("/login")
+    public ResponseEntity<LoginResDto>  userLogin(@Valid @RequestBody LoginReqDto loginReqDto){
+        LoginResDto loginResDto = userService.login(loginReqDto.getUserEmail(), loginReqDto.getUserPassword());
+
+        return ResponseEntity.ok()
+                .body(loginResDto);
+    }
 
 
 }
