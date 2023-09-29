@@ -38,9 +38,9 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	// MapStruct
-	implementation "org.mapstruct:mapstruct:1.5.5.Final"
-	annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
-	testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+//	implementation "org.mapstruct:mapstruct:1.5.5.Final"
+//	annotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
+//	testAnnotationProcessor "org.mapstruct:mapstruct-processor:1.5.5.Final"
 
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

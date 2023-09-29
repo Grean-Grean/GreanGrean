@@ -4,7 +4,6 @@ import com.greengreen.greengreen.dto.request.EmailCheckReqDto;
 import com.greengreen.greengreen.dto.request.NickNameCheckReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.mapper.UserMapper;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +21,11 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
-    private final UserMapper userMapper;
 
     // 회원가입
     @PostMapping("/regist")
     public ResponseEntity<Void> userRegist(@Valid @RequestBody UserRegistReqDto userRegistReqDto){
-        userService.singUp(userMapper.userRegistReqDtoToUser(userRegistReqDto));
+        userService.singUp(userRegistReqDto);
 
         return ResponseEntity.ok().build();
     }
