@@ -25,7 +25,7 @@ public class UserController {
     // 회원가입
     @PostMapping("/regist")
     public ResponseEntity<Void> userRegist(@Valid @RequestBody UserRegistReqDto userRegistReqDto){
-        userService.singUp(userMapper.userRegistReqDtoToUser(userRegistReqDto));
+        userService.singUp(userRegistReqDto);
 
         return ResponseEntity.ok().build();
     }

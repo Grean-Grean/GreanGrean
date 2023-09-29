@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@Builder
 @DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,9 +24,10 @@ public class Faq {
     private String faqTitle;
 
     @Column(name = "faq_content", nullable = false)
-    private String fagContent;
+    private String faqContent;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User user;
+    public void modifyFaq(String faqTitle, String faqContent){
+        this.faqTitle = faqTitle;
+        this.faqContent = faqContent;
+    }
 }

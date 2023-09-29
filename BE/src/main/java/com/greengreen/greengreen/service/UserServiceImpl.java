@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.service;
 
+import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.entity.User;
 import com.greengreen.greengreen.repository.UserRepository;
@@ -15,7 +16,14 @@ public class UserServiceImpl implements UserService{
 
     // 회원가입
     @Override
-    public void singUp(User user) {
+    public void singUp(UserRegistReqDto userRegistReqDto) {
+        User user = User.builder()
+                .userEmail(userRegistReqDto.getUserEmail())
+                .userPassword(userRegistReqDto.getUserPassword())
+                .userName(userRegistReqDto.getUserName())
+                .userNickName(userRegistReqDto.getUserNickName())
+                .build();
+
         userRepository.save(user);
     }
 
