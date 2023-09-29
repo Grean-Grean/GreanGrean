@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService{
     // 회원가입
     @Override
     public void singUp(UserRegistReqDto userRegistReqDto) {
-
         String encodedPassword = passwordEncoder.encode(userRegistReqDto.getUserPassword());
 
         User user = User.builder()
