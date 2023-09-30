@@ -1,0 +1,25 @@
+.signup {
+  width: 100%;
+  height: 100%;
+  background: white;
+  box-shadow: 8px 8px 35px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 39px;
+  padding: 30px;
+}
+.form h1 {
+  text-align: center;
+  color: black;
+  font-size: 64px;
+  font-family: Noto Sans;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.alert {
+  text-align: center;
+  color: #bf3e3e;
+  font-size: 10px;
+  font-family: Noto Sans;
+  font-weight: 200;
+  word-wrap: break-word;
+}

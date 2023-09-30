@@ -1,0 +1,8 @@
+.alert {
+  text-align: center;
+  color: #bf3e3e;
+  font-size: 10px;
+  font-family: Noto Sans;
+  font-weight: 200;
+  word-wrap: break-word;
+}
