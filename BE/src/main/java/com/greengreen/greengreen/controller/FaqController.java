@@ -49,7 +49,7 @@ public class FaqController {
 
     // 글 수정
     @PutMapping("/modify/{faqId}")
-    public ResponseEntity<FaqResDto> faqModify(@Valid @RequestParam FaqModifyReqDto faqModifyReqDto){
+    public ResponseEntity<Void> faqModify(@Valid @RequestParam FaqModifyReqDto faqModifyReqDto){
         faqService.modifyFaq(faqModifyReqDto);
 
         return ResponseEntity.ok().build();

@@ -1,5 +1,7 @@
 package com.greengreen.greengreen.entity;
 
+import com.greengreen.greengreen.dto.request.ProductModifyReqDto;
+import com.greengreen.greengreen.enums.ProductStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,13 +37,13 @@ public class Product {
     private Integer productPrice;
 
     @Column(name = "product_img", nullable = false)
-    private String  productImg;
+    private String productImg;
 
     @Column(name = "product_create_time", nullable = false)
     private LocalDateTime productCreateTime;
 
     @Column(name = "product_category", nullable = false)
-    private String productCategory;
+    private ProductStatus productCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
@@ -53,4 +56,13 @@ public class Product {
     @OneToMany(mappedBy="purchase", cascade=CascadeType.ALL)
     @JoinColumn(name = "purchaseId")
     private List<Purchase> purchase;
+
+    public void modifyProduct(ProductModifyReqDto productModifyReqDto){
+        this.productName = productModifyReqDto.getProductName();
+        this.productContent = productModifyReqDto.getProductContent();
+        this.productNumber = productModifyReqDto.getProductNumber();
+        this.productPrice = productModifyReqDto.getProductPrice();
+        this.productImg = productModifyReqDto.getProductImg();
+        this.productCategory = productModifyReqDto.getProductCategory();
+    }
 }
