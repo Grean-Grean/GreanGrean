@@ -2,9 +2,7 @@ package com.greengreen.greengreen.dto.request;
 
 import com.greengreen.greengreen.entity.User;
 import com.greengreen.greengreen.enums.ProductStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
@@ -12,6 +10,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class ProductRegistReqDto {
     private Long userId;
