@@ -1,33 +1,36 @@
 import React, { useState } from 'react'
-import SERVER_URL from '../../utils/misc'
+
+
+const SERVER_URL = "http://172.30.1.23:8080"
 
 const ProductAdd = () => {
 
+    const [file, setFile] = useState(null);
     const [imageSrc, setImageSrc] = useState('')
     const filename = ""
     const [obj, setObj] = useState({
         userId: 1,
         productName: "",
-        productContent: '',
+        productContent: '디테일입니다.',
         productNumber: 0,
         productPrice: 0,
-        productImg: '',
-        productCategory: []
+        productImg: '이미지입니다.',
+        productCategory: ""
     })
 
     //handleChangeObj, 오브젝트 변경되면 적용하기
     const handleChangeObj = (e) => {
 
-        if (e.target.name !== 'productCategory') {
-            setObj({
-                ...obj,
-                [e.target.name]: e.target.value
-            })
-        } else {
-            const newState = { ...obj }
-            newState.productCategory = [...newState.productCategory, e.target.value]
-            setObj(newState)
-        }
+        // if (e.target.name !== 'productCategory') {
+        setObj({
+            ...obj,
+            [e.target.name]: e.target.value
+        })
+        // } else {
+        //     const newState = { ...obj }
+        //     newState.productCategory = [...newState.productCategory, e.target.value]
+        //     setObj(newState)
+        // }
     }
 
     //img file 읽어 오기
@@ -48,23 +51,43 @@ const ProductAdd = () => {
     }
 
     //상품 등록 클릭시 작동
-    const sendObj = () => {
-        // api/product/add
-        console.log(obj)
-        fetch(`${SERVER_URL}/product/add`, {     //api/upload 데이터 전송
-            method: 'POST',
-            body: obj,
-        })
-            .then(response => {
-                //console.log(response.what)
-                return response.json()
-            })
-            .catch((error) => {
-                console.log('error to api/uploading', error);
-                console.log('netWork Error')
+    const sendObj = async () => {
 
+        // const formData = new FormData();
+        // formData.append('userId', obj.userId);
+        // formData.append('productName', obj.productName);
+        // formData.append('productContent', obj.productContent);
+        // formData.append('productNumber', obj.productNumber);
+        // formData.append('productPrice', obj.productPrice);
+        // formData.append('productImg', obj.productImg);
+        // formData.append('productCategory', obj.productCategory);
+
+        try {
+            const response = await fetch(`${SERVER_URL}/product/add`, {
+                method: 'POST',
+                // 나중에 formdata로 전달할때 쓰셈
+                //   headers: {
+                //   // 'Content-Type': 'application/json', // 주석 처리
+                // },
+                // body: formData, // FormData 객체 전달
+                headers: {
+                    'Content-Type': 'application/json', // 주석 처리
+                },
+                body: JSON.stringify(obj),
             });
-    }
+
+            if (response.ok) {
+                alert('상품 등록 성공');
+            } else {
+                alert('상품 등록 실패');
+            }
+        } catch (error) {
+            console.error('상품 등록 오류:', error);
+            alert('상품 등록 중 오류가 발생했습니다.');
+        }
+    };
+
+
 
     return (
         <div style={{ width: 1920, height: 2734, position: 'relative', background: '#F8F3ED' }}>
@@ -136,10 +159,10 @@ const ProductAdd = () => {
                 style={{ width: 442, height: 49, left: 1059, top: 768, position: 'absolute', background: '#D9D9D9' }}
             >
                 <option selected value={'선택'}>선택</option>
-                <option value={'봄'}>봄</option>
-                <option value={'여름'}>여름</option>
-                <option value={'가을'}>가을</option>
-                <option value={'겨울'}>겨울</option>
+                <option value={'SPRING'}>봄</option>
+                <option value={'SUMMER'}>여름</option>
+                <option value={'FALL'}>가을</option>
+                <option value={'WINTER'}>겨울</option>
             </select>
 
             {/* 이미 선택된 카테고리 */}
@@ -151,9 +174,6 @@ const ProductAdd = () => {
             </div>
             <div style={{ left: 1079, top: 843, position: 'absolute', color: 'black', fontSize: 24, fontFamily: 'Noto Sans', fontWeight: '400', letterSpacing: 1.20, wordWrap: 'break-word' }}>{obj.productCategory}</div>
             <div className="Rectangle78" style={{ width: 1669, height: 855, left: 123, top: 1412, position: 'absolute', background: '#D9D9D9' }} />
-
-
-
 
             <div
                 className="Group30"

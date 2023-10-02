@@ -3,9 +3,17 @@ import ProductItem from './ProductItem'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 
-// https://choa-ri.tistory.com/102 카테고리 필터
-const ProductList = ({ productList, inputText, choseCategory }) => {
+// productId: 3,
+// productImg: '',
+// productName: '국화',
+// productPrice: 3000,
+// productNumber: 800,
+// productCategory: 'fall',
+// productContent: '가을의 대표 꽃 국화 결혼식장에는 가져가지 마세요!',
 
+// https://choa-ri.tistory.com/102 카테고리 필터
+const ProductList = ({ productList, inputText }) => {
+    console.log(productList)
     const [cafilteredData, setFilteredData] = useState(productList)
 
     const isUserSignIn = useSelector(state => state.completed.iscompleted)
@@ -15,7 +23,7 @@ const ProductList = ({ productList, inputText, choseCategory }) => {
         if (inputText === '') {
             return e
         } else {
-            return e.name.toLowerCase().includes(inputText)
+            return e.productName.toLowerCase().includes(inputText)
         }
     })
 
@@ -30,7 +38,7 @@ const ProductList = ({ productList, inputText, choseCategory }) => {
             }
             <div style={{ display: 'flex', flexFlow: 'wrap' }}>
                 {filteredData.map((item) => (
-                    <ProductItem key={item.id} {...item} />
+                    <ProductItem key={item.productId} {...item} />
                 ))}
             </div>
             {isUserSignIn ?
