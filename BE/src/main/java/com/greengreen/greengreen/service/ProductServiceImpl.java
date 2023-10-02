@@ -53,6 +53,8 @@ public class ProductServiceImpl implements ProductService{
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
+            ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+
             ProductResDto p = ProductResDto.builder()
                     .productId(product.getProductId())
                     .productName(product.getProductName())
@@ -60,7 +62,9 @@ public class ProductServiceImpl implements ProductService{
                     .productNumber(product.getProductNumber())
                     .productPrice(product.getProductPrice())
                     .productImg(product.getProductImg())
-                    .productCategory(product.getProductCategory())
+                    .productCreateTime(product.getProductCreateTime())
+                    .productModifyTime(product.getProductModifyTime())
+                    .productCategory(productStatus)
                     .build();
             productResDtos.add(p);
         }
@@ -74,14 +78,19 @@ public class ProductServiceImpl implements ProductService{
         Product product = productRepository.findByProductId(productIdReqDto.getProductId())
                 .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
 
+        ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+
         ProductDetailResDto productDetailResDto = ProductDetailResDto.builder()
+                .sellerId(product.getUser().getUserId())
                 .productId(product.getProductId())
                 .productName(product.getProductName())
                 .productContent(product.getProductContent())
                 .productNumber(product.getProductNumber())
                 .productPrice(product.getProductPrice())
                 .productImg(product.getProductImg())
-                .productCategory(product.getProductCategory())
+                .productCreateTime(product.getProductCreateTime())
+                .productModifyTime(product.getProductModifyTime())
+                .productCategory(productStatus)
                 .build();
 
         return productDetailResDto;
@@ -95,6 +104,8 @@ public class ProductServiceImpl implements ProductService{
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
+            ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+
             ProductResDto p = ProductResDto.builder()
                     .productId(product.getProductId())
                     .productName(product.getProductName())
@@ -102,7 +113,9 @@ public class ProductServiceImpl implements ProductService{
                     .productNumber(product.getProductNumber())
                     .productPrice(product.getProductPrice())
                     .productImg(product.getProductImg())
-                    .productCategory(product.getProductCategory())
+                    .productCreateTime(product.getProductCreateTime())
+                    .productModifyTime(product.getProductModifyTime())
+                    .productCategory(productStatus)
                     .build();
             productResDtos.add(p);
         }
@@ -125,7 +138,10 @@ public class ProductServiceImpl implements ProductService{
     // 상품 삭제
     @Override
     public void deleteProduct(ProductIdReqDto productIdReqDto) {
-        if(productIdReqDto.getSellerId().equals(productIdReqDto.getUserId())){
+        Product product = productRepository.findByProductId(productIdReqDto.getProductId())
+                .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
+
+        if(product.getUser().getUserId().equals(productIdReqDto.getUserId())){
             productRepository.deleteByProductId(productIdReqDto.getProductId())
                     .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
         } else{

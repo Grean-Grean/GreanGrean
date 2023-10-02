@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class ProductIdReqDto {
     private Long userId;
-    private Long sellerId;
 
     private Long productId;
 }

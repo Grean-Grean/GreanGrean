@@ -40,10 +40,10 @@ public class Product {
     private String productImg;
 
     @Column(name = "product_create_time", nullable = false)
-    private LocalDateTime productCreateTime = LocalDateTime.now();
+    private LocalDateTime productCreateTime;
 
     @Column(name = "product_modify_time")
-    private LocalDateTime productModifyTime = LocalDateTime.now();
+    private LocalDateTime productModifyTime;
 
     @Column(name = "product_category", nullable = false)
     private ProductStatus productCategory;
@@ -64,6 +64,7 @@ public class Product {
         this.productNumber = productModifyReqDto.getProductNumber();
         this.productPrice = productModifyReqDto.getProductPrice();
         this.productImg = productModifyReqDto.getProductImg();
-        this.productCategory = productModifyReqDto.getProductCategory();
+        this.productModifyTime = LocalDateTime.now();
+        this.productCategory = ProductStatus.valueOf(String.valueOf(productModifyReqDto.getProductCategory()));
     }
 }
