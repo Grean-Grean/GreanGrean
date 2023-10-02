@@ -13,9 +13,6 @@ import MyPage from "../components/mypage/MyPage";
 import Faq from "../components/Faq/Faq";
 import FaqAdd from "../components/Faq/FaqAdd";
 
-// import SignIn from "../components/modals/SignIn";
-// import SignUp from "../components/modals/SignUp";
-
 import SignIn from "../components/user/SignIn";
 import SignUp from "../components/user/SignUp";
 

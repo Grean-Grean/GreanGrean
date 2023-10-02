@@ -11,7 +11,8 @@ function SignUpData(props) {
     confirmPassword: "",
   });
 
-  const [emailExists, setEmailExists] = useState(false);
+  const [emailExistsStatus, setEmailExistsStatus] = useState("");
+  const [nickNameExistsStatus, setNickNameExistsStatus] = useState("");
   const [passwordMismatch, setPasswordMismatch] = useState(false);
 
   const handleInputChange = (e) => {
@@ -21,10 +22,72 @@ function SignUpData(props) {
       [name]: value,
     });
     if (name === "userEmail") {
-      setEmailExists(false); // Reset emailExists state when email changes
+      setEmailExistsStatus(false); // Reset emailExists state when email changes
     } else if (name === "userPassword" || name === "confirmPassword") {
-      setPasswordMismatch(false); // Reset passwordMismatch state when password changes
+      // Check if userPassword and confirmPassword match
+      if (name === "userPassword" && formData.confirmPassword === value) {
+        setPasswordMismatch(false);
+      } else if (
+        name === "confirmPassword" &&
+        formData.userPassword === value
+      ) {
+        setPasswordMismatch(false);
+      } else {
+        setPasswordMismatch(true);
+      }
+    } else if (name === "userNickName") {
+      setNickNameExistsStatus(false); // Reset nickNameExists state when nickname changes
     }
+  };
+
+  const handleNickNameCheck = () => {
+    const { userNickName } = formData;
+
+    // Send userNickName to the server for checking
+    axios
+      .post("http://172.30.1.23:8080/user/nickname", { userNickName })
+      .then((response) => {
+        // Handle the response from the server here
+        if (response.data.status === 0) {
+          // Nickname already exists
+          console.log(response.data.message);
+          setNickNameExistsStatus(response.data.message);
+        } else if (response.data.status === 1) {
+          // Nickname is available
+          console.log(response.data.message);
+          setNickNameExistsStatus(response.data.message);
+          // You can perform additional actions here if needed
+        }
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
+  };
+
+  const handleEmailCheck = () => {
+    const { userEmail } = formData;
+
+    // Send userNickName to the server for checking
+    axios
+      .post("http://172.30.1.23:8080/user/email", { userEmail })
+      .then((response) => {
+        // Handle the response from the server here
+        if (response.data.status === 0) {
+          // Nickname already exists
+          console.log(response.data.message);
+          setEmailExistsStatus(response.data.message);
+        } else if (response.data.status === 1) {
+          // Nickname is available
+          console.log(response.data.message);
+          setEmailExistsStatus(response.data.message);
+          // You can perform additional actions here if needed
+        }
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
   };
 
   const handleSignUp = () => {
@@ -47,9 +110,22 @@ function SignUpData(props) {
       });
   };
 
+  const passwordCheckMessageClassName = passwordMismatch
+    ? classes.alert
+    : classes.pass;
+  const passwordCheckMessageText = passwordMismatch
+    ? "비밀번호가 일치하지 않습니다."
+    : "비밀번호가 일치합니다.";
+
+  let passwordCheckMessage = (
+    <p htmlFor="confirmPassword" className={passwordCheckMessageClassName}>
+      {passwordCheckMessageText}
+    </p>
+  );
+
   return (
     <>
-      <p>
+      <div>
         <label htmlFor="userName">이름</label>
         <input
           type="text"
@@ -58,9 +134,9 @@ function SignUpData(props) {
           value={formData.userName}
           onChange={handleInputChange}
         />
-      </p>
+      </div>
 
-      <p>
+      <div>
         <label htmlFor="userNickName">닉네임</label>
         <input
           type="text"
@@ -69,9 +145,11 @@ function SignUpData(props) {
           value={formData.userNickName}
           onChange={handleInputChange}
         />
-        <button>중복확인</button>
-      </p>
-      <p>
+        <button onClick={handleNickNameCheck}>중복확인</button>
+        <p className={classes.alert}>{nickNameExistsStatus}</p>
+      </div>
+
+      <div>
         <label htmlFor="userEmail">이메일</label>
         <input
           type="email"
@@ -80,16 +158,12 @@ function SignUpData(props) {
           value={formData.userEmail}
           onChange={handleInputChange}
         />
-        <button>인증하기</button>
+        <button onClick={handleEmailCheck}>인증하기</button>
         <br />
-        {emailExists && (
-          <label htmlFor="userEmail" className={classes.alert}>
-            이미 등록된 이메일입니다.
-          </label>
-        )}
-      </p>
+        <p className={classes.alert}>{emailExistsStatus}</p>
+      </div>
 
-      <p>
+      <div>
         <label htmlFor="userPassword">비밀번호</label>
         <input
           type="password"
@@ -99,9 +173,9 @@ function SignUpData(props) {
           value={formData.userPassword}
           onChange={handleInputChange}
         />
-      </p>
+      </div>
 
-      <p>
+      <div>
         <label htmlFor="confirmPassword">비밀번호 확인</label>
         <input
           type="password"
@@ -111,14 +185,10 @@ function SignUpData(props) {
           onChange={handleInputChange}
         />
         <br />
-        {passwordMismatch && (
-          <label htmlFor="confirmPassword" className={classes.alert}>
-            비밀번호가 일치하지 않습니다.
-          </label>
-        )}
-      </p>
+        {passwordCheckMessage}
+      </div>
 
-      <p>
+      <div>
         <label htmlFor="verificationCode">인증번호</label>
         <input
           type="text"
@@ -128,7 +198,7 @@ function SignUpData(props) {
           onChange={handleInputChange}
         />
         <button>확인</button>
-      </p>
+      </div>
       <button onClick={handleSignUp}>가입하기</button>
     </>
   );
