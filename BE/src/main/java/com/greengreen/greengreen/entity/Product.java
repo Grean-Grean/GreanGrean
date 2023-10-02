@@ -46,16 +46,14 @@ public class Product {
     private ProductStatus productCategory;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy="review", cascade=CascadeType.ALL)
-    @JoinColumn(name = "reviewId")
-    private List<Review> review;
+    @OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+    private List<Review> reviews;
 
-    @OneToMany(mappedBy="purchase", cascade=CascadeType.ALL)
-    @JoinColumn(name = "purchaseId")
-    private List<Purchase> purchase;
+    @OneToMany(mappedBy="product", cascade=CascadeType.ALL)
+    private List<Purchase> purchases;
 
     public void modifyProduct(ProductModifyReqDto productModifyReqDto){
         this.productName = productModifyReqDto.getProductName();
