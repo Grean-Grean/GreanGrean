@@ -10,8 +10,8 @@ import ProductBuy from "../components/product/ProductBuy";
 
 import MyPage from "../components/mypage/MyPage";
 
-import Faq from "../components/Faq/Faq";
-import FaqAdd from "../components/Faq/FaqAdd";
+import Faq from "../components/faq/Faq";
+import FaqAdd from "../components/faq/FaqAdd";
 
 import SignIn from "../components/user/SignIn";
 import SignUp from "../components/user/SignUp";
