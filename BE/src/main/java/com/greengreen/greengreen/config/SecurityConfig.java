@@ -28,6 +28,9 @@ public class SecurityConfig {
                 .csrf().disable() // CSRF 보호 비활성화 (개발 환경에서만 사용)
                 .headers().frameOptions().disable(); // X-Frame-Options 비활성화 (개발 환경에서 H2 콘솔을 사용하기 위해)
 
+        // CORS 설정 비활성화
+        http.cors().disable();
+
         return http.build();
     }
 }
