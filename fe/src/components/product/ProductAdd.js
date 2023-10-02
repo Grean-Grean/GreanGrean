@@ -11,7 +11,7 @@ const ProductAdd = () => {
     const [obj, setObj] = useState({
         userId: 1,
         productName: "",
-        productContent: '디테일입니다.',
+        productContent: '',
         productNumber: 0,
         productPrice: 0,
         productImg: '이미지입니다.',
@@ -20,7 +20,8 @@ const ProductAdd = () => {
 
     //handleChangeObj, 오브젝트 변경되면 적용하기
     const handleChangeObj = (e) => {
-
+        console.log(e.target.name)
+        console.log(e.target.value)
         // if (e.target.name !== 'productCategory') {
         setObj({
             ...obj,
@@ -173,7 +174,16 @@ const ProductAdd = () => {
                 <div style={{ left: 19, top: 0, position: 'absolute', color: 'black', fontSize: 36, fontFamily: 'Noto Sans', fontWeight: '400', letterSpacing: 1.80, wordWrap: 'break-word' }}>-</div>
             </div>
             <div style={{ left: 1079, top: 843, position: 'absolute', color: 'black', fontSize: 24, fontFamily: 'Noto Sans', fontWeight: '400', letterSpacing: 1.20, wordWrap: 'break-word' }}>{obj.productCategory}</div>
-            <div className="Rectangle78" style={{ width: 1669, height: 855, left: 123, top: 1412, position: 'absolute', background: '#D9D9D9' }} />
+            <textarea
+                className="Rectangle78"
+                style={{ paddingTop: '30px', letterSpacing: 1.30, fontWeight: '500', fontSize: 24, fontFamily: 'Noto Sans', width: 1669, height: 855, left: 123, top: 1412, position: 'absolute', background: '#D9D9D9' }}
+                name='productContent'
+                value={obj.productContent}
+                onChange={handleChangeObj}
+                placeholder='상세 설명을 입력해 주세요'
+                placeholderColor="black"
+            />
+
 
             <div
                 className="Group30"
