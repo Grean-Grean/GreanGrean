@@ -19,7 +19,7 @@ const ProductItem = ({ id, img, name, price, stock, category, detail }) => {
         <div
             className="ProductItem"
             style={{ background: 'orange', width: 300, height: 300, margin: 10 }}
-            onClick={() => navigate(`/product/detail/:${id}`, { state: state })}
+            onClick={() => navigate(`/shop/product/detail/:${id}`, { state: state })}
         >
 
             <h5>{id}item 이름 : {name}</h5>

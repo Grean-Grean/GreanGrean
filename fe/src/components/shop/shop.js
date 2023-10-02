@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react"
 import ProductList from "../product/ProductList"
 import SearchBar from "./SearchBar"
 
@@ -42,12 +43,24 @@ const dummyList = [
 ]
 
 const Shop = () => {
+
+    const [data, setData] = useState([])
+
+    const [search, setSearch] = useState('')
+
+
+    useEffect(() => {
+        setData(dummyList)
+    }, [])
+
+
+
     return (
         <div >
             <h2>Shop page</h2>
-            <SearchBar />
+            <SearchBar setSearch={setSearch} />
             <br />
-            <ProductList productList={dummyList} />
+            <ProductList productList={data} inputText={search} />
 
         </div>
     )
