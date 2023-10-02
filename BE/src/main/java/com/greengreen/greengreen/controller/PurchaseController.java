@@ -21,9 +21,6 @@ import java.util.List;
 public class PurchaseController {
     private final PurchaseService purchaseService;
 
-    // 우편번호 검색
-
-
     // 구매
     @PostMapping("/buy")
     public ResponseEntity<Void> purchaseBuy(@Valid @RequestBody PurchaseBuyReqDto purchaseBuyReqDto){

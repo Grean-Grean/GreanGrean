@@ -15,12 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class PurchaseServiceImpl implements PurchaseService{
-    private final PurchaseRepository purchaseRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-
-    // 우편번호 검색
-    
 
     // 구매
     @Override
