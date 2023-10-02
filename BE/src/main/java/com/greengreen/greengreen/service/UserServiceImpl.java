@@ -23,6 +23,10 @@ public class UserServiceImpl implements UserService{
     // 회원가입
     @Override
     public void singUp(UserRegistReqDto userRegistReqDto) {
+
+//        userRepository.findByUserEmail(userRegistReqDto.getUserEmail()).orElseThrow(()-> new RuntimeException("이미 등록된 이메일입니다."));
+//        userRepository.findByUserNickName(userRegistReqDto.getUserNickName()).orElseThrow(()-> new RuntimeException("이미 등록된 닉네임입니다."));
+
         String encodedPassword = passwordEncoder.encode(userRegistReqDto.getUserPassword());
 
         User user = User.builder()

@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.repository;
 
+import com.fasterxml.jackson.databind.cfg.CoercionInputShape;
 import com.greengreen.greengreen.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUserEmail(String userEmail);
 
     Optional<User> findByUserEmail(String userEmail);
+
+    Optional<User> findByUserNickName(String userNickName);
 }

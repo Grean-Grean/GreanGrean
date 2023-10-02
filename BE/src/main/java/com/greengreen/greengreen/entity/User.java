@@ -19,10 +19,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column(name = "user_email", length = 20, nullable = false)
+    @Column(name = "user_email", length = 30, nullable = false)
     private String userEmail;
 
-    @Column(name = "user_password", length = 20, nullable = false)
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
     @Column(name = "user_name", length = 5, nullable = false)
@@ -31,13 +31,13 @@ public class User {
     @Column(name = "user_nick_name", length = 20, nullable = false)
     private String userNickName;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Product> productList;
 
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviewList;
 
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Purchase> purchaseList;
 
 }
