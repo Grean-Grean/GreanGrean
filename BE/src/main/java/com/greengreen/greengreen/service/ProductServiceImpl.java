@@ -5,12 +5,14 @@ import com.greengreen.greengreen.dto.response.ProductDetailResDto;
 import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.ProductStatus;
 import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +29,17 @@ public class ProductServiceImpl implements ProductService{
         User user = userRepository.findByUserId(productRegistReqDto.getUserId())
                 .orElseThrow(()->new RuntimeException("유효하지 않은 user입니다."));
 
+        ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(productRegistReqDto.getProductCategory()));
+        LocalDateTime localDateTime = LocalDateTime.now();
+
         Product product = Product.builder()
                 .productName(productRegistReqDto.getProductName())
                 .productContent(productRegistReqDto.getProductContent())
                 .productNumber(productRegistReqDto.getProductNumber())
                 .productPrice(productRegistReqDto.getProductPrice())
                 .productImg(productRegistReqDto.getProductImg())
-                .productCategory(productRegistReqDto.getProductCategory())
+                .productCreateTime(localDateTime)
+                .productCategory(productStatus)
                 .user(user)
                 .build();
 

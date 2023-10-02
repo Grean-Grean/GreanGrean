@@ -40,7 +40,10 @@ public class Product {
     private String productImg;
 
     @Column(name = "product_create_time", nullable = false)
-    private LocalDateTime productCreateTime;
+    private LocalDateTime productCreateTime = LocalDateTime.now();
+
+    @Column(name = "product_modify_time")
+    private LocalDateTime productModifyTime = LocalDateTime.now();
 
     @Column(name = "product_category", nullable = false)
     private ProductStatus productCategory;

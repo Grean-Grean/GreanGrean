@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,15 +23,14 @@ public class ProductRegistReqDto {
     @NotBlank(message = "상품 설명을 입력해야 합니다.")
     private String productContent;
 
-    @NotBlank(message = "상품 수량을 입력해야 합니다.")
+    @NotNull
     private Integer productNumber;
 
-    @NotBlank(message = "상품 가격을 입력해야 합니다.")
+    @NotNull
     private Integer productPrice;
 
     @NotBlank(message = "상품 이미지을 입력해야 합니다.")
     private String productImg;
 
-    @NotBlank(message = "상품 카테고리를 입력해야 합니다.")
     private ProductStatus productCategory;
 }
