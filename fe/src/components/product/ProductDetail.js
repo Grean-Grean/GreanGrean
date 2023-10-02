@@ -6,6 +6,8 @@ const ProductDetail = () => {
     const location = useLocation()
     const locationState = location.state
 
+
+
     return (
         <div>
             <h2>ProductDetail입니다.</h2>
@@ -14,7 +16,10 @@ const ProductDetail = () => {
             <h2>상세설명 : {locationState.detail}</h2>
             <h2>재고 : {locationState.stock}</h2>
             <h2>카테고리 : {locationState.category}</h2>
+
+
         </div>
+
     )
 }
 
