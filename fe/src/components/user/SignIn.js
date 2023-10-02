@@ -25,13 +25,7 @@ function SignIn() {
   return (
     <div className={classes.signin}>
       <h1 className={classes.form}>SIGN IN</h1>
-      <SignInData
-        onEmailChange={signInEmailHandler}
-        onPwChange={signInPwHandler}
-      />
-      <p>
-        <button onClick={signIn}>로그인</button>
-      </p>
+      <SignInData />
       <p>
         <text>비밀번호 찾기 | </text>
         <Link to="/user/signup">회원가입</Link>

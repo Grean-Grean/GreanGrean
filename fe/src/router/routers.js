@@ -10,11 +10,8 @@ import ProductBuy from "../components/product/ProductBuy";
 
 import MyPage from "../components/mypage/MyPage";
 
-import FAQ from "../components/FAQ/FAQ";
-import FaqAdd from "../components/FAQ/FaqAdd";
-
-// import SignIn from "../components/modals/SignIn";
-// import SignUp from "../components/modals/SignUp";
+import Faq from "../components/Faq/Faq";
+import FaqAdd from "../components/Faq/FaqAdd";
 
 import SignIn from "../components/user/SignIn";
 import SignUp from "../components/user/SignUp";
@@ -45,7 +42,7 @@ const Routers = () => {
         <Route path="/mypage/*" element={<MyPage />} />
 
         {/* FAQ */}
-        <Route path="/faq" element={<FAQ />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/faq/register" element={<FaqAdd />} />
       </Routes>
     </>
