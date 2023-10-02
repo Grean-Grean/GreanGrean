@@ -69,11 +69,19 @@ import { Link } from "react-router-dom";
 function Header() {
   return (
     <div>
-      <Link to="/">GREANGREAN</Link>
+      {/* <Link to="/">GREANGREAN</Link>
       <Link to="/shop">Shop</Link>
       <Link to="/faq">FAQ</Link>
       <Link to="/user/signin">로그인</Link>
-      <Link to="/user/signup">회원가입</Link>
+      <Link to="/user/signup">회원가입</Link> */}
+
+      <nav>
+        <a href="/">GREENGREEN</a>
+        <a href="/shop">Shop</a>
+        <a href="/faq">FAQ</a>
+        <a href="/user/signin">로그인</a>
+        <a href="/user/signup">회원가입</a>
+      </nav>
     </div>
   );
 }

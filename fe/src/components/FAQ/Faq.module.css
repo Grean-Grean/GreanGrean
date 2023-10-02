@@ -1,0 +1,12 @@
+.unclickecText {
+  font-weight: 200;
+}
+
+.clickedText {
+  font-weight: 500;
+}
+
+.textAll {
+  font-weight: 600;
+  color: aquamarine;
+}

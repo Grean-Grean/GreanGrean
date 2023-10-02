@@ -47,7 +47,6 @@ function SignUp() {
         onNicknameChange={signUpNicknameChangeHandler}
         onNameChange={signUpNameChangeHandler}
       />
-      <button onClick={signUp}>회원가입</button>
     </div>
   );
 }

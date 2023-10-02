@@ -1,6 +1,8 @@
 function FaqList() {
     return (
-        <div>FAQ list</div>
+        <li>
+            ss
+        </li>
     );
 }
 
