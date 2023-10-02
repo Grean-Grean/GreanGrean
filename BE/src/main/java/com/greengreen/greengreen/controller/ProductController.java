@@ -39,7 +39,7 @@ public class ProductController {
 
     // 상품 상세 조회
     @GetMapping("/detail/{productId}")
-    public ResponseEntity<ProductDetailResDto> productDetail(@RequestParam ProductIdReqDto productIdReqDto) {
+    public ResponseEntity<ProductDetailResDto> productDetail(@PathVariable ProductIdReqDto productIdReqDto) {
         ProductDetailResDto productDetailResDto = productService.detailProduct(productIdReqDto);
 
         return ResponseEntity.ok()
@@ -57,7 +57,7 @@ public class ProductController {
 
     // 상품 수정
     @PutMapping("/modify/{productId}")
-    public ResponseEntity<Void> productModify(@Valid @RequestParam ProductModifyReqDto productModifyReqDto) {
+    public ResponseEntity<Void> productModify(@Valid @PathVariable ProductModifyReqDto productModifyReqDto) {
         productService.modifyProduct(productModifyReqDto);
 
         return ResponseEntity.ok().build();
@@ -65,7 +65,7 @@ public class ProductController {
 
     // 상품 삭제
     @DeleteMapping("/delete/{productId}")
-    public ResponseEntity<Void> productDelete(@RequestParam ProductIdReqDto productIdReqDto){
+    public ResponseEntity<Void> productDelete(@PathVariable ProductIdReqDto productIdReqDto){
         productService.deleteProduct(productIdReqDto);
 
         return ResponseEntity.ok().build();
