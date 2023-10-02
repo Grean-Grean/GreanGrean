@@ -40,7 +40,7 @@ public class FaqController {
 
     // 글 상세 보기
     @GetMapping("/detail/{faqId}")
-    public ResponseEntity<FaqResDto> faqDetail(@RequestParam FaqIdReqDto faqIdReqDto){
+    public ResponseEntity<FaqResDto> faqDetail(@PathVariable FaqIdReqDto faqIdReqDto){
         FaqResDto faqResDto = faqService.detailFaq(faqIdReqDto);
 
         return ResponseEntity.ok()
@@ -49,7 +49,7 @@ public class FaqController {
 
     // 글 수정
     @PutMapping("/modify/{faqId}")
-    public ResponseEntity<FaqResDto> faqModify(@Valid @RequestParam FaqModifyReqDto faqModifyReqDto){
+    public ResponseEntity<Void> faqModify(@Valid @PathVariable FaqModifyReqDto faqModifyReqDto){
         faqService.modifyFaq(faqModifyReqDto);
 
         return ResponseEntity.ok().build();
@@ -57,7 +57,7 @@ public class FaqController {
 
     // 글 삭제
     @DeleteMapping("/delete/{faqId}")
-    public ResponseEntity<Void> faqDelete(@RequestParam FaqIdReqDto faqIdReqDto){
+    public ResponseEntity<Void> faqDelete(@PathVariable FaqIdReqDto faqIdReqDto){
         faqService.deleteFaq(faqIdReqDto);
 
         return ResponseEntity.ok().build();

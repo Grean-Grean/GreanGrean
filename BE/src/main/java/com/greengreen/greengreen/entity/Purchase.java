@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.entity;
 
+import com.greengreen.greengreen.enums.PurchaseStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Builder
 @DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,7 +38,7 @@ public class Purchase {
     private String purchasePhoneNumber;
 
     @Column(name = "purchase_state", nullable = false)
-    private String purchaseStatus;
+    private PurchaseStatus purchaseStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
