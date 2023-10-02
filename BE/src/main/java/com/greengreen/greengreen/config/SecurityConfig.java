@@ -22,11 +22,13 @@ public class SecurityConfig {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers("/**") // 모든 페이지에 대한 권한 설정
-                                .permitAll() // 모든 페이지에 대한 접근 허용
+                                .antMatchers("/**")
+                                .permitAll()
                 )
-                .csrf().disable() // CSRF 보호 비활성화 (개발 환경에서만 사용)
-                .headers().frameOptions().disable(); // X-Frame-Options 비활성화 (개발 환경에서 H2 콘솔을 사용하기 위해)
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
+                .cors(); // CORS 활성화
 
         return http.build();
     }
