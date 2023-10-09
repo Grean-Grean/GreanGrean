@@ -6,14 +6,18 @@ import com.greengreen.greengreen.dto.request.ReviewModifyReqDto;
 import com.greengreen.greengreen.dto.request.ReviewRegistReqDto;
 import com.greengreen.greengreen.dto.response.ReviewResDto;
 import com.greengreen.greengreen.entity.Product;
+import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.Review;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.PurchaseStatus;
 import com.greengreen.greengreen.repository.ProductRepository;
+import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.ReviewRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Array;
 import java.time.LocalDateTime;
@@ -23,33 +27,33 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ReviewServiceImpl implements ReviewService {
     private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository;
-    private final ProductRepository productRepository;
+    private final PurchaseRepository purchaseRepository;
 
     // 리뷰 등록
     @Override
     public void addReview(ReviewRegistReqDto reviewRegistReqDto) {
-        // 리뷰 등록 조건 - 1. 상품 구매자, 2. 구매 상태가 COMPLETE
-        if(){
-            User user = userRepository.findByUserId(reviewRegistReqDto.getUserId())
-                    .orElseThrow(()->new RuntimeException("유효하지 않은 사용자입니다."));
+        Purchase purchase = purchaseRepository.findByPurchaseId(reviewRegistReqDto.getPurchaseId())
+                .orElseThrow(()->new RuntimeException("구매 기록이 없습니다."));
 
-            Product product = productRepository.findByProductId(reviewRegistReqDto.getProductId())
-                    .orElseThrow(()->new RuntimeException("유효하지 않은 상품입니다."));
+        if(!purchase.getUser().getUserId().equals(reviewRegistReqDto.getUserId())){
+            throw new RuntimeException("구매자만 리뷰를 작성할 수 있습니다.");
+        }
 
+        if(purchase.getPurchaseStatus() == PurchaseStatus.COMPLETE){
             Review review = Review.builder()
                     .reviewContent(reviewRegistReqDto.getReviewContent())
                     .reviewCreateTime(LocalDateTime.now())
                     .reviewImg(reviewRegistReqDto.getReviewImg())
-                    .user(user)
-                    .product(product)
+                    .user(purchase.getUser())
+                    .product(purchase.getProduct())
                     .build();
 
             reviewRepository.save(review);
         } else{
-            throw new RuntimeException("리뷰 작성자만 삭제할 수 있습니다");
+            throw new RuntimeException("구매 완료 후에만 리뷰를 작성할 수 있습니다.");
         }
     }
 

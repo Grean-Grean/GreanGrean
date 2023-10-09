@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,10 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewRegistReqDto {
+    @NotNull
     private Long userId;
-    private Long productId;
 
-    private Long reviewId;
+    @NotNull
+    private Long purchaseId;
 
     @NotBlank(message = "리뷰 내용을 입력해야 합니다.")
     private String reviewContent;
