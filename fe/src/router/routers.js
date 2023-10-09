@@ -28,7 +28,7 @@ const Routers = () => {
 
         {/* product  user id 생기면 라우터 수정 */}
         <Route path="/shop/product/detail/:id" element={<ProductDetail />} />
-        <Route path="/shop/product/buy/" element={<ProductBuy />} />
+        <Route path="/shop/product/buy/:id" element={<ProductBuy />} />
 
         <Route path="/shop/product/add" element={<ProductAdd />} />
 

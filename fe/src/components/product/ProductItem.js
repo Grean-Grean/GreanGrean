@@ -14,13 +14,13 @@ const ProductItem = ({ productId, productImg, productName, productPrice, product
     const navigate = useNavigate()
 
     const state = {
-        id: productId,
-        img: productImg,
-        name: productName,
-        price: productPrice,
-        stock: productNumber,
-        category: productCategory,
-        detail: productContent,
+        productId: productId,
+        productImg: productImg,
+        productName: productName,
+        productPrice: productPrice,
+        productNumber: productNumber,
+        productCategory: productCategory,
+        productContent: productContent,
     }
 
     return (

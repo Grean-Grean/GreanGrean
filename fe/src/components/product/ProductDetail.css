@@ -1,0 +1,78 @@
+.flexwrab {
+    display: flex;
+    
+}
+
+.page {
+    /* 100vw 디스플레이 화면의 100퍼센트 넓이 */
+    width: 80vw;
+    /* 100vh 디스플레이 화면의 100퍼센트 높이 */
+    height: auto;
+    border: 1px solid black;
+    margin: 30px;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgArea {
+    width: 400px;
+    height: 400px;
+    background-color: aqua;
+    margin-right: 50px;
+    margin-left: 30px;
+    
+}
+
+.img {
+    margin: 10;
+    background-color: bisque;
+}
+
+.nameArea {
+    background-color: blueviolet;
+}
+
+.Text {
+    color: #000;
+    font-family: Noto Sans;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.32rem;
+}
+
+.priceArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.buyBotton {
+    color: aliceblue;
+    border: 1px solid black;
+    margin-top: 50px;
+    border-radius: 0.625rem;
+    background: var(--Main-Green, #214C2D);
+    text-align: center;
+}
+
+.stick {
+    margin-top: 30px;
+    width: 65vw;
+    height: 0.1875rem;
+    background: #000;
+}
+
+.contentArea {
+    display: flex;
+    flex-direction: row;
+}
+
+.openPage {
+    display: flex;
+    flex-direction: column;
+}
