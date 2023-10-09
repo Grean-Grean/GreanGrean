@@ -1,71 +1,69 @@
-// src/FaqAdd.js
-
+import axios from "axios";
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function FaqAdd({ categories, onAddFAQ }) {
-  // const location = useLocation();
+import Styles from "./FaqAdd.module.css";
 
-  const [newQuestion, setNewQuestion] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [newAnswer, setNewAnswer] = useState("");
+function FaqAdd() {
+  const navigate = useNavigate();
 
-  // const { categories, onAddFAQ } = location.state || {};
+  const [faqData, setFaqData] = useState({
+    faqTitle: "",
+    faqContent: "",
+    userNickName: "",
+  });
 
-  // console.log(categories);
-  // console.log(onAddFAQ);
-
-  const handleAddFAQ = () => {
-    if (
-      newQuestion.trim() === "" ||
-      selectedCategory.trim() === "" ||
-      newAnswer.trim() === ""
-    ) {
-      // 필수 입력 필드가 비어있으면 추가하지 않음
-      return;
-    }
-
-    // 새로운 FAQ 항목을 추가하는 코드
-    const newItem = {
-      category: selectedCategory,
-      question: newQuestion,
-      answer: newAnswer,
-    };
-
-    onAddFAQ(newItem);
-
-    // 입력 필드 초기화
-    setNewQuestion("");
-    setSelectedCategory("");
-    setNewAnswer("");
+  const handleInputChange = (e) => {
+    const { id, value } = e.target; // "id"와 "value"를 가져옵니다.
+    setFaqData({
+      ...faqData,
+      [id]: value, // "id"를 키로 사용하여 상태를 업데이트합니다.
+    });
   };
 
+  const handleFaqAdd = () => {
+    axios
+      .post("http://172.30.1.23:8080/faq/add", faqData)
+      .then((response) => {
+        // Handle the response from the server here
+        console.log(response);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
+
+    navigate("/faq");
+  };
   return (
-    <div className="add-faq">
-      <h2>새로운 FAQ 추가하기</h2>
-      <input
-        type="text"
-        placeholder="제목"
-        value={newQuestion}
-        onChange={(e) => setNewQuestion(e.target.value)}
-      />
-      <select
-        value={selectedCategory}
-        onChange={(e) => setSelectedCategory(e.target.value)}
-      >
-        <option value="">카테고리 선택</option>
-        {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
-        ))}
-      </select>
-      <textarea
-        placeholder="내용"
-        value={newAnswer}
-        onChange={(e) => setNewAnswer(e.target.value)}
-      ></textarea>
-      <button onClick={handleAddFAQ}>추가하기</button>
+    <div className={Styles.faqadd_background}>
+      Faq Page입니다.
+      <div>
+        <label className={Styles.label} htmlFor="faqtitle">
+          제목
+        </label>
+        <input
+          className={Styles.faq_title}
+          type="text"
+          id="faqTitle"
+          placeholder="제목을 입력하세요."
+          value={faqData.faqTitle}
+          onChange={handleInputChange}
+        ></input>
+      </div>
+      <div>
+        <label className={Styles.label} htmlFor="faqcontent">내용</label>
+        <input
+          className={Styles.faq_content}
+          type="text"
+          id="faqContent"
+          name="faqContent"
+          placeholder="내용을 추가하세요."
+          value={faqData.faqContent}
+          onChange={handleInputChange}
+        ></input>
+      </div>
+      <button className={Styles.faqadd_button} onClick={handleFaqAdd}>추가하기</button>
     </div>
   );
 }

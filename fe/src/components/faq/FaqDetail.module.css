@@ -1,0 +1,42 @@
+.faq-container {
+  margin: 15px;
+}
+
+.faq-title,
+.faq-content {
+  margin: 20px 0px
+}
+
+/* 아코디언 아이콘을 오른쪽으로 정렬 */
+.faq-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* 아코디언 아이콘의 스타일 */
+  .icon {
+    margin-left: 10px; /* 아이콘과 텍스트 사이의 간격 조절 */
+  }
+
+/* 기본 가로선 스타일 */
+.faq-divider {
+  border-bottom: 1px solid #ccc;
+
+}
+
+/* 활성화된 가로선 스타일 */
+.faq-divider.active {
+  border-bottom: 2px solid #000; /* 두꺼운 가로선 스타일 */
+}
+
+/* 타이틀 위의 가로선 스타일 */
+.faq-title-divider {
+  border-top: 1px solid #ccc;
+
+}
+
+/* 타이틀-콘텐츠 사이의 두꺼운 가로선 스타일 */
+.faq-title-content-divider {
+  border-top: 2px solid #000; /* 두꺼운 가로선 스타일 */
+
+}

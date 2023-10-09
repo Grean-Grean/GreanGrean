@@ -1,94 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-import Styles from "./Faq.module.css";
 import faqData from "./FaqData";
-import Accordion from "./Accordion";
 import FaqAdd from "./FaqAdd";
+import FaqDetail from "./FaqDetail";
+import styles from "./Faq.module.css";
 
 function Faq() {
   const navigate = useNavigate();
+  // const [faqData, setFaqData] = useState([]);
 
-  const [openItem, setOpenItem] = useState(null);
-  const [faqItems, setFaqItems] = useState(faqData); // faqData 배열을 초기 데이터로 사용합니다.
-  const categories = faqData.map((item) => item.category); // 카테고리 목록을 추출합니다.
+  // useEffect(() => {
+  //   // 백엔드 API 엔드포인트에 요청을 보냅니다.
+  //   axios.get('http://172.30.1.23:8080/faq/list').then((response) => {
+  //     // 요청에 대한 응답에서 FAQ 데이터를 추출하여 상태에 설정합니다.
+  //     setFaqData(response.data);
+  //   });
+  // }, []);
 
-  const toggleItem = (itemId) => {
-    if (openItem === itemId) {
-      setOpenItem(null);
-    } else {
-      setOpenItem(itemId);
-    }
-  };
+  const faqData = [
+    {
+      faqid: 1,
+      faqTitle: "FAQ 1",
+      faqContent: "FAQ 1의 내용입니다.",
+    },
+    {
+      faqid: 2,
+      faqTitle: "FAQ 2",
+      faqContent: "FAQ 2의 내용입니다.",
+    },
+    {
+      faqid: 3,
+      faqTitle: "FAQ 3",
+      faqContent: "FAQ 3의 내용입니다.",
+    },
+  ];
 
-  const handleAddFAQ = (newItem) => {
-    const updatedFaqItems = [...faqItems]; // 기존 FAQ 항목 복사
-
-    // 카테고리 별로 FAQ 항목을 그룹화
-    const categoryIndex = updatedFaqItems.findIndex(
-      (category) => category.category === newItem.category
-    );
-
-    if (categoryIndex !== -1) {
-      // 이미 해당 카테고리가 존재하는 경우
-      const newQuestion = {
-        id: updatedFaqItems[categoryIndex].questions.length + 1,
-        question: newItem.question,
-        answer: newItem.answer,
-      };
-      updatedFaqItems[categoryIndex].questions.push(newQuestion);
-    } else {
-      // 새로운 카테고리인 경우
-      updatedFaqItems.push({
-        category: newItem.category,
-        questions: [
-          {
-            id: 1,
-            question: newItem.question,
-            answer: newItem.answer,
-          },
-        ],
-      });
-    }
-
-    setFaqItems(updatedFaqItems);
-  };
-
-  const handleUpdateFAQ = (itemId, updatedItem) => {
-    const updatedFaqItems = [...faqItems];
-
-    // FAQ 항목을 찾아서 업데이트
-    for (const category of updatedFaqItems) {
-      const updatedQuestions = category.questions.map((question) =>
-        question.id === itemId ? updatedItem : question
-      );
-      category.questions = updatedQuestions;
-    }
-
-    setFaqItems(updatedFaqItems);
-  };
+  function goToFaqAdd() {
+    navigate("/faq/register");
+  }
 
   return (
-    <div className="App">
-      <h1>FAQ 페이지</h1>
-      {faqItems.map((category) => (
-        <div key={category.id}>
-          <h2>{category.category}</h2>
-          {category.questions.map((item) => (
-            <Accordion
-              key={item.id}
-              item={item}
-              onToggle={toggleItem}
-              onUpdate={(itemId, updatedItem) =>
-                handleUpdateFAQ(itemId, updatedItem)
-              }
-            />
-          ))}
+    <body className={styles.faq_background}>
+      <div className={styles.content}>
+        <h1 className={styles.faq_header}>FAQs</h1>
+        <FaqDetail faqData={faqData} />
+        <div>
+          <button className={styles.btn} onClick={goToFaqAdd}>추가하기</button>
         </div>
-      ))}
-
-      <FaqAdd categories={categories} onAddFAQ={handleAddFAQ} />
-    </div>
+      </div>
+    </body>
   );
 }
 

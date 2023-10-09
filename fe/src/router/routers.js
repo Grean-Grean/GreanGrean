@@ -12,7 +12,6 @@ import MyPage from "../components/mypage/MyPage";
 
 import Faq from "../components/faq/Faq";
 import FaqAdd from "../components/faq/FaqAdd";
-import FAQAccordion from "../components/faq/FaqAccordion";
 
 import SignIn from "../components/user/SignIn";
 import SignUp from "../components/user/SignUp";
@@ -43,7 +42,7 @@ const Routers = () => {
         <Route path="/mypage/*" element={<MyPage />} />
 
         {/* FAQ */}
-        <Route path="/faq" element={<FAQAccordion />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/faq/register" element={<FaqAdd />} />
       </Routes>
     </>

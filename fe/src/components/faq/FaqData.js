@@ -1,4 +1,3 @@
-// src/data.js
 
 const faqData = [
   {

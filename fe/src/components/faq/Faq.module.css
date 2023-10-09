@@ -1,5 +1,42 @@
 .faq_background {
   background-color: #f8f3ed;
-  padding-left: 100px;
-  padding-right: 100px;
+}
+
+.content {
+  margin: 0px 200px;
+}
+
+.faq_header {
+  margin-bottom: 100px;
+}
+
+.btn {
+  width: 150px;
+  height: 46px;
+  
+  /* 버튼 위치 */
+  position: relative;
+  
+  /* 상자 디자인 큰틀 */
+  margin-bottom: 30px;
+  border: 0px;
+  background-color: #214C2D;
+    
+  /* 그림자 */
+  border-radius: 10px;
+  box-shadow:.4rem .3rem 0.7rem #BEC5D0,
+             -.2rem -.2rem .4rem #FBFBFB;
+
+  /* 글씨 */
+  font-family: Noto Sans;
+  color: white;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+  
+.btn:active {
+  /*버튼 눌리는 효과*/
+  box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, 
+              inset .3rem .4rem .8rem #BEC5D0; 
+  cursor: pointer;
 }
