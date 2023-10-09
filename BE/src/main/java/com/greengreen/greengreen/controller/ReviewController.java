@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/product")
+@RequestMapping("/review")
 @CrossOrigin("*")
 public class ReviewController {
     private final ReviewService reviewService;
@@ -32,13 +32,13 @@ public class ReviewController {
     }
 
     // 리뷰 전체 조회
-    @GetMapping("/list")
-    public ResponseEntity<List<ReviewResDto>> reviewList(@Valid @RequestBody ProductIdReqDto productIdReqDto){
-        List<ReviewResDto> reviewResDtos = reviewService.listReview(productIdReqDto);
-
-        return ResponseEntity.ok()
-                .body(reviewResDtos);
-    }
+//    @GetMapping("/list")
+//    public ResponseEntity<List<ReviewResDto>> reviewList(@Valid @RequestBody ProductIdReqDto productIdReqDto){
+//        List<ReviewResDto> reviewResDtos = reviewService.listReview(productIdReqDto);
+//
+//        return ResponseEntity.ok()
+//                .body(reviewResDtos);
+//    }
 
     // 리뷰 수정
     @PutMapping("/modify/{reviewId}")

@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum PurchaseStatus {
     ORDER("신청"),
     ACCEPT("수락"),
+    REFUSE("거절"),
     COMPLETE("완료");
 
     private final String status;
