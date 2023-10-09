@@ -1,28 +1,18 @@
 package com.greengreen.greengreen.service;
 
-import com.greengreen.greengreen.dto.request.ProductIdReqDto;
 import com.greengreen.greengreen.dto.request.ReviewIdReqDto;
 import com.greengreen.greengreen.dto.request.ReviewModifyReqDto;
 import com.greengreen.greengreen.dto.request.ReviewRegistReqDto;
-import com.greengreen.greengreen.dto.response.ReviewResDto;
-import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.Review;
-import com.greengreen.greengreen.entity.User;
 import com.greengreen.greengreen.enums.PurchaseStatus;
-import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.ReviewRepository;
-import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Array;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Slf4j
 @Service
