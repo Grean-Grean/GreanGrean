@@ -9,6 +9,7 @@ import com.greengreen.greengreen.repository.FaqRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class FaqServiceImpl implements FaqService{
     private final FaqRepository faqRepository;
 
@@ -35,6 +37,7 @@ public class FaqServiceImpl implements FaqService{
     }
 
     // 글 전체 보기
+    @Transactional(readOnly = true)
     @Override
     public List<FaqResDto> listFaq() {
         List<Faq> faqList = faqRepository.findAll();
@@ -53,6 +56,7 @@ public class FaqServiceImpl implements FaqService{
     }
 
     // 글 상세 보기
+    @Transactional(readOnly = true)
     @Override
     public FaqResDto detailFaq(FaqIdReqDto faqIdReqDto) {
         Faq faq = faqRepository.findByFaqId(faqIdReqDto.getFaqId())

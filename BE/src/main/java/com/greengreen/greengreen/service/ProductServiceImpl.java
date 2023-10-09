@@ -11,6 +11,8 @@ import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
@@ -47,6 +50,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     // 상품 전체 조회
+    @Transactional(readOnly = true)
     @Override
     public List<ProductResDto> listProduct() {
         List<Product> productList = productRepository.findAll();
@@ -73,6 +77,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     // 상품 상세 조회
+    @Transactional(readOnly = true)
     @Override
     public ProductDetailResDto detailProduct(ProductIdReqDto productIdReqDto) {
         Product product = productRepository.findByProductId(productIdReqDto.getProductId())
@@ -97,6 +102,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     // 상품 검색어, 테마 조회
+    @Transactional(readOnly = true)
     @Override
     public List<ProductResDto> searchQuery(ProductQueryReqDto productQueryReqDto) {
         List<Product> productList = productRepository.findAllByProductNameContainsAndProductCategory(

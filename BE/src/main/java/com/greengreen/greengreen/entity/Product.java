@@ -67,4 +67,12 @@ public class Product {
         this.productModifyTime = LocalDateTime.now();
         this.productCategory = ProductStatus.valueOf(String.valueOf(productModifyReqDto.getProductCategory()));
     }
+
+    public void minusProductNumber(Integer purchaseNumber){
+        this.productNumber -= purchaseNumber;
+    }
+
+    public void plusProductNumber(Integer purchaseNumber){
+        this.productNumber += purchaseNumber;
+    }
 }
