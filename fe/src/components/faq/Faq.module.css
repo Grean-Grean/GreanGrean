@@ -1,12 +1,5 @@
-.unclickecText {
-  font-weight: 200;
-}
-
-.clickedText {
-  font-weight: 500;
-}
-
-.textAll {
-  font-weight: 600;
-  color: aquamarine;
+.faq_background {
+  background-color: #f8f3ed;
+  padding-left: 100px;
+  padding-right: 100px;
 }

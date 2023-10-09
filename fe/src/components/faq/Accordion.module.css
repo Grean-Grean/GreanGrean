@@ -1,0 +1,45 @@
+/* src/Accordion.css */
+
+.accordion-item {
+  margin-bottom: 16px;
+}
+
+.accordion-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.accordion-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  outline: none;
+}
+
+.accordion-button.open {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  margin-top: 8px;
+}
+
+.text {
+  color: blue;
+}
+
+.category {
+  font-weight: 600;
+}
+
+.question {
+  font-weight: 400;
+}
+
+.answer {
+  font-weight: 200;
+  color: blueviolet;
+}
