@@ -40,8 +40,8 @@ public class ProductController {
 
     // 상품 상세 조회
     @GetMapping("/detail/{productId}")
-    public ResponseEntity<ProductDetailResDto> productDetail(@PathVariable ProductIdReqDto productIdReqDto) {
-        ProductDetailResDto productDetailResDto = productService.detailProduct(productIdReqDto);
+    public ResponseEntity<ProductDetailResDto> productDetail(@PathVariable Long productId) {
+        ProductDetailResDto productDetailResDto = productService.detailProduct(productId);
 
         return ResponseEntity.ok()
                 .body(productDetailResDto);
@@ -49,25 +49,31 @@ public class ProductController {
 
     // 상품 검색어, 테마 조회
     @GetMapping("/search")
-    public ResponseEntity<List<ProductResDto>> productSearchQuery(@RequestParam ProductQueryReqDto productQueryReqDto){
-        List<ProductResDto> productResDtos = productService.searchQuery(productQueryReqDto);
-
+    public ResponseEntity<List<ProductResDto>> productSearchQuery(@RequestParam String query, @RequestParam String category){
+        List<ProductResDto> productResDtos = null;
+        if(query == "" && category == "") {
+            productResDtos = productService.listProduct();
+        }else if(category == "") {
+            productResDtos = productService.queryProduct(query);
+        }else{
+            productResDtos = productService.searchQuery(query, category);
+        }
         return ResponseEntity.ok()
                 .body(productResDtos);
     }
 
     // 상품 수정
-    @PutMapping("/modify/{productId}")
-    public ResponseEntity<Void> productModify(@Valid @PathVariable ProductModifyReqDto productModifyReqDto) {
+    @PutMapping("/modify")
+    public ResponseEntity<Void> productModify(@Valid @RequestBody ProductModifyReqDto productModifyReqDto) {
         productService.modifyProduct(productModifyReqDto);
 
         return ResponseEntity.ok().build();
     }
 
     // 상품 삭제
-    @DeleteMapping("/delete/{productId}")
-    public ResponseEntity<Void> productDelete(@PathVariable ProductIdReqDto productIdReqDto){
-        productService.deleteProduct(productIdReqDto);
+    @DeleteMapping("/delete/{productId}/{userId}")
+    public ResponseEntity<Void> productDelete(@PathVariable Long productId, @PathVariable Long userId){
+        productService.deleteProduct(productId, userId);
 
         return ResponseEntity.ok().build();
     }

@@ -79,8 +79,8 @@ public class ProductServiceImpl implements ProductService{
     // 상품 상세 조회
     @Transactional(readOnly = true)
     @Override
-    public ProductDetailResDto detailProduct(ProductIdReqDto productIdReqDto) {
-        Product product = productRepository.findByProductId(productIdReqDto.getProductId())
+    public ProductDetailResDto detailProduct(Long productId) {
+        Product product = productRepository.findByProductId(productId)
                 .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
 
         ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
@@ -102,11 +102,93 @@ public class ProductServiceImpl implements ProductService{
     }
 
     // 상품 검색어, 테마 조회
+//    @Transactional(readOnly = true)
+//    @Override
+//    public List<ProductResDto> searchQuery(String query, String category) {
+//        ProductStatus productSt =  ProductStatus.valueOf(category);
+//        List<Product> productList = productRepository.findAllByProductNameContainsAndProductCategory(
+//                query, productSt);
+//        List<ProductResDto> productResDtos = new ArrayList<>();
+//
+//        for (Product product : productList) {
+//            ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+//
+//            ProductResDto p = ProductResDto.builder()
+//                    .productId(product.getProductId())
+//                    .productName(product.getProductName())
+//                    .productContent(product.getProductContent())
+//                    .productNumber(product.getProductNumber())
+//                    .productPrice(product.getProductPrice())
+//                    .productImg(product.getProductImg())
+//                    .productCreateTime(product.getProductCreateTime())
+//                    .productModifyTime(product.getProductModifyTime())
+//                    .productCategory(productStatus)
+//                    .build();
+//            productResDtos.add(p);
+//        }
+//
+//        return productResDtos;
+//    }
+
     @Transactional(readOnly = true)
     @Override
-    public List<ProductResDto> searchQuery(ProductQueryReqDto productQueryReqDto) {
+    public List<ProductResDto> searchQuery(String query, String category) {
+        // category 값을 열거형 상수와 일치하도록 수정
+        ProductStatus productStatus = ProductStatus.valueOf(category); // 이 부분 수정
+
         List<Product> productList = productRepository.findAllByProductNameContainsAndProductCategory(
-                productQueryReqDto.getQuery(), productQueryReqDto.getCategory());
+                query, productStatus);
+
+        List<ProductResDto> productResDtos = new ArrayList<>();
+
+        for (Product product : productList) {
+            ProductResDto p = ProductResDto.builder()
+                    .productId(product.getProductId())
+                    .productName(product.getProductName())
+                    .productContent(product.getProductContent())
+                    .productNumber(product.getProductNumber())
+                    .productPrice(product.getProductPrice())
+                    .productImg(product.getProductImg())
+                    .productCreateTime(product.getProductCreateTime())
+                    .productModifyTime(product.getProductModifyTime())
+                    .productCategory(productStatus) // 열거형 상수로 설정
+                    .build();
+            productResDtos.add(p);
+        }
+
+        return productResDtos;
+    }
+    // 상품 수정
+    @Override
+    public void modifyProduct(ProductModifyReqDto productModifyReqDto) {
+        if(productModifyReqDto.getSellerId().equals(productModifyReqDto.getUserId())){
+            Product product = productRepository.findByProductId(productModifyReqDto.getProductId())
+                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
+            product.modifyProduct(productModifyReqDto);
+        } else{
+            throw new RuntimeException("상품 판매자만 수정할 수 있습니다");
+        }
+    }
+
+    // 상품 삭제
+    @Override
+    public void deleteProduct(Long productId, Long userId) {
+        Product product = productRepository.findByProductId(productId)
+                .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
+
+        if(product.getUser().getUserId().equals(userId)){
+            productRepository.deleteByProductId(product.getProductId())
+                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
+        }else{
+            throw new RuntimeException("상품 판매자만 삭제할 수 있습니다");
+        }
+    }
+
+    // 키워드 조회
+    @Transactional(readOnly = true)
+    @Override
+    public List<ProductResDto> queryProduct(String query) {
+        List<Product> productList = productRepository.findAllByProductNameContains(query);
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
@@ -127,31 +209,5 @@ public class ProductServiceImpl implements ProductService{
         }
 
         return productResDtos;
-    }
-
-    // 상품 수정
-    @Override
-    public void modifyProduct(ProductModifyReqDto productModifyReqDto) {
-        if(productModifyReqDto.getSellerId().equals(productModifyReqDto.getUserId())){
-            Product product = productRepository.findByProductId(productModifyReqDto.getProductId())
-                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
-            product.modifyProduct(productModifyReqDto);
-        } else{
-            throw new RuntimeException("상품 판매자만 수정할 수 있습니다");
-        }
-    }
-
-    // 상품 삭제
-    @Override
-    public void deleteProduct(ProductIdReqDto productIdReqDto) {
-        Product product = productRepository.findByProductId(productIdReqDto.getProductId())
-                .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
-
-        if(product.getUser().getUserId().equals(productIdReqDto.getUserId())){
-            productRepository.deleteByProductId(productIdReqDto.getProductId())
-                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
-        } else{
-            throw new RuntimeException("상품 판매자만 삭제할 수 있습니다");
-        }
     }
 }

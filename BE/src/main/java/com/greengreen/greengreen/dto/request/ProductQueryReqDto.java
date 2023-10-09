@@ -9,6 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductQueryReqDto {
-    String query;
-    ProductStatus category;
+    private String query;
+    private ProductStatus category;
 }

@@ -9,8 +9,11 @@ import java.util.List;
 public interface ProductService {
     void addProduct(ProductRegistReqDto productRegistReqDto);
     List<ProductResDto> listProduct();
-    ProductDetailResDto detailProduct(ProductIdReqDto productIdReqDto);
-    List<ProductResDto> searchQuery(ProductQueryReqDto productQueryReqDto);
+    ProductDetailResDto detailProduct(Long productId);
+    List<ProductResDto> searchQuery(String query, String category);
     void modifyProduct(ProductModifyReqDto productModifyReqDto);
-    void deleteProduct(ProductIdReqDto productIdReqDto);
+    void deleteProduct(Long productId, Long userId);
+
+    List<ProductResDto> queryProduct(String query);
+
 }
