@@ -79,11 +79,11 @@ function FaqDetail({ faqData }) {
     if (editModeIndex === index) {
       /* Axios를 통해 백엔드에서 FAQ 내용을 업데이트하는 부분/ 업데이트 후, 수정 모드를 다시 false로 설정*/
 
-      console.log("faqId : ", faq.faqId);
+      // console.log("faqId : ", faq.faqId);
       console.log("수정모드 내용 확인: ", faqEditData);
 
       axios
-        .put(`http://172.30.1.100:8080/faq/modify/${faq.faqid}`, faqEditData)
+        .put(`http://172.30.1.97:8080/faq/modify`, faqEditData)
         .then(() => {
           toggleEditMode(index);
           // 성공적으로 수정데이터 전송 후 기존 editdata 초기화
@@ -127,7 +127,7 @@ function FaqDetail({ faqData }) {
       console.log("delete Faq:", deleteFaq);
 
       axios
-        .delete(`http://172.30.1.100:8080/faq/delete/${faq.faqid}`, deleteFaq)
+        .delete(`http://172.30.1.97:8080/faq/delete?userNickName=${deleteFaq.userNickName}&faqId=${deleteFaq.faqId}`)
         .then(() => {
           // 삭제 성공 시, 화면에서도 해당 FAQ를 삭제합니다.
           const updatedFaqData = faqData.filter(

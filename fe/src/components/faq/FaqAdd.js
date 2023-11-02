@@ -26,7 +26,7 @@ function FaqAdd() {
   const handleFaqAdd = () => {
     console.log(faqData);
     axios
-      .post("http://172.30.1.100:8080/faq/add", faqData)
+      .post("http://172.30.1.97:8080/faq/add", faqData)
       .then(() => {
         // Handle the response from the server here
         // console.log(response);
