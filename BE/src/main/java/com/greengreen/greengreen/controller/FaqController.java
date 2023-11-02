@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/faq")
+@CrossOrigin("*")
 public class FaqController {
     private final FaqService faqService;
 

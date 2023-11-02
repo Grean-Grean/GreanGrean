@@ -6,6 +6,7 @@ import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,19 +48,17 @@ public class ProductController {
                 .body(productDetailResDto);
     }
 
-    // 상품 검색어, 테마 조회
     @GetMapping("/search")
-    public ResponseEntity<List<ProductResDto>> productSearchQuery(@RequestParam String query, @RequestParam String category){
+    public ResponseEntity<List<ProductResDto>> productSearchQuery(@RequestParam(required = false, defaultValue = "") String query, @RequestParam(required = false, defaultValue = "") String category) {
         List<ProductResDto> productResDtos = null;
-        if(query == "" && category == "") {
+        if (query.isEmpty() && category.isEmpty()) {
             productResDtos = productService.listProduct();
-        }else if(category == "") {
+        } else if (category.isEmpty()) {
             productResDtos = productService.queryProduct(query);
-        }else{
+        } else {
             productResDtos = productService.searchQuery(query, category);
         }
-        return ResponseEntity.ok()
-                .body(productResDtos);
+        return ResponseEntity.ok().body(productResDtos);
     }
 
     // 상품 수정
