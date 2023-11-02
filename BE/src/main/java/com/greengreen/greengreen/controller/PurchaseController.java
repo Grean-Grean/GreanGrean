@@ -13,6 +13,7 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/purchase")
+@CrossOrigin("*")
 public class PurchaseController {
     private final PurchaseService purchaseService;
 

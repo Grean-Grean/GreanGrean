@@ -3,11 +3,15 @@ package com.greengreen.greengreen.service;
 import com.greengreen.greengreen.dto.request.ReviewIdReqDto;
 import com.greengreen.greengreen.dto.request.ReviewModifyReqDto;
 import com.greengreen.greengreen.dto.request.ReviewRegistReqDto;
+import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.Review;
+import com.greengreen.greengreen.entity.User;
 import com.greengreen.greengreen.enums.PurchaseStatus;
+import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.ReviewRepository;
+import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Transactional
 public class ReviewServiceImpl implements ReviewService {
+    private final UserRepository userRepository;
+    private final ProductRepository productRepository;
     private final ReviewRepository reviewRepository;
     private final PurchaseRepository purchaseRepository;
 
@@ -32,13 +38,18 @@ public class ReviewServiceImpl implements ReviewService {
             throw new RuntimeException("구매자만 리뷰를 작성할 수 있습니다.");
         }
 
+        User user = userRepository.findByUserId(reviewRegistReqDto.getUserId())
+                .orElseThrow(()->new RuntimeException("유효하지 않은 user입니다."));
+
+        Product product = purchase.getProduct();
+
         if(purchase.getPurchaseStatus() == PurchaseStatus.COMPLETE){
             Review review = Review.builder()
                     .reviewContent(reviewRegistReqDto.getReviewContent())
                     .reviewCreateTime(LocalDateTime.now())
                     .reviewImg(reviewRegistReqDto.getReviewImg())
-                    .user(purchase.getUser())
-                    .product(purchase.getProduct())
+                    .user(user)
+                    .product(product)
                     .build();
 
             reviewRepository.save(review);
@@ -81,12 +92,12 @@ public class ReviewServiceImpl implements ReviewService {
 
     // 리뷰 삭제
     @Override
-    public void deleteReview(ReviewIdReqDto reviewIdReqDto) {
-        Review review = reviewRepository.findByReviewId(reviewIdReqDto.getReviewId())
+    public void deleteReview(Long reviewId, Long userId) {
+        Review review = reviewRepository.findByReviewId(reviewId)
                 .orElseThrow(()->new RuntimeException("ReviewId가 올바르지 않습니다."));
 
-        if(review.getUser().getUserId().equals(reviewIdReqDto.getUserId())){
-            reviewRepository.deleteByReviewId(reviewIdReqDto.getReviewId())
+        if(review.getUser().getUserId().equals(userId)){
+            reviewRepository.deleteByReviewId(reviewId)
                     .orElseThrow(()->new RuntimeException("ReviewId가 올바르지 않습니다."));
         } else{
             throw new RuntimeException("리뷰 작성자만 삭제할 수 있습니다");

@@ -12,5 +12,5 @@ public interface ReviewService {
     void addReview(ReviewRegistReqDto reviewRegistReqDto);
 //    List<ReviewResDto> listReview(ProductIdReqDto productIdReqDto);
     void modifyReview(ReviewModifyReqDto reviewModifyReqDto);
-    void deleteReview(ReviewIdReqDto reviewIdReqDto);
+    void deleteReview(Long reviewId, Long userId);
 }
