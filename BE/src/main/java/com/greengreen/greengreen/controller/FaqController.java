@@ -49,17 +49,17 @@ public class FaqController {
     }
 
     // 글 수정
-    @PutMapping("/modify/{faqId}")
-    public ResponseEntity<Void> faqModify(@Valid @PathVariable FaqModifyReqDto faqModifyReqDto){
+    @PutMapping("/modify")
+    public ResponseEntity<Void> faqModify(@Valid @RequestBody FaqModifyReqDto faqModifyReqDto){
         faqService.modifyFaq(faqModifyReqDto);
 
         return ResponseEntity.ok().build();
     }
 
     // 글 삭제
-    @DeleteMapping("/delete/{faqId}")
-    public ResponseEntity<Void> faqDelete(@PathVariable FaqIdReqDto faqIdReqDto){
-        faqService.deleteFaq(faqIdReqDto);
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> faqDelete(@RequestParam Long faqId, @RequestParam String userNickName ){
+        faqService.deleteFaq(faqId, userNickName);
 
         return ResponseEntity.ok().build();
     }

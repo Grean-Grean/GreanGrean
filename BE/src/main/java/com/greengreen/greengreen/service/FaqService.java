@@ -12,5 +12,6 @@ public interface FaqService {
     List<FaqResDto> listFaq();
     FaqResDto detailFaq(FaqIdReqDto faqIdReqDto);
     void modifyFaq(FaqModifyReqDto faqModifyReqDto);
-    void deleteFaq(FaqIdReqDto faqIdReqDto);
+
+    void deleteFaq(Long faqId, String userNickName);
 }

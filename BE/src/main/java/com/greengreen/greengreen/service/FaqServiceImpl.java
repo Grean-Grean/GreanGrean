@@ -84,9 +84,9 @@ public class FaqServiceImpl implements FaqService{
 
     // 글 삭제
     @Override
-    public void deleteFaq(FaqIdReqDto faqIdReqDto) {
-        if(faqIdReqDto.getUserNickName().equals("admin")) {
-            faqRepository.deleteByFaqId(faqIdReqDto.getFaqId())
+    public void deleteFaq(Long faqId, String userNickName) {
+        if(userNickName.equals("admin")) {
+            faqRepository.deleteByFaqId(faqId)
                     .orElseThrow(()->new RuntimeException("FaqId가 올바르지 않습니다."));
         } else{
             throw new RuntimeException("관리자만 삭제할 수 있습니다");
