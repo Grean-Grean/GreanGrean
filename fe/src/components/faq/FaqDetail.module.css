@@ -4,24 +4,23 @@
 
 .faq-title,
 .faq-content {
-  margin: 20px 0px
+  margin: 20px 0px;
 }
 
 /* 아코디언 아이콘을 오른쪽으로 정렬 */
 .faq-title {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  /* 아코디언 아이콘의 스타일 */
-  .icon {
-    margin-left: 10px; /* 아이콘과 텍스트 사이의 간격 조절 */
-  }
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 아코디언 아이콘의 스타일 */
+.icon {
+  margin-left: 10px; /* 아이콘과 텍스트 사이의 간격 조절 */
+}
 
 /* 기본 가로선 스타일 */
 .faq-divider {
   border-bottom: 1px solid #ccc;
-
 }
 
 /* 활성화된 가로선 스타일 */
@@ -32,11 +31,38 @@
 /* 타이틀 위의 가로선 스타일 */
 .faq-title-divider {
   border-top: 1px solid #ccc;
-
 }
 
 /* 타이틀-콘텐츠 사이의 두꺼운 가로선 스타일 */
 .faq-title-content-divider {
   border-top: 2px solid #000; /* 두꺼운 가로선 스타일 */
-
 }
+
+.gray-box button {
+  background-color: #D9D9D9; /* 네모박스 배경색 설정 */
+  padding: 1px 15px; /* 글씨와 네모박스 사이의 패딩 설정 */
+  color: white; /* 글씨 색상 설정 */
+  display: inline-block; /* 네모박스 크기를 글씨 크기에 맞게 설정 */
+  margin: 7px 0px 7px 7px; /*위 오른쪽 아래 왼쪽*/
+  border: none;
+  outline: none;
+}
+
+.gray-box {
+  text-align: right;
+}
+
+.gray-box button:active {
+  outline: 2px solid #696969; /* 원하는 스타일 및 색상을 적용합니다 */
+}
+
+textarea {
+    margin: 20px 0px;
+    width: 100%; 
+    height: auto; 
+    background: transparent; 
+    border: 2px solid #aeaeae; 
+    outline-color: #214C2D;
+    resize: none; /* 사용자가 크기 조절을 못하도록 설정, 필요에 따라 제거 가능 */
+  }
+  

@@ -36,7 +36,7 @@
   
 .btn:active {
   /*버튼 눌리는 효과*/
-  box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, 
+  /* box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, 
               inset .3rem .4rem .8rem #BEC5D0; 
-  cursor: pointer;
+  cursor: pointer; */
 }

@@ -10,8 +10,10 @@ function FaqAdd() {
   const [faqData, setFaqData] = useState({
     faqTitle: "",
     faqContent: "",
-    userNickName: "",
+    userNickName: "admin",
   });
+
+  console.log(faqData);
 
   const handleInputChange = (e) => {
     const { id, value } = e.target; // "id"와 "value"를 가져옵니다.
@@ -22,15 +24,17 @@ function FaqAdd() {
   };
 
   const handleFaqAdd = () => {
+    console.log(faqData);
     axios
-      .post("http://172.30.1.23:8080/faq/add", faqData)
-      .then((response) => {
+      .post("http://172.30.1.100:8080/faq/add", faqData)
+      .then(() => {
         // Handle the response from the server here
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         // Handle errors here
         console.error(error);
+        console.log("에러남");
       });
 
     navigate("/faq");
@@ -52,7 +56,9 @@ function FaqAdd() {
         ></input>
       </div>
       <div>
-        <label className={Styles.label} htmlFor="faqcontent">내용</label>
+        <label className={Styles.label} htmlFor="faqcontent">
+          내용
+        </label>
         <input
           className={Styles.faq_content}
           type="text"
@@ -63,7 +69,9 @@ function FaqAdd() {
           onChange={handleInputChange}
         ></input>
       </div>
-      <button className={Styles.faqadd_button} onClick={handleFaqAdd}>추가하기</button>
+      <button className={Styles.faqadd_button} onClick={handleFaqAdd}>
+        추가하기
+      </button>
     </div>
   );
 }

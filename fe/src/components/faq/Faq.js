@@ -9,11 +9,10 @@ import styles from "./Faq.module.css";
 
 function Faq() {
   const navigate = useNavigate();
-  // const [faqData, setFaqData] = useState([]);
+  //const [faqData, setFaqData] = useState([]);
 
   // useEffect(() => {
-  //   // 백엔드 API 엔드포인트에 요청을 보냅니다.
-  //   axios.get('http://172.30.1.23:8080/faq/list').then((response) => {
+  //   axios.get('http://172.30.1.100:8080/faq/list').then((response) => {
   //     // 요청에 대한 응답에서 FAQ 데이터를 추출하여 상태에 설정합니다.
   //     setFaqData(response.data);
   //   });
@@ -21,17 +20,17 @@ function Faq() {
 
   const faqData = [
     {
-      faqid: 1,
+      faqId: 1,
       faqTitle: "FAQ 1",
       faqContent: "FAQ 1의 내용입니다.",
     },
     {
-      faqid: 2,
+      faqId: 2,
       faqTitle: "FAQ 2",
       faqContent: "FAQ 2의 내용입니다.",
     },
     {
-      faqid: 3,
+      faqId: 3,
       faqTitle: "FAQ 3",
       faqContent: "FAQ 3의 내용입니다.",
     },
