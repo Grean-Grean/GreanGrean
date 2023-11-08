@@ -1,67 +1,53 @@
 /* 전체 배경 스타일 및 패딩 추가 */
 .faqadd_background {
-    background-color: #f8f3ed;
-    padding: 20px; /* 전체 요소에 대한 top 패딩 20px 추가 */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  /* 공통 label 스타일 */
-  .label {
-    font-family: Noto Sans;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: 1.2px;
-    text-align: left; /* label 텍스트를 왼쪽 정렬 */
-    margin-right: 20px; /* label과 input 사이 간격 설정 */
-    padding-top: 20px;
-  }
-  
-  /* 공통 input 스타일 */
-  .faq_title,
-  .faq_content {
-    border-radius: 5px;
-    border: 1.5px solid var(--Main-Green, #214c2d);
-    background: var(--white, #fff);
-    width: 100%; /* 가로로 꽉 채우기 */
-    padding: 10px; /* 내용 input 필드에 대한 패딩 설정 */
-  }
-  
-  /* 내용 label 및 내용 input 필드 스타일 */
-  .faq_content {
-    margin-top: 20px; /* 내용 input 필드 위에 20px 패딩 추가 */
-  }
-  
-  .faqadd_button {
-    width: 150px;
-    height: 46px;
-    
-    /* 버튼 위치 */
-    position: relative;
-    
-    /* 상자 디자인 큰틀 */
-    margin-bottom: 30px;
-    border: 0px;
-    background-color: #214C2D;
-      
-    /* 그림자 */
-    border-radius: 10px;
-    box-shadow:.4rem .3rem 0.7rem #BEC5D0,
-               -.2rem -.2rem .4rem #FBFBFB;
-  
-    /* 글씨 */
-    font-family: Noto Sans;
-    color: white;
-    font-size: 1.3em;
-    font-weight: bold;
-  }
-    
-  .faqadd_button:active {
-    /*버튼 눌리는 효과*/
-    box-shadow: inset -.3rem -.1rem 1.4rem  #FBFBFB, 
-                inset .3rem .4rem .8rem #BEC5D0; 
-    cursor: pointer;
-  }
+  background-color: #f8f3ed;
+  padding: 20px; /* 전체 요소에 대한 top 패딩 20px 추가 */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 공통 label 스타일 */
+.label {
+  font-family: Noto Sans;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 1.2px;
+  text-align: left; /* label 텍스트를 왼쪽 정렬 */
+  margin-right: 20px; /* label과 input 사이 간격 설정 */
+  padding-top: 20px;
+}
+
+/* 공통 input 스타일 */
+.faq_title,
+.faq_content {
+  border-radius: 5px;
+  border: 1.5px solid var(--Main-Green, #214c2d);
+  background: var(--white, #fff);
+  width: 100%; /* 가로로 꽉 채우기 */
+  padding: 10px; /* 내용 input 필드에 대한 패딩 설정 */
+}
+
+/* 내용 label 및 내용 input 필드 스타일 */
+.faq_content {
+  margin-top: 20px; /* 내용 input 필드 위에 20px 패딩 추가 */
+}
+
+.faqadd_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  padding: 10px 15px;
+  margin: 10px 0px;
+  position: relative;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  transition: all 0.2s;
+  background: #214c2d;
+  border-radius: 5px;
+}

@@ -41,7 +41,6 @@ function FaqAdd() {
   };
   return (
     <div className={Styles.faqadd_background}>
-      Faq Page입니다.
       <div>
         <label className={Styles.label} htmlFor="faqtitle">
           제목

@@ -10,14 +10,10 @@ import Routers from "./router/routers";
 import RouteTest from "./components/RouteTest";
 
 function App() {
-
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
-
         <Routers />
-        <Footer />
       </div>
     </BrowserRouter>
   );

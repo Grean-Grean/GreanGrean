@@ -61,28 +61,35 @@
 
 // export default Header
 
-import SignIn from "./user/SignIn";
-import SignUp from "./user/SignUp";
-
 import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
 
 function Header() {
   return (
-    <div>
-      {/* <Link to="/">GREANGREAN</Link>
-      <Link to="/shop">Shop</Link>
-      <Link to="/faq">FAQ</Link>
-      <Link to="/user/signin">로그인</Link>
-      <Link to="/user/signup">회원가입</Link> */}
+    <header className={styles.main_header}>
+      <div>
+        <a className={styles.header_logo} href="/">
+          GREENGREEN
+        </a>
+      </div>
 
-      <nav>
-        <a href="/">GREENGREEN</a>
-        <a href="/shop">Shop</a>
-        <a href="/faq">FAQ</a>
-        <a href="/user/signin">로그인</a>
-        <a href="/user/signup">회원가입</a>
+      <nav className={styles.header_nav}>
+        <ul>
+          <li>
+            <a href="/shop">Shop</a>
+          </li>
+          <li>
+            <a href="/faq">FAQ</a>
+          </li>
+          <li>
+            <a href="/user/signin">로그인</a>
+          </li>
+          <li>
+            <a href="/user/signup">회원가입</a>
+          </li>
+        </ul>
       </nav>
-    </div>
+    </header>
   );
 }
 
