@@ -127,7 +127,9 @@ function FaqDetail({ faqData }) {
       console.log("delete Faq:", deleteFaq);
 
       axios
-        .delete(`http://172.30.1.97:8080/faq/delete?userNickName=${deleteFaq.userNickName}&faqId=${deleteFaq.faqId}`)
+        .delete(
+          `http://172.30.1.97:8080/faq/delete?userNickName=${deleteFaq.userNickName}&faqId=${deleteFaq.faqId}`
+        )
         .then(() => {
           // 삭제 성공 시, 화면에서도 해당 FAQ를 삭제합니다.
           const updatedFaqData = faqData.filter(
@@ -185,6 +187,7 @@ function FaqDetail({ faqData }) {
           )}
         </div>
       ))}
+      <div className={styles["faq-title-content-divider"]} />
     </div>
   );
 }

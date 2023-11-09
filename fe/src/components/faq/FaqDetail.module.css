@@ -4,11 +4,18 @@
 
 .faq-title,
 .faq-content {
-  margin: 20px 0px;
+  margin: 20px 40px;
 }
 
-/* 아코디언 아이콘을 오른쪽으로 정렬 */
+.faq-content {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+}
+
 .faq-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
   display: flex;
   justify-content: space-between;
 }
@@ -39,13 +46,14 @@
 }
 
 .gray-box button {
-  background-color: #D9D9D9; /* 네모박스 배경색 설정 */
-  padding: 1px 15px; /* 글씨와 네모박스 사이의 패딩 설정 */
-  color: white; /* 글씨 색상 설정 */
-  display: inline-block; /* 네모박스 크기를 글씨 크기에 맞게 설정 */
-  margin: 7px 0px 7px 7px; /*위 오른쪽 아래 왼쪽*/
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: #d9d9d9;
+  padding: 2px 15px;
+  margin: 7px 0px 20px 7px;
   border: none;
-  outline: none;
+  border-radius: 3px;
 }
 
 .gray-box {
@@ -57,12 +65,14 @@
 }
 
 textarea {
-    margin: 20px 0px;
-    width: 100%; 
-    height: auto; 
-    background: transparent; 
-    border: 2px solid #aeaeae; 
-    outline-color: #214C2D;
-    resize: none; /* 사용자가 크기 조절을 못하도록 설정, 필요에 따라 제거 가능 */
-  }
-  
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  margin: 20px 0px;
+  padding: 10px 10px;
+  width: 100%;
+  height: 250px;
+  background: transparent;
+  border: 2px solid #aeaeae;
+  outline-color: #214c2d;
+  resize: none; /* 사용자가 크기 조절을 못하도록 설정, 필요에 따라 제거 가능 */
+}
