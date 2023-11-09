@@ -1,3 +1,5 @@
+import axios from "axios";
+
 function FaqList() {
     return (
         <li>

@@ -1,0 +1,78 @@
+.faq-container {
+  margin: 15px;
+}
+
+.faq-title,
+.faq-content {
+  margin: 20px 40px;
+}
+
+.faq-content {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+}
+
+.faq-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 아코디언 아이콘의 스타일 */
+.icon {
+  margin-left: 10px; /* 아이콘과 텍스트 사이의 간격 조절 */
+}
+
+/* 기본 가로선 스타일 */
+.faq-divider {
+  border-bottom: 1px solid #ccc;
+}
+
+/* 활성화된 가로선 스타일 */
+.faq-divider.active {
+  border-bottom: 2px solid #000; /* 두꺼운 가로선 스타일 */
+}
+
+/* 타이틀 위의 가로선 스타일 */
+.faq-title-divider {
+  border-top: 1px solid #ccc;
+}
+
+/* 타이틀-콘텐츠 사이의 두꺼운 가로선 스타일 */
+.faq-title-content-divider {
+  border-top: 2px solid #000; /* 두꺼운 가로선 스타일 */
+}
+
+.gray-box button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  background-color: #d9d9d9;
+  padding: 2px 15px;
+  margin: 7px 0px 20px 7px;
+  border: none;
+  border-radius: 3px;
+}
+
+.gray-box {
+  text-align: right;
+}
+
+.gray-box button:active {
+  outline: 2px solid #696969; /* 원하는 스타일 및 색상을 적용합니다 */
+}
+
+textarea {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  margin: 20px 0px;
+  padding: 10px 10px;
+  width: 100%;
+  height: 250px;
+  background: transparent;
+  border: 2px solid #aeaeae;
+  outline-color: #214c2d;
+  resize: none; /* 사용자가 크기 조절을 못하도록 설정, 필요에 따라 제거 가능 */
+}

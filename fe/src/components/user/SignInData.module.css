@@ -1,0 +1,174 @@
+.inner {
+  padding: 60px 50px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign_header {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  color: black;
+  font-size: 54px;
+  word-wrap: break-word;
+  margin: 50px 0px;
+  justify-content: center;
+  align-items: center;
+}
+
+.caution {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: #bf3e3e;
+  font-size: 10px;
+  word-wrap: break-word;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.caution.vibration {
+  animation: vibration 0.5s;
+}
+
+.inner input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 350px;
+  padding: 8px 15px;
+  margin: 8px 0px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: 2px #214c2d solid;
+}
+
+input:focus {
+  outline: 1px #214c2d solid;
+  box-shadow: 0 0 5px #214c2d;
+}
+
+.login_more {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: 8px;
+  white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+}
+
+.login_more a,
+.login_more p {
+  display: inline; /* 인라인 요소로 변경하여 연결되도록 함 */
+  margin-right: 5px; /* 요소 간 간격 설정 (원하는 간격으로 조절) */
+  color: #aeaeae; /* 텍스트 색상 변경 */
+  text-decoration: none; /* 밑줄 제거 */
+}
+
+input::placeholder {
+  color: #aeaeae; /* 원하는 색상으로 변경 */
+}
+
+hr {
+  width: 100%;
+  border: 1.2px #aeaeae solid;
+  border-radius: 1px;
+  margin: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo_kakaotalk {
+  width: 60px;
+  height: 60px;
+  margin: 0px 40px;
+  border-radius: 50px;
+  background-size: 110%;
+  background-image: url("../../../public/asset/image/logo_kakaotalk.png");
+  align-items: center;
+  background-position: center;
+}
+
+.logo_google {
+  width: 60px;
+  height: 60px;
+  margin: 0px 40px;
+  outline: 1px solid #aeaeae;
+  border-radius: 50px;
+  background-image: url("../../../public/asset/image/logo_google.png");
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-position: center;
+  align-items: center;
+}
+
+.logo_naver {
+  width: 60px;
+  height: 60px;
+  margin: 0px 40px;
+  border-radius: 50px;
+  background-image: url("../../../public/asset/image/logo_naver.png");
+  background-size: contain;
+  background-position: center;
+}
+
+.logo_else {
+  width: 60px;
+  height: 60px;
+  margin: 0px 40px;
+  border-radius: 50px;
+  background-color: #aeaeae;
+  background-size: contain;
+  background-position: center;
+}
+
+.sign_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  display: block;
+  padding: 8px 15px;
+  margin: 10px 0px;
+  position: relative;
+  width: 350px;
+  text-align: center;
+  color: #fff;
+  border: none;
+  transition: all 0.2s;
+
+  background: linear-gradient(180deg, #214c2d 0%, #253129 100%);
+  border-radius: 5px;
+}
+
+.sign_button:hover {
+  letter-spacing: 1px;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+@keyframes vibration {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-3px);
+  }
+  40% {
+    transform: translateX(3px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

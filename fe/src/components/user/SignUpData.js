@@ -81,7 +81,6 @@ function SignUpData(props) {
           // Nickname is available
           console.log(response.data.message);
           setEmailExistsStatus(response.data.message);
-          // You can perform additional actions here if needed
         }
       })
       .catch((error) => {
@@ -110,97 +109,116 @@ function SignUpData(props) {
       });
   };
 
-  const passwordCheckMessageClassName = passwordMismatch
-    ? classes.alert
+  const passwordCheckMessageColor = passwordMismatch
+    ? classes.caution
     : classes.pass;
   const passwordCheckMessageText = passwordMismatch
     ? "비밀번호가 일치하지 않습니다."
     : "비밀번호가 일치합니다.";
 
   let passwordCheckMessage = (
-    <p htmlFor="confirmPassword" className={passwordCheckMessageClassName}>
+    <p
+      htmlFor="confirmPassword"
+      className={`${classes.alert} ${passwordCheckMessageColor}`}
+    >
       {passwordCheckMessageText}
     </p>
   );
 
   return (
-    <>
-      <div>
-        <label htmlFor="userName">이름</label>
-        <input
-          type="text"
-          id="userName"
-          name="userName"
-          value={formData.userName}
-          onChange={handleInputChange}
-        />
-      </div>
+    <div className={classes.inner}>
+      <div className={classes.inner}>
+        <h1 className={classes.sign_header}>SIGN UP</h1>
+        <div>
+          <label htmlFor="userName">이름</label>
+          <input
+            type="text"
+            id="userName"
+            name="userName"
+            value={formData.userName}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="userNickName">닉네임</label>
-        <input
-          type="text"
-          id="userNickName"
-          name="userNickName"
-          value={formData.userNickName}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleNickNameCheck}>중복확인</button>
-        <p className={classes.alert}>{nickNameExistsStatus}</p>
-      </div>
+        <div>
+          <label htmlFor="userNickName">닉네임</label>
+          <input
+            type="text"
+            id="userNickName"
+            name="userNickName"
+            value={formData.userNickName}
+            onChange={handleInputChange}
+          />
+          <button
+            className={classes.check_button}
+            onClick={handleNickNameCheck}
+          >
+            중복확인
+          </button>
+          <p className={`${classes.alert} ${classes.caution}`}>
+            {nickNameExistsStatus}
+          </p>
+        </div>
 
-      <div>
-        <label htmlFor="userEmail">이메일</label>
-        <input
-          type="email"
-          id="userEmail"
-          name="userEmail"
-          value={formData.userEmail}
-          onChange={handleInputChange}
-        />
-        <button onClick={handleEmailCheck}>인증하기</button>
-        <br />
-        <p className={classes.alert}>{emailExistsStatus}</p>
-      </div>
+        <div>
+          <label htmlFor="userEmail">이메일</label>
+          <input
+            type="email"
+            id="userEmail"
+            name="userEmail"
+            value={formData.userEmail}
+            onChange={handleInputChange}
+          />
+          <button className={classes.check_button} onClick={handleEmailCheck}>
+            인증하기
+          </button>
+          <br />
+          <p className={`${classes.alert} ${classes.caution}`}>
+            {emailExistsStatus}
+          </p>
+        </div>
 
-      <div>
-        <label htmlFor="userPassword">비밀번호</label>
-        <input
-          type="password"
-          id="userPassword"
-          name="userPassword"
-          placeholder="영어, 숫자, 특수문자를 포함한 8자리 이상"
-          value={formData.userPassword}
-          onChange={handleInputChange}
-        />
-      </div>
+        <div>
+          <label htmlFor="userPassword">비밀번호</label>
+          <input
+            type="password"
+            id="userPassword"
+            name="userPassword"
+            placeholder="영어, 숫자, 특수문자를 포함한 8자리 이상"
+            value={formData.userPassword}
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor="confirmPassword">비밀번호 확인</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-        />
-        <br />
-        {passwordCheckMessage}
-      </div>
+        <div>
+          <label htmlFor="confirmPassword">비밀번호 확인</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+          />
+          <br />
+          {passwordCheckMessage}
+        </div>
 
-      <div>
-        <label htmlFor="verificationCode">인증번호</label>
-        <input
-          type="text"
-          id="verificationCode"
-          name="verificationCode"
-          value={formData.verificationCode}
-          onChange={handleInputChange}
-        />
-        <button>확인</button>
+        <div>
+          <label htmlFor="verificationCode">인증번호</label>
+          <input
+            type="text"
+            id="verificationCode"
+            name="verificationCode"
+            value={formData.verificationCode}
+            onChange={handleInputChange}
+          />
+          <button className={classes.check_button}>확인</button>
+        </div>
+        <button className={classes.sign_button} onClick={handleSignUp}>
+          가입하기
+        </button>
       </div>
-      <button onClick={handleSignUp}>가입하기</button>
-    </>
+    </div>
   );
 }
 
