@@ -1,0 +1,46 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* 원하는 간격으로 조정 */
+    margin-left: 30px;
+}
+
+.text {
+    width: 140px;
+    margin-right: 10px; /* 텍스트와 입력 요소 사이의 간격 설정 */
+}
+
+.buyButton{
+    width: 10rem;
+    height: 3rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background: var(--Main-Green, #214C2D);
+    color: var(--white, #FFF);
+    font-family: Noto Sans;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.searchButton {
+    width: 4rem;
+    height: 2rem;
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background: var(--Main-Green, #214C2D);
+    color: var(--white, #FFF);
+    font-family: Noto Sans;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-left: 10px;
+}

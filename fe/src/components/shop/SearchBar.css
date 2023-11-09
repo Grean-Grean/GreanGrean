@@ -1,0 +1,87 @@
+.searchBar {
+    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.searchText {
+    display: flex;
+    margin-left: 30px;
+    width: 800px;
+}
+
+.CategoryText {
+    color: #000;
+    text-align: center;
+    font-family: Noto Sans;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.category{
+    width: 700px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.categoryArea {
+    
+}
+
+.button {
+    margin-left: 20px;
+    width: 5.0625rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    border-radius: 6.25rem;
+    border: 2px solid #000;    
+    background-color: #ffffff;
+}
+
+.choseButton {
+    margin-left: 20px;
+    width: 5.0625rem;
+    height: 1.75rem;
+    flex-shrink: 0;
+    border-radius: 6.25rem;
+    border: 2px solid #ffffff; 
+    background-color: black;
+    color: #ffffff;
+}
+
+.SearchButtonArea{
+    margin-top: 30px;
+}
+
+.SearchBarTextInput {
+    display: flex;
+    align-items: center;
+    background: #000; /* 배경색을 검은색으로 지정 */
+    padding: 8px;
+    border-radius: 20px;
+    width: 700px; /* 너비 조절 가능 */
+    margin-bottom: 30px;
+  }
+  
+  .SearchBarTextInput > input {
+    border: none; /* input 요소의 테두리 제거 */
+    background: transparent; /* 투명한 배경 설정 */
+    color: #fff; /* 글자색을 흰색으로 지정 */
+    width: 100%; /* input 요소가 부모 요소를 가득 채우도록 함 */
+    margin-left: 8px; /* 아이콘과 input 사이 여백 조절 */
+  }
+  
+  .SearchBarTextInput > input::placeholder {
+    color: #fff; /* placeholder(입력 힌트)의 글자색을 흰색으로 지정 */
+  }
+  
+  .SearchBarTextInput > svg {
+    color: #fff; /* 아이콘 색상을 흰색으로 지정 */
+  }

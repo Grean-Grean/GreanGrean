@@ -41,6 +41,8 @@ const Routers = () => {
           {/* FAQ */}
           <Route path="/faq" element={<Faq />} />
           <Route path="/faq/register" element={<FaqAdd />} />
+
+          <Route path="/shop/product/edit/:productId" element={<ProductEdit />} />
         </Route>
 
         {/* 로그인, 회원가입 */}

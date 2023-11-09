@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-const SERVER_URL = "http://172.30.1.23:8080"
+const SERVER_URL = "http://172.30.1.16:8080"
 
 const ProductAdd = () => {
 
@@ -53,7 +53,7 @@ const ProductAdd = () => {
 
     //상품 등록 클릭시 작동
     const sendObj = async () => {
-
+        console.log(JSON.stringify(obj))
         // const formData = new FormData();
         // formData.append('userId', obj.userId);
         // formData.append('productName', obj.productName);
