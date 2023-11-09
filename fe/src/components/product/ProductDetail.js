@@ -5,7 +5,7 @@ import './ProductDetail.css'
 import ProductContentPage from "./ProductContentPage"
 import ProductReviewPage from "./ProductReviewPage"
 
-const SERVER_URL = ""
+const SERVER_URL = "http://172.30.1.16:8080"
 
 const dummyList =
 {
@@ -19,7 +19,8 @@ const dummyList =
     review: [
         {
             id: 1,
-            userNickName: "인망원숭이",
+            content: '내용',
+            userNickName: "예비유미학살자",
             reviewContent: "튤립으로 봄에 인테리어를 하니까 집이 확 살아요!"
         },
         {
@@ -37,7 +38,7 @@ const ProductDetail = () => {
     //이전 페이지에서 정보 받아 오기
     const location = useLocation()
     const locationState = location.state
-    const [item, setItem] = useState(dummyList)
+    const [item, setItem] = useState([])
     const [number, setNumber] = useState(0)
     const navigate = useNavigate()
 
@@ -59,24 +60,26 @@ const ProductDetail = () => {
     // review : List<Review>}
     // /product/detail/{productId}
 
-    // const getItem = async () => {
+    const getItem = async () => {
 
-    //     fetch(`${SERVER_URL}/product/detail/${locationState.productId}`, {
-    //         method: 'GET'
-    //     })
-    //         .then(res => res.json())
-    //         .then(res => {
-    //             console.log(1, res);
-    //             setItem(res);
-    //         })
-    // }
+        fetch(`${SERVER_URL}/product/detail/${locationState.productId}`, {
+            method: 'GET'
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(1, res);
+                setItem(res);
+            })
+    }
 
+
+    // /product/detail/{productId}
     // //첫 화면에 데이터 받기
-    // useEffect(() => {
-    //     console.log("product Detail page 데이터 get~")
-    //     getItem();
-    //     console.log(item)
-    // }, [])
+    useEffect(() => {
+        console.log("product Detail page 데이터 get~")
+        getItem();
+        console.log(item)
+    }, [])
 
 
     const addNumber = () => {
@@ -99,6 +102,10 @@ const ProductDetail = () => {
 
     const clickBuyBotton = () => {
         navigate(`/shop/product/buy/${item.productId}`, { state: item })
+    }
+
+    const clickEditBotton = () => {
+        navigate(`/shop/product/edit/${item.productId}`, { state: item })
     }
 
     const openContentAreaHandler = () => {
@@ -139,6 +146,9 @@ const ProductDetail = () => {
                         <div className="buyBotton Text" onClick={clickBuyBotton}>
                             바로 구매
                         </div>
+                        <div className="buyBotton Text" onClick={clickEditBotton}>
+                            수정하기
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,9 +174,12 @@ const ProductDetail = () => {
                 <h2>리뷰</h2>
                 {isOpenReview
                     ?
-                    <div className="openPage">
-                        <ProductReviewPage prductReview={item.review} />
-                    </div>
+                    <>
+                        <text>아직 미완</text>
+                    </>
+                    // <div className="openPage">
+                    //     <ProductReviewPage prductReview={item.review} />
+                    // </div>
                     :
                     <></>
                 }

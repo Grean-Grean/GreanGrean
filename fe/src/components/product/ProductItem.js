@@ -25,15 +25,18 @@ const ProductItem = ({ productId, productImg, productName, productPrice, product
 
     return (
         <div
-            className="ProductItem"
-            style={{ background: 'orange', width: 300, height: 300, margin: 10 }}
+            className="Product"
             onClick={() => navigate(`/shop/product/detail/:${productId}`, { state: state })}
         >
-
-            <h5>{productId}item 이름 : {productName}</h5>
-            <img src={"/" + productImg} />
-            <h5>가격 : {productPrice}</h5>
-            <h5>재고 : {productNumber}</h5>
+            <div className="ProductImgArea">
+                <img src={"/" + productImg} />
+            </div>
+            <div className="ProductTextArea">
+                <h5 className="ProductText" style={{ fontSize: 20 }}>{productName}</h5>
+                <h5 className="ProductText" style={{ fontSize: 5 }}>{productId}</h5>
+                <h5 className="ProductText">가격 : {productPrice}</h5>
+                <h5 className="ProductText">재고 : {productNumber}</h5>
+            </div>
         </div>
     )
 }

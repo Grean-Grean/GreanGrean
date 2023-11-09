@@ -32,7 +32,7 @@ const Routers = () => {
 
         <Route path="/shop/product/add" element={<ProductAdd />} />
 
-        <Route path="/shop/product/edit/" element={<ProductEdit />} />
+        <Route path="/shop/product/edit/:productId" element={<ProductEdit />} />
 
         {/* 로그인, 회원가입 */}
         <Route path="/user/signin" element={<SignIn />} />
