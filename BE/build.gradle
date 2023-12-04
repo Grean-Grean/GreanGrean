@@ -29,6 +29,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+	//S3
+	implementation "org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE"
 
 	// Lombok
 	compileOnly 'org.projectlombok:lombok'
@@ -51,8 +55,9 @@ dependencies {
 	// 암호화
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-crypto'
-}
+
 
 //tasks.named('test') {
 //	useJUnitPlatform()
 //}
+}
