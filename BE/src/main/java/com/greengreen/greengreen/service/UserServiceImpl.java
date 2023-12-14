@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.service;
 
+import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
@@ -78,6 +79,16 @@ public class UserServiceImpl implements UserService{
             // 비밀번호가 일치하지 않을 경우 로그인 실패
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
+    }
+
+    @Override
+    public void modifyUser(UserModifyReqDto userModifyReqDto) {
+        String encodedPassword = passwordEncoder.encode(userModifyReqDto.getUserPassword());
+        userModifyReqDto.setUserPassword(encodedPassword);
+
+        User user = userRepository.findByUserId(userModifyReqDto.getUserId())
+                .orElseThrow(()->new RuntimeException("userId가 올바르지 않습니다."));
+        user.modifyUser(userModifyReqDto);
     }
 
 }

@@ -1,9 +1,6 @@
 package com.greengreen.greengreen.controller;
 
-import com.greengreen.greengreen.dto.request.EmailCheckReqDto;
-import com.greengreen.greengreen.dto.request.LoginReqDto;
-import com.greengreen.greengreen.dto.request.NickNameCheckReqDto;
-import com.greengreen.greengreen.dto.request.UserRegistReqDto;
+import com.greengreen.greengreen.dto.request.*;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
 import com.greengreen.greengreen.service.UserService;
@@ -56,6 +53,14 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body(loginResDto);
+    }
+
+    // 회원정보 수정
+    @PutMapping("/modify")
+    public ResponseEntity<Void> userModify(@Valid @RequestBody UserModifyReqDto userModifyReqDto){
+        userService.modifyUser(userModifyReqDto);
+
+        return ResponseEntity.ok().build();
     }
 
 
