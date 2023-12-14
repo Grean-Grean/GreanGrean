@@ -1,11 +1,11 @@
-
+import Sidebar from "./Sidebar"
 
 const SellManagement = () => {
 
     return (
-        <div>
+        <Sidebar>
             <h2>SellManagement 입니다.</h2>
-        </div>
+        </Sidebar>
     )
 
 }

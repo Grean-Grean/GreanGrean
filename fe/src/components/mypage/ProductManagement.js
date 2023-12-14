@@ -1,10 +1,10 @@
-
+import Sidebar from "./Sidebar"
 const ProductManagement = () => {
 
     return (
-        <div>
+        <Sidebar>
             <h2>ProductManagement 입니다.</h2>
-        </div>
+        </Sidebar>
     )
 
 }

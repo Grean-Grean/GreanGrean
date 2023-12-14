@@ -87,6 +87,9 @@ function Header() {
           <li>
             <a href="/user/signup">회원가입</a>
           </li>
+          <li>
+            <a href="/mypage/orders">마이페이지</a>
+          </li>
         </ul>
       </nav>
     </header>
