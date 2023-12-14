@@ -81,9 +81,9 @@ public class ReviewServiceImpl implements ReviewService {
     // 리뷰 수정
     @Override
     public void modifyReview(ReviewModifyReqDto reviewModifyReqDto) {
-        if(reviewModifyReqDto.getUserId().equals(reviewModifyReqDto.getUserId())){
-            Review review = reviewRepository.findByReviewId(reviewModifyReqDto.getReviewId())
-                    .orElseThrow(()->new RuntimeException("ReviewId가 올바르지 않습니다."));
+        Review review = reviewRepository.findByReviewId(reviewModifyReqDto.getReviewId())
+                .orElseThrow(()->new RuntimeException("ReviewId가 올바르지 않습니다."));
+        if(reviewModifyReqDto.getUserId().equals(review.getUser().getUserId())){
             review.modifyReview(reviewModifyReqDto);
         } else{
             throw new RuntimeException("리뷰 작성자만 수정할 수 있습니다");
