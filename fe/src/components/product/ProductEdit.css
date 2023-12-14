@@ -1,0 +1,32 @@
+.ProductDetailPageBackGround{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.imgSelect {
+    margin: 20px;
+}
+
+.editBotton {
+    font-size: 2rem;
+    font-weight: 600;
+    width: 300px;
+    height: 60px;
+    color: whitesmoke;
+    margin-left: 10px;
+    background: var(--Main-Green, #214C2D);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.editBottonArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Item {
+    margin-top: 10px;
+}

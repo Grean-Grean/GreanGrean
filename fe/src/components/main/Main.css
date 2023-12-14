@@ -115,7 +115,9 @@
 }
 
 .ShopButton{
+    display: flex;
     width: 120px;
     border-radius: 6.25rem;
     border: 3px solid var(--white, #FFF);
+    justify-content: center;
 }

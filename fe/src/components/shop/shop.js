@@ -270,17 +270,17 @@ const Shop = () => {
             <div>
                 <ProductList productList={data} inputText={search} />
             </div>
-            {isUserSignIn ?
-                <div className='SubmitButtonArea'>
-                    <button className='SubmitButton' onClick={() => navigate('/shop/product/add')}>등록하기</button>
-                </div>
-                :
-                <div className='SubmitButtonArea'>
-                    <button className='SubmitButton' onClick={() => {
-                        alert("로그인을 먼저 해주세요")
-                    }}>등록하기</button>
-                </div>
-            }
+            {/* {isUserSignIn ? */}
+            <div className='SubmitButtonArea'>
+                <button className='SubmitButton' onClick={() => navigate('/shop/product/add')}>등록하기</button>
+            </div>
+            {/* // : */}
+            {/* // <div className='SubmitButtonArea'> */}
+            {/* //     <button className='SubmitButton' onClick={() => { */}
+            {/* //         alert("로그인을 먼저 해주세요") */}
+            {/* //     }}>등록하기</button> */}
+            {/* // </div> */}
+            {/* // } */}
         </div>
     )
 }

@@ -1,0 +1,10 @@
+.ProductContentPage{
+    display: flex;
+    flex-direction: row;
+    /* background-color: #1d2327; */
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: var(--white, whitesmoke);
+}

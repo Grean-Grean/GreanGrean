@@ -15,11 +15,13 @@ const SERVER_URL = "http://172.30.1.16:8080"
 //     purchaseNumber : String, //우편번호
 //     purchasePhoneNumber : String} //전화번호
 
-const ProductBuy = () => {
+const ProductBuy = ({ number }) => {
 
     const location = useLocation()
     const locationState = location.state
 
+    //구매 숫자
+    console.log(locationState.number)
     //처음 화면 랜더 할때 상품 데이터 가지고 와야함
     const [state, setState] = useState({
         userId: 1,
@@ -130,12 +132,11 @@ const ProductBuy = () => {
 
 
     return (
-        <div className="page">
-            <h2>ProductBuy page입니다!</h2>
-
+        <div className="BuyPage">
             <div className="line">
                 <text className="text">구매 수령인 이름  </text>
                 <input
+                    className="input"
                     type="text"
                     name="purchaseName"
                     value={state.purchaseName}
@@ -145,6 +146,8 @@ const ProductBuy = () => {
             <div className="line">
                 <text className="text">우편번호  </text>
                 <input
+                    style={{ width: 210 }}
+                    className="input"
                     type="text"
                     name="purchaseNumber"
                     value={state.purchaseNumber}
@@ -163,6 +166,7 @@ const ProductBuy = () => {
             <div className="line">
                 <text className="text">주소  </text>
                 <input
+                    className="input"
                     type="text"
                     name="purchaseAddress"
                     value={state.purchaseAddress}
@@ -172,6 +176,7 @@ const ProductBuy = () => {
             <div className="line">
                 <text className="text">상세 주소  </text>
                 <input
+                    className="input"
                     type="text"
                     name="purchaseAddressDetail"
                     value={state.purchaseAddressDetail}
@@ -181,6 +186,7 @@ const ProductBuy = () => {
             <div className="line">
                 <text className="text">수령인 전화번호  </text>
                 <input
+                    className="input"
                     type="text"
                     name="purchasePhoneNumber"
                     value={state.purchasePhoneNumber}
@@ -188,7 +194,7 @@ const ProductBuy = () => {
                 />
             </div>
 
-            <div>
+            <div className="buyButtonArea">
                 <button
                     className="buyButton"
                     onClick={buyButtonClick}

@@ -4,6 +4,7 @@ import './ProductDetail.css'
 
 import ProductContentPage from "./ProductContentPage"
 import ProductReviewPage from "./ProductReviewPage"
+import { TiLeaf } from "react-icons/ti"
 
 const SERVER_URL = "http://172.30.1.16:8080"
 
@@ -13,7 +14,7 @@ const dummyList =
     productImg: '',
     productName: '튤립',
     productPrice: 5000,
-    productNumber: 5,
+    productNumber: 10000000,
     productCategory: 'spring',
     productContent: '봄의 대표 꽃 튤립 싸다! 싸!, 이걸로 예전엔 집을 샀다고요? 저도 그때로 가고 싶네요!',
     review: [
@@ -21,7 +22,7 @@ const dummyList =
             id: 1,
             content: '내용',
             userNickName: "예비유미학살자",
-            reviewContent: "튤립으로 봄에 인테리어를 하니까 집이 확 살아요!"
+            reviewContent: "튤립으로 봄에 인테리어를 하니까 집이 확 살아요! "
         },
         {
             id: 2,
@@ -39,11 +40,12 @@ const ProductDetail = () => {
     const location = useLocation()
     const locationState = location.state
     const [item, setItem] = useState([])
-    const [number, setNumber] = useState(0)
+    const [number, setNumber] = useState(1)
     const navigate = useNavigate()
 
     const [isOpenContent, setIsOpenContent] = useState(false)
     const [isOpenReview, setIsOpenReview] = useState(false)
+    const [buyItem, setBuyItem] = useState([])
 
 
     //data
@@ -79,7 +81,9 @@ const ProductDetail = () => {
         console.log("product Detail page 데이터 get~")
         getItem();
         console.log(item)
+        setItem(dummyList)
     }, [])
+
 
 
     const addNumber = () => {
@@ -101,7 +105,14 @@ const ProductDetail = () => {
     }
 
     const clickBuyBotton = () => {
-        navigate(`/shop/product/buy/${item.productId}`, { state: item })
+        //buyItem에 state만들어서 넣기
+        if (number == 0) {
+            alert("한개 이상 선택해주세요")
+        } else {
+            console.log(number)
+            navigate(`/shop/product/buy/${item.productId}`, { state: { ...item, number } })
+        }
+
     }
 
     const clickEditBotton = () => {
@@ -117,76 +128,105 @@ const ProductDetail = () => {
         setIsOpenReview(!isOpenReview)
     }
 
+    const handleChangeNumber = (e) => {
+        setNumber(e.target.value)
+        if (e.target.value > item.productNumber) {
+            alert(`현재 남은 재고는 ${item.productNumber}개 입니다.`)
+            setNumber(item.productNumber)
+        } else if (e.target.value < 0) {
+            setNumber(0)
+        }
+        //입력된 값을 state저장
+    }
 
     return (
-        <div className="page">
+        <div className="ProductDetailPageBackGround">
+            <div className="page">
 
-            <div className="flexwrab">
-                <div className="imgArea">
-                    <img className="img" />
+                <div className="flexwrab ">
+                    <div className="imgArea">
+                        <img className="img" />
+                    </div>
+
+                    <div className="ContentArea">
+                        <div className="NameArea">
+                            <h2 className="NameText" >{item.productName}</h2>
+                            <div className="priceArea">
+                                <h2 className="NameText" style={{ fontWeight: "500", marginRight: 5 }}>
+                                    {[item.productPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                </h2>
+                                <h2 className="Text">원</h2>
+                            </div>
+                        </div>
+                        <div className="BuycontentArea">
+                            <div className="PriceContentArea">
+                                <h2 className="Text">주문수량</h2>
+                                <input
+                                    className="BuyCount Text"
+                                    type="number"
+                                    min="0" max={item.productNumber}
+                                    name='productNumber'
+                                    value={number}
+                                    onChange={handleChangeNumber}
+                                />
+                            </div>
+                        </div>
+                        <div className="TotalPrices">
+                            <text className="Text" style={{ color: "#214C2D", marginRight: 10 }}>총 상품 금액</text>
+                            <text className="NameText" style={{ fontWeight: "700", color: "#214C2D" }}>
+                                {[number * item.productPrice].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                            </text>
+                            <TiLeaf color="#214C2D" size={40} />
+                        </div>
+                        <div className="buyBottonArea">
+
+                            <div className="buyBotton Text" onClick={clickEditBotton} style={{ backgroundColor: "black" }}>
+                                수정하기
+                            </div>
+                            <div className="buyBotton Text" onClick={clickBuyBotton}>
+                                구매하기
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="nameArea">
-                    <h2 className="name Text" >이름 : {item.productName}</h2>
-                    <h2 className="smallContent Text" style={{ fontSize: '1.5rem', marginBottom: '100px' }}>짧은 설명 어쩌구 저꺼주</h2>
+                <div className="ProductContentDetailArea">
+                    <div>
+                        <div className="stick"></div>
+                        <h2 className="Text" onClick={openContentAreaHandler}>상품 상세설명  ▼</h2>
+                        {isOpenContent
+                            ?
+                            <div>
+                                <div className="openPage">
+                                    <ProductContentPage productContent={item.productContent} />
+                                </div>
+                                <div className="stick"></div>
+                            </div>
+                            :
+                            <div className="stick"></div>
+                        }
+                    </div>
 
                     <div>
-                        <div className="priceArea">
-                            <h2 className="Text">가격 : </h2>
-                            <h2 className="Text">{item.productPrice}원</h2>
-                        </div>
-                        <div className="priceArea">
-                            <h2 className="Text">구매 수량 : </h2>
-                            <h2 className="Text">{number}</h2>
-                            <h2 className="Text">개</h2>
-                            <button onClick={addNumber}>+</button>
-                            <button onClick={minusNumber}>-</button>
-                        </div>
 
-                        <div className="buyBotton Text" onClick={clickBuyBotton}>
-                            바로 구매
-                        </div>
-                        <div className="buyBotton Text" onClick={clickEditBotton}>
-                            수정하기
-                        </div>
+                        <h2 className="Text" onClick={openReviewAreaHandler}>리뷰   ▼</h2>
+                        {isOpenReview
+                            ?
+                            // <>
+                            //     <text>아직 미완</text>
+                            //     <div className="stick"></div>
+                            // </>
+                            <div className="openPage">
+                                <ProductReviewPage prductReview={item.review} />
+                            </div>
+                            :
+                            <div className="stick"></div>
+
+                        }
                     </div>
                 </div>
-            </div>
-
-            <div className="stick"></div>
-            <div
-                onClick={openContentAreaHandler}
-            >
-                <h2 className="Text">상품 상세설명</h2>
-                {isOpenContent
-                    ?
-                    <div className="openPage">
-                        <ProductContentPage productContent={item.productContent} />
-                    </div>
-                    :
-                    <></>
-                }
-            </div>
-
-            <div className="stick"></div>
-
-            <div onClick={openReviewAreaHandler}>
-                <h2>리뷰</h2>
-                {isOpenReview
-                    ?
-                    <>
-                        <text>아직 미완</text>
-                    </>
-                    // <div className="openPage">
-                    //     <ProductReviewPage prductReview={item.review} />
-                    // </div>
-                    :
-                    <></>
-                }
-            </div>
-
+            </div >
         </div >
-
     )
 }
 

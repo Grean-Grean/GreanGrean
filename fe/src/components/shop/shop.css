@@ -6,12 +6,18 @@
     align-content: center;
 }
 
+.Product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .ProductListArea{
     display: flex;
     flex-direction: column;
     width: 90%;
-
     margin: 0 auto;
+    align-items: center;
 }
 .ProductList{
     display: flex;

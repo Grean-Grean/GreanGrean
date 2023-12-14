@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import axios from "axios"
+import "./ProductEdit.css"
 
 const SERVER_URL = "http://172.30.1.16:8080"
 
@@ -96,87 +97,71 @@ const ProductEdit = ({ state }) => {
 
 
     return (
-        <div >
-            {/* 이미지 파일 선택 구역 */}
-            {imageSrc ? <img src={imageSrc} alt="preview-img" /> : <div>이미지 없음</div>}
-            <div />
-            <div >
-                <input type='file' onChange={(e) => {
-                    encodeFileToBase64(e.target.files[0]);
-                }} />
-                <h2>{filename}</h2>
+        <div className="ProductDetailPageBackGround">
+
+            <div className="flexwrab">
+                <div>
+                    <div className="imgArea">
+                        {/* 이미지 파일 선택 구역 */}
+                        {imageSrc ? <img className="img" src={imageSrc} alt="preview-img" /> : <div className="Text">이미지 없음</div>}
+                    </div>
+                    <div className="imgSelect Text">
+                        <input type='file' onChange={(e) => {
+                            encodeFileToBase64(e.target.files[0]);
+                        }} />
+                        <h2>{filename}</h2>
+                    </div>
+                </div>
+
+                <div className="ContentArea">
+                    {/* 상품명이름 구역 */}
+                    <div className="Item Text">등록 상품명 </div>
+                    <input
+                        name='productName'
+                        className="상품명"
+                        value={item.productName}
+                        onChange={handleChangeItem}
+                        placeholder='상품명을 입력해주세요'
+                    />
+
+                    {/* 판매 가격 구역 */}
+                    <div className="Item Text">판매 가격</div>
+                    <input
+                        className="Text"
+                        name='productPrice'
+                        value={item.productPrice}
+                        onChange={handleChangeItem}
+                    />
 
 
+                    {/* 판매수량 구역 */}
+                    <div className="Item Text">판매 수량</div>
+                    <input
+                        className="Text"
+                        name='productNumber'
+                        value={item.productNumber}
+                        onChange={handleChangeItem}
+                    />
+                    {/* 카테고리 추가 구역*/}
+                    <div className="Item Text">카테고리 선택</div>
+                    {/* 카테고리 */}
+                    <select
+                        name='productCategory'
+                        value={item.productCategory}
+                        onChange={handleChangeItem}
+                    >
+                        <option selected value={'선택'}>선택</option>
+                        <option value={'SPRING'}>봄</option>
+                        <option value={'SUMMER'}>여름</option>
+                        <option value={'FALL'}>가을</option>
+                        <option value={'WINTER'}>겨울</option>
+                    </select>
+                </div>
             </div>
-            {/* 상품명이름 구역 */}
-            <div >등록 상품명 </div>
-            <input
-                name='productName'
-                className="상품명"
-                value={item.productName}
-                onChange={handleChangeItem}
-                placeholder='상품명을 입력해주세요'
-            />
 
-            {/* 판매 가격 구역 */}
-            <div >판매 가격</div>
-            <input
-                className="Rectangle73"
-                name='productPrice'
-                value={item.productPrice}
-                onChange={handleChangeItem}
-            />
-            <div >원</div>
-
-
-            {/* 판매수량 구역 */}
-            <div >판매 수량</div>
-            <input
-                className="Rectangle75"
-                name='productNumber'
-                value={item.productNumber}
-                onChange={handleChangeItem}
-            />
-            <div>개</div>
-
-
-            <div >상세 설명 추가</div>
-
-            {/* 카테고리 추가 구역*/}
-            <div >카테고리 추가</div>
-            {/* 카테고리 */}
-            <div className="Rectangle23" />
-            {/* '+' */}
-            <div
-                className="Group24"
-
-
-            >
-                <div className="Ellipse7" />
-                <div >+</div>
-            </div>
-            <select
-                name='productCategory'
-                value={item.productCategory}
-                onChange={handleChangeItem}
-            >
-                <option selected value={'선택'}>선택</option>
-                <option value={'SPRING'}>봄</option>
-                <option value={'SUMMER'}>여름</option>
-                <option value={'FALL'}>가을</option>
-                <option value={'WINTER'}>겨울</option>
-            </select>
-
-            {/* 이미 선택된 카테고리 */}
-            <div className="Rectangle76" />
-            {/* '- */}
-            <div className="Group36" >
-                <div className="Ellipse7" />
-                <div >-</div>
-            </div>
-            <div >{item.productCategory}</div>
+            <div className="Text" style={{ fontSize: 20 }}>상세 설명 추가</div>
             <textarea
-                className="Rectangle78"
+                className="Text"
                 name='productContent'
                 value={item.productContent}
                 onChange={handleChangeItem}
@@ -186,20 +171,14 @@ const ProductEdit = ({ state }) => {
 
 
             <div
-                className="Group30"
+                className="editBottonArea"
                 onClick={sendObj}
             >
-                <div className="Rectangle22" />
-                <div >상품 수정</div>
+                <div className="editBotton">상품 수정</div>
             </div>
 
-            <div
-                className="Group30"
-                onClick={deleteProduct}
-            >
-                <div className="Rectangle22" />
-                <div >상품 삭제</div>
-            </div>
+
+
         </div >
 
     )
