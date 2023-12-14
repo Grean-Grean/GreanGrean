@@ -36,13 +36,17 @@ const Main = () => {
                 </div>
             </div>
 
-            <div className="NewProductView">
+            {/* <div className="NewProductView">
                 <div>최근 등록 상품</div>
                 <div className="NewProductList">
                     <div className="Product">상품 1</div>
                     <div className="Product">상품 2</div>
                     <div className="Product">상품 3</div>
                 </div>
+            </div> */}
+
+            <div>
+
             </div>
         </div>
     );

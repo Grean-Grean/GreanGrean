@@ -48,7 +48,7 @@ const Routers = () => {
         {/* 로그인, 회원가입 */}
         <Route path="/user/signin" element={<SignIn />} />
         <Route path="/user/signup" element={<SignUp />} />
-      </Routes>
+      </Routes >
     </>
   );
 };

@@ -1,0 +1,86 @@
+.ProductReviewItem {
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    /* background-color: #1d2327; */
+    width: auto;
+    height: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    background: var(--white, whitesmoke);
+    box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ReviewImgArea {
+    display: flex;
+    flex-direction: column;
+    /* border: 4px solid black; */
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.ReviewImg {
+    /* border: 3px solid green; */
+    width: 170px;
+    height: 170px;
+    margin-left: 10px;
+    overflow: hidden; 
+}
+
+.ReviewImg img {
+    width: 100%; /* 이미지를 컨테이너에 꽉 차게 표시 */
+    height: 100%; /* 가로 크기에 맞추어 세로 크기를 자동 조절 */
+}
+
+.ReviewContentArea {
+    display: flex;
+    flex-direction: column;
+    /* border: 3px solid pink; */
+    width: 100vw;
+    padding: 10px;
+    
+}
+
+.ReviewNameArea {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.ReviewText{
+    font-family: Noto Sans;
+    font-size: 1.3rem;
+    font-style: normal;
+    /* color: aliceblue; */
+}
+
+.ReviewContent{
+    /* border: 3px solid blue; */
+    height: 150px;
+}
+
+.ReviewButtonArea {
+    /* border: 3px solid white; */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ReviewBotton{
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 0.3125rem;
+    border: 1px solid var(--Main-Green, #214C2D);
+
+}
+
+.ReviwImgChangeBtn{
+    max-width: 100%; /* 최대 가로 너비 100%로 설정 */
+    overflow: hidden; /* 넘치는 부분을 감추기 */
+    box-sizing: border-box; /* 너비와 높이에 border와 padding을 포함하도록 설정 */
+    margin-top: 10px; /* 원하는 여백 값으로 조절 */
+}
+
+.ReviwImgChangeBtn input {
+    width: 100%; /* input 요소를 부모 요소에 꽉 차게 표시 */
+}

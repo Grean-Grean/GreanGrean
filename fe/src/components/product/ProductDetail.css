@@ -1,69 +1,139 @@
 .flexwrab {
     display: flex;
+    width: 75vw;
+    /* background-color: brown; */
     
 }
-
+.ProductDetailPageBackGround{
+    background-color: #F8F3ED;
+    padding: 10px;
+}
 .page {
+    padding-top: 30px;
     /* 100vw 디스플레이 화면의 100퍼센트 넓이 */
     width: 80vw;
     /* 100vh 디스플레이 화면의 100퍼센트 높이 */
     height: auto;
-    border: 1px solid black;
-    margin: 30px;
+    margin: 0 auto;
     text-align: start;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 2.4375rem;
+    background: var(--white, whitesmoke);
+    box-shadow: 3px 3px 10px 2px rgba(0, 0, 0, 0.25);
 }
 
 .imgArea {
-    width: 400px;
+    display: flex;
+    width: 500px;
     height: 400px;
-    background-color: aqua;
+    background-color: gainsboro;
     margin-right: 50px;
     margin-left: 30px;
-    
+    justify-content: center;
+    align-items: center;
 }
 
 .img {
     margin: 10;
-    background-color: bisque;
+    /* background-color: bisque; */
+    width: 500px;
+    height: 400px;
+    object-fit: contain;
+
 }
 
-.nameArea {
-    background-color: blueviolet;
+.ContentArea {
+    display: flex;
+    flex-direction: column;
+    width: 700px;
+    height: 400px;
+    border-radius: 5px;
+    padding: 10px;
 }
 
+.NameArea {
+    display: flex;
+    flex-direction: column;
+    /* background-color: antiquewhite; */
+    align-items: flex-start;
+}
+
+.NameText {
+    color: #000;
+    font-family: Noto Sans;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+}
+
+.BuycontentArea {
+    display: flex;
+    flex-direction: column;
+    /* background-color: blue; */
+    height: 300px;
+}
 .Text {
     color: #000;
     font-family: Noto Sans;
-    font-size: 2rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    letter-spacing: 0.32rem;
 }
 
 .priceArea {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    
+    /* background-color: aqua; */
+    align-items: center;
 }
 
+.buyBottonArea{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+.BuyCount {
+    margin-left: 20px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100px; 
+    margin-right: 10px;
+    transition: 0.3s;
+    background: var(--white, whitesmoke);
+
+  }
+
+  .BuyCount:focus{
+    width: 150px;
+  }
+
+
+
 .buyBotton {
-    color: aliceblue;
-    border: 1px solid black;
-    margin-top: 50px;
-    border-radius: 0.625rem;
+    font-size: 2rem;
+    font-weight: 600;
+    width: 150px;
+    height: 60px;
+    color: whitesmoke;
+    margin-left: 10px;
     background: var(--Main-Green, #214C2D);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
 }
 
 .stick {
     margin-top: 30px;
-    width: 65vw;
-    height: 0.1875rem;
+    height: 0.1rem;
     background: #000;
 }
 
@@ -76,3 +146,38 @@
     display: flex;
     flex-direction: column;
 }
+
+.TotalPrices {
+    display: flex;
+    justify-content: flex-end
+}
+
+.PriceContentArea{
+    display: flex;
+    align-items: center;
+}
+
+.ProductContentDetailArea{
+    /* background-color: #ccc; */
+    display: flex;
+    flex-direction: column;
+    width: 75vw;
+}
+
+@media screen and (max-width: 1200px) {
+    .flexwrab {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .imgArea {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
+      margin-bottom: 20px; /* 이미지와 나머지 사이 여백 추가 */
+    }
+  
+    .ContentArea {
+      width: 100%;
+    }
+  }
