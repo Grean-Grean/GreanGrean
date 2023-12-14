@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.entity;
 
+import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -40,4 +41,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Purchase> purchaseList;
 
+    public void modifyUser(UserModifyReqDto userModifyReqDto){
+        this.userPassword = userModifyReqDto.getUserPassword();
+        this.userName = userModifyReqDto.getUserName();
+        this.userNickName = userModifyReqDto.getUserNickName();
+    }
 }
