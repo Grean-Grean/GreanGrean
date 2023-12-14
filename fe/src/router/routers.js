@@ -10,6 +10,10 @@ import ProductEdit from "../components/product/ProductEdit";
 import ProductBuy from "../components/product/ProductBuy";
 
 import MyPage from "../components/mypage/MyPage";
+import UserInfo from "../components/mypage/UserInfo";
+import OrderInfo from "../components/mypage/OrderInfo";
+import SellManagement from "../components/mypage/SellManagement";
+import ProductManagement from "../components/mypage/ProductManagement";
 
 import Faq from "../components/faq/Faq";
 import FaqAdd from "../components/faq/FaqAdd";
@@ -36,13 +40,19 @@ const Routers = () => {
           <Route path="/shop/product/edit/" element={<ProductEdit />} />
 
           {/* mypage */}
-          <Route path="/mypage/*" element={<MyPage />} />
+          <Route path="/mypage/info" element={<UserInfo />} /> 
+          <Route path="/mypage/orders" element={<OrderInfo />} />
+          <Route path="/mypage/sells" element={<SellManagement />} />
+          <Route path="/mypage/products" element={<ProductManagement />} />
 
           {/* FAQ */}
           <Route path="/faq" element={<Faq />} />
           <Route path="/faq/register" element={<FaqAdd />} />
 
-          <Route path="/shop/product/edit/:productId" element={<ProductEdit />} />
+          <Route
+            path="/shop/product/edit/:productId"
+            element={<ProductEdit />}
+          />
         </Route>
 
         {/* 로그인, 회원가입 */}
