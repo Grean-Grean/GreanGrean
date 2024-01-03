@@ -1,9 +1,20 @@
 .alert {
-    text-align: center;
-    color: #bf3e3e;
-    font-size: 10px;
-    font-family: Noto Sans;
-    font-weight: 200;
-    word-wrap: break-word;
-  }
-  
+  text-align: center;
+  color: #bf3e3e;
+  font-size: 10px;
+  font-family: Noto Sans;
+  font-weight: 200;
+  word-wrap: break-word;
+}
+
+.passwordContainer {
+  margin-bottom: 20px;
+}
+
+.passwordIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
