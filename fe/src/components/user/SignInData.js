@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import classes from "./SignInData.module.css";
 
 function SignInData(props) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const [signInData, setSignInData] = useState({
     userEmail: "",
     userPassword: "",
@@ -19,19 +21,18 @@ function SignInData(props) {
   };
 
   const handleSignUp = () => {
-    // axios
-    //   .post("http://172.30.1.23:8080/user/login", signInData)
-    //   .then((response) => {
-    //     // Handle the response from the server here
-    //     console.log(response.data.userId);
-    //     console.log(response.data.userNickName);
-    //   })
-    //   .catch((error) => {
-    //     // Handle errors here
-    //     console.error(error);
-    //     setShowCaution(true);
-    //   });
-    setShowCaution(true);
+    axios
+      .post(`/user/login`, signInData)
+      .then((response) => {
+        // Handle the response from the server here
+        console.log(response.data.userId);
+        console.log(response.data.userNickName);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+        setShowCaution(true);
+      });
   };
 
   return (

@@ -7,11 +7,13 @@ import FaqDetail from "./FaqDetail";
 import styles from "./Faq.module.css";
 
 function Faq() {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate();
   // const [faqData, setFaqData] = useState([]);
 
   // useEffect(() => {
-  //   axios.get('http://172.30.1.97:8080/faq/list').then((response) => {
+  //   axios.get(`/faq/list`).then((response) => {
   //     // 요청에 대한 응답에서 FAQ 데이터를 추출하여 상태에 설정합니다.
   //     setFaqData(response.data);
   //   });

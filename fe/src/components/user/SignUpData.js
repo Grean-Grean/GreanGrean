@@ -3,6 +3,8 @@ import axios from "axios";
 import classes from "./SignUpData.module.css";
 
 function SignUpData(props) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     userName: "",
     userNickName: "",
@@ -45,7 +47,7 @@ function SignUpData(props) {
 
     // Send userNickName to the server for checking
     axios
-      .post("http://172.30.1.23:8080/user/nickname", { userNickName })
+      .post(`/user/nickname`, { userNickName })
       .then((response) => {
         // Handle the response from the server here
         if (response.data.status === 0) {
@@ -70,7 +72,7 @@ function SignUpData(props) {
 
     // Send userNickName to the server for checking
     axios
-      .post("http://172.30.1.23:8080/user/email", { userEmail })
+      .post(`/user/email`, { userEmail })
       .then((response) => {
         // Handle the response from the server here
         if (response.data.status === 0) {
@@ -98,7 +100,7 @@ function SignUpData(props) {
 
     // Send data to the server using axios POST request
     axios
-      .post("http://172.30.1.23:8080/user/regist", formData)
+      .post(`/user/regist`, formData)
       .then((response) => {
         // Handle the response from the server here
         console.log(response.data);

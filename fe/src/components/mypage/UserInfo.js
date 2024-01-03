@@ -7,6 +7,9 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import styles from "./UserInfo.module.css";
 
 const UserInfo = () => {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+  console.log(axios.defaults.baseURL);
+
   const [userInfo, setUserInfo] = useState({
     userId: "",
     userName: "",
@@ -40,7 +43,7 @@ const UserInfo = () => {
     const { userNickName } = userInfo;
 
     axios
-      .post("http://172.30.1.23:8080/user/nickname", { userNickName })
+      .post(`/user/nickname`, { userNickName })
       .then((response) => {
         if (response.data.status === 0) {
           console.log(response.data.message);
@@ -62,7 +65,7 @@ const UserInfo = () => {
   const handleEmailCheck = () => {
     const { userEmail } = userInfo;
     axios
-      .post("http://172.30.1.23:8080/user/email", { userEmail })
+      .post(`/user/email`, { userEmail })
       .then((response) => {
         if (response.data.status === 0) {
           console.log(response.data.message);

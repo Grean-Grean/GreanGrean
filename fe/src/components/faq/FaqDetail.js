@@ -3,6 +3,8 @@ import styles from "./FaqDetail.module.css"; // CSS 모듈 가져오기
 import axios from "axios";
 
 function FaqDetail({ faqData }) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [editModeIndex, setEditModeIndex] = useState(null);
 
@@ -83,7 +85,7 @@ function FaqDetail({ faqData }) {
       console.log("수정모드 내용 확인: ", faqEditData);
 
       axios
-        .put(`http://172.30.1.97:8080/faq/modify`, faqEditData)
+        .put(`/faq/modify`, faqEditData)
         .then(() => {
           toggleEditMode(index);
           // 성공적으로 수정데이터 전송 후 기존 editdata 초기화
@@ -128,7 +130,7 @@ function FaqDetail({ faqData }) {
 
       axios
         .delete(
-          `http://172.30.1.97:8080/faq/delete?userNickName=${deleteFaq.userNickName}&faqId=${deleteFaq.faqId}`
+          `/faq/delete?userNickName=${deleteFaq.userNickName}&faqId=${deleteFaq.faqId}`
         )
         .then(() => {
           // 삭제 성공 시, 화면에서도 해당 FAQ를 삭제합니다.

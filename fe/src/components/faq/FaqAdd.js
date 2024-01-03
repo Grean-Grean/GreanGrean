@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Styles from "./FaqAdd.module.css";
 
 function FaqAdd() {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const navigate = useNavigate();
 
   const [faqData, setFaqData] = useState({
@@ -26,7 +28,7 @@ function FaqAdd() {
   const handleFaqAdd = () => {
     console.log(faqData);
     axios
-      .post("http://172.30.1.97:8080/faq/add", faqData)
+      .post(`/faq/add`, faqData)
       .then(() => {
         // Handle the response from the server here
         // console.log(response);
