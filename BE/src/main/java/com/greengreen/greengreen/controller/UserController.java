@@ -1,8 +1,10 @@
 package com.greengreen.greengreen.controller;
 
+import com.amazonaws.Response;
 import com.greengreen.greengreen.dto.request.*;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
+import com.greengreen.greengreen.dto.response.PurchaseResDto;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -61,6 +64,15 @@ public class UserController {
         userService.modifyUser(userModifyReqDto);
 
         return ResponseEntity.ok().build();
+    }
+
+    // 주문 내역 조회
+    @GetMapping("/purchasehistory/{userId}")
+    public ResponseEntity<List<PurchaseResDto>> purchaseHistory(@PathVariable Long userId){
+        List<PurchaseResDto> purchaseResDtos = userService.purchaseHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(purchaseResDtos);
     }
 
 

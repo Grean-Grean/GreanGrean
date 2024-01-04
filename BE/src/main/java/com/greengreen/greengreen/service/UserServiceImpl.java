@@ -1,17 +1,23 @@
 package com.greengreen.greengreen.service;
 
+import com.greengreen.greengreen.dto.request.UserIdReqDto;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
+import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -20,6 +26,7 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PurchaseRepository purchaseRepository;
 
     // 회원가입
     @Override
@@ -81,6 +88,7 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    // 회원정보 수정
     @Override
     public void modifyUser(UserModifyReqDto userModifyReqDto) {
         String encodedPassword = passwordEncoder.encode(userModifyReqDto.getUserPassword());
@@ -89,6 +97,30 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUserId(userModifyReqDto.getUserId())
                 .orElseThrow(()->new RuntimeException("userId가 올바르지 않습니다."));
         user.modifyUser(userModifyReqDto);
+    }
+
+    // 구매 내역 조회
+    @Transactional
+    @Override
+    public List<PurchaseResDto> purchaseHistory(Long userId) {
+        List<Purchase> purchaseList = purchaseRepository.findByUserId(userId);
+        List<PurchaseResDto> purchaseResDtos = new ArrayList<>();
+
+        for(Purchase purchase : purchaseList){
+            PurchaseResDto p = PurchaseResDto.builder()
+                            .purchaseId(purchase.getPurchaseId())
+                            .purchaseName(purchase.getPurchaseName())
+                            .purchaseAddress(purchase.getPurchaseAddress())
+                            .purchaseNumber(purchase.getPurchaseNumber())
+                            .purchaseTime(purchase.getPurchaseTime())
+                            .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
+                            .purchaseStatus(purchase.getPurchaseStatus())
+                            .product(purchase.getProduct())
+                            .build();
+            purchaseResDtos.add(p);
+        }
+
+        return purchaseResDtos;
     }
 
 }
