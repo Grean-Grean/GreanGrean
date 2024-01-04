@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Springboot build') {
+            steps {
+                dir('BE'){
+                    sh '''
+                    echo 'springboot build'
+                    chmod +x gradlew
+                    ./gradlew clean build
+                    '''
+                }
+            }
+        }
+        stage('Dockerimage build') {
+            steps {
+                dir('BE'){
+                    sh '''
+                    echo 'Dockerimage build'
+                    docker build -t docker-springboot:0.0.1 .
+                    '''
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                dir('BE'){
+                    sh '''
+                    echo 'Deploy'
+	                docker stop springboot
+                    docker rm springboot
+                    docker run -d -p 8080:8080 --name springboot docker-springboot:0.0.1 -e TZ=Asia/Seoul
+                    '''
+                }
+            }
+        }
+    }
+}
