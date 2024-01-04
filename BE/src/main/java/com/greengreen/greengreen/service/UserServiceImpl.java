@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService{
         }
     }
 
+    // 유저 정보 수정
     @Override
     public void modifyUser(UserModifyReqDto userModifyReqDto) {
         String encodedPassword = passwordEncoder.encode(userModifyReqDto.getUserPassword());
