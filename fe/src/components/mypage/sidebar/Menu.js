@@ -10,10 +10,11 @@ const Container = styled.div`
 `;
 
 const menuList = [
-  { menuName: "주문 정보", path: "/mypage/orders" },
-  { menuName: "회원 정보", path: "/mypage/info" },
-  { menuName: "상품 관리", path: "/mypage/products" },
-  { menuName: "판매 관리", path: "/mypage/sells" },
+  { menuName: "내 주문 정보", path: "/mypage/orders" },
+  { menuName: "회원 정보 수정", path: "/mypage/info" },
+  { menuName: "등록 상품 관리", path: "/mypage/products" },
+  { menuName: "상품 판매 접수", path: "/mypage/sells" },
+  { menuName: "상품 판매 완료", path: "/mypage/complements" },
 ];
 
 const Menu = () => {

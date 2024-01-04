@@ -1,6 +1,6 @@
-import styles from "./SellList.module.css";
+import styles from "./SellCompletedList.module.css";
 
-const SellList = ({ sellData }) => {
+const SellCompletedList = ({}) => {
   return (
     <div>
       <table>
@@ -11,7 +11,7 @@ const SellList = ({ sellData }) => {
             <th>주문 날짜</th>
             <th>배송지</th>
             <th>전화번호</th>
-            <th>배송 여부</th>
+            <th>배송 확인</th>
           </tr>
         </thead>
         <tbody>
@@ -22,8 +22,7 @@ const SellList = ({ sellData }) => {
             <td>대전광역시 유성구 와룡로 136번길 15, 하늘바람휴먼시...</td>
             <td>000-0000-0000</td>
             <td>
-              <button className={styles.complete_button}>완료</button>
-              <button className={styles.reject_button}>거절</button>
+              <button className={styles.reject_button}>취소</button>
             </td>
           </tr>
           <tr>
@@ -33,8 +32,7 @@ const SellList = ({ sellData }) => {
             <td>대전광역시 유성구 와룡로 136번길 15, 하늘바람휴먼시...</td>
             <td>000-0000-0000</td>
             <td>
-              <button className={styles.complete_button}>완료</button>
-              <button className={styles.reject_button}>거절</button>
+              <button className={styles.reject_button}>취소</button>
             </td>
           </tr>
           <tr>
@@ -44,8 +42,7 @@ const SellList = ({ sellData }) => {
             <td>대전광역시 유성구 와룡로 136번길 15, 하늘바람휴먼시...</td>
             <td>000-0000-0000</td>
             <td>
-              <button className={styles.complete_button}>완료</button>
-              <button className={styles.reject_button}>거절</button>
+              <button className={styles.reject_button}>취소</button>
             </td>
           </tr>
         </tbody>
@@ -54,4 +51,4 @@ const SellList = ({ sellData }) => {
   );
 };
 
-export default SellList;
+export default SellCompletedList;

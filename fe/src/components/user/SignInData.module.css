@@ -70,7 +70,7 @@ input::placeholder {
   color: #aeaeae; /* 원하는 색상으로 변경 */
 }
 
-hr {
+.bar {
   width: 100%;
   border: 1.2px #aeaeae solid;
   border-radius: 1px;

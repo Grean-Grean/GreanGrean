@@ -1,10 +1,15 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/userSlice";
 
 import classes from "./SignInData.module.css";
 
 function SignInData(props) {
   axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [signInData, setSignInData] = useState({
     userEmail: "",
@@ -21,18 +26,34 @@ function SignInData(props) {
   };
 
   const handleSignUp = () => {
-    axios
-      .post(`/user/login`, signInData)
-      .then((response) => {
-        // Handle the response from the server here
-        console.log(response.data.userId);
-        console.log(response.data.userNickName);
+    // test code
+    dispatch(
+      setUser({
+        userID: 1,
+        userNickName: "jina",
       })
-      .catch((error) => {
-        // Handle errors here
-        console.error(error);
-        setShowCaution(true);
-      });
+    );
+
+    navigate("/");
+
+    // axios
+    //   .post(`/user/login`, signInData)
+    //   .then((response) => {
+    //     // Handle the response from the server here
+    //     // console.log(response.data.userId);
+    //     // console.log(response.data.userNickName);
+    //     dispatch(
+    //       setUser({
+    //         userID: response.data.userId,
+    //         userNickName: response.data.userNickName,
+    //       })
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     // Handle errors here
+    //     console.error(error);
+    //     setShowCaution(true);
+    //   });
   };
 
   return (
@@ -79,7 +100,7 @@ function SignInData(props) {
           <p>|</p>
           <a href="/user/signup">회원가입</a>
         </div>
-        <hr />
+        <hr className={classes.bar} />
         <div className={classes.logo}>
           <div className={classes.logo_kakaotalk}></div>
           <div className={classes.logo_google}></div>

@@ -18,3 +18,47 @@
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+.title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.bar {
+  border-width: 2px 0 0 0;
+  border-color: #000;
+}
+
+.user input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 350px;
+  padding: 8px 15px;
+  margin: 8px 0px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: 2px #214c2d solid;
+}
+
+.modify_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  background-color: #214c2d;
+  color: #fff;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.withdrawal_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  background-color: #214c2d;
+  color: #fff;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}

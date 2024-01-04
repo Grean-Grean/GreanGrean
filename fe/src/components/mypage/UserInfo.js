@@ -148,8 +148,9 @@ const UserInfo = () => {
 
   return (
     <Sidebar>
-      <div>
-        <h2>마이페이지 - 회원정보</h2>
+      <div className={styles.user}>
+        <h2 className={styles.title}>마이페이지 - 회원 정보</h2>
+        <hr className={styles.bar} />
         <div>
           <label htmlFor="userName">이름</label>
           <input
@@ -169,7 +170,10 @@ const UserInfo = () => {
             value={userInfo.userNickName}
             onChange={handleInputChange}
           />
-          <button className={styles.check_button} onClick={handleNickNameCheck}>
+          <button
+            className={styles.modify_button}
+            onClick={handleNickNameCheck}
+          >
             중복확인
           </button>
           <p className={`${styles.alert} ${styles.caution}`}>
@@ -185,7 +189,7 @@ const UserInfo = () => {
             value={userInfo.userEmail}
             onChange={handleInputChange}
           />
-          <button className={styles.check_button} onClick={handleEmailCheck}>
+          <button className={styles.modify_button} onClick={handleEmailCheck}>
             인증하기
           </button>
           <br />
@@ -219,7 +223,9 @@ const UserInfo = () => {
           <div style={{ color: "red" }}>{passwordValidationMessage}</div>
         )}
         <div>
-          <button onClick={userInfoUpdate}>수정</button>
+          <button className={styles.modify_button} onClick={userInfoUpdate}>
+            수정
+          </button>
           <button onClick={handleDeleteUserInfo}>회원 탈퇴</button>
         </div>
       </div>
