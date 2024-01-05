@@ -5,6 +5,7 @@ import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
+import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.dto.response.PurchaseResDto;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface UserService {
     public void modifyUser(UserModifyReqDto userModifyReqDto);
 
     List<PurchaseResDto> purchaseHistory(Long userId);
+
+    List<ProductResDto> productHistory(Long userId);
 }

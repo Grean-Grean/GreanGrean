@@ -5,11 +5,14 @@ import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
+import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.dto.response.PurchaseResDto;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.ProductStatus;
 import com.greengreen.greengreen.enums.PurchaseStatus;
+import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final PurchaseRepository purchaseRepository;
+    private final ProductRepository productRepository;
 
     // 회원가입
     @Override
@@ -127,6 +131,31 @@ public class UserServiceImpl implements UserService{
         }
 
         return purchaseResDtos;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<ProductResDto> productHistory(Long userId) {
+        List<Product> productList = productRepository.findAllByUserId(userId);
+        List<ProductResDto> productResDtos = new ArrayList<>();
+
+        for(Product product : productList){
+            ProductStatus productCategory = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+            ProductResDto p = ProductResDto.builder()
+                    .productId(product.getProductId())
+                    .productName(product.getProductName())
+                    .productContent(product.getProductContent())
+                    .productNumber(product.getProductNumber())
+                    .productPrice(product.getProductPrice())
+                    .productImg(product.getProductImg())
+                    .productCreateTime(product.getProductCreateTime())
+                    .productModifyTime(product.getProductModifyTime())
+                    .productCategory(productCategory)
+                    .build();
+            productResDtos.add(p);
+        }
+
+        return productResDtos;
     }
 
 }

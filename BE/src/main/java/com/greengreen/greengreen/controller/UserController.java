@@ -4,6 +4,7 @@ import com.amazonaws.Response;
 import com.greengreen.greengreen.dto.request.*;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
+import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.dto.response.PurchaseResDto;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -73,6 +74,15 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .body(purchaseResDtos);
+    }
+
+    // 판매 내역 조회
+    @GetMapping("/producthistory/{userId}")
+    public ResponseEntity<List<ProductResDto>> productHistory(@PathVariable Long userId){
+        List<ProductResDto> productResDtos = userService.productHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(productResDtos);
     }
 
 
