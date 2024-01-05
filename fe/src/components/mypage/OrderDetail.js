@@ -38,10 +38,13 @@ function OrderDetail({ orderData }) {
                 총 결제 금액 :{" "}
                 {productDetails[index]?.productPrice * order.purchaseNumber}원
               </p>
-              <div className={styles.user_data}>
-                <p>{order.purchaseName}</p>
-                <p>{order.purchaseAddress}</p>
-                <p>{order.purchasePhoneNumber}</p>
+              <div className={styles.bottom}>
+                <div className={styles.user_data}>
+                  <p>{order.purchaseName}</p>
+                  <p>{order.purchaseAddress}</p>
+                  <p>{order.purchasePhoneNumber}</p>
+                </div>
+                <button className={styles.review_button}>리뷰 작성</button>
               </div>
             </div>
           </div>

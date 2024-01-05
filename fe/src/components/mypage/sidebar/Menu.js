@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
+import styles from "./Memu.module.css";
 
 const Container = styled.div`
   ul {
@@ -19,7 +20,7 @@ const menuList = [
 
 const Menu = () => {
   return (
-    <Container>
+    <div className={styles.container}>
       <ul>
         {menuList.map((data) => {
           return (
@@ -31,7 +32,7 @@ const Menu = () => {
           );
         })}
       </ul>
-    </Container>
+    </div>
   );
 };
 
