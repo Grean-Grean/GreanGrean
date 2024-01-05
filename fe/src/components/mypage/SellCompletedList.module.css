@@ -1,0 +1,10 @@
+.reject_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  background-color: #803030;
+  color: #fff;
+  padding: 3px 12px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}

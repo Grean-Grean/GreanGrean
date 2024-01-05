@@ -1,9 +1,78 @@
-.alert {
-    text-align: center;
-    color: #bf3e3e;
-    font-size: 10px;
-    font-family: Noto Sans;
-    font-weight: 200;
-    word-wrap: break-word;
-  }
-  
+.contentcontainer {
+  display: flex;
+  flex-direction: column; /* 요소들을 세로(column) 방향으로 배치 */
+  justify-content: center; /* 세로 방향 가운데 정렬 */
+  align-items: center;
+}
+
+.passwordContainer {
+  margin-bottom: 20px;
+}
+
+.passwordIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.bar {
+  border-width: 2px 0 0 0;
+  border-color: #000;
+}
+
+.user input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 350px;
+  padding: 8px 15px;
+  margin: 8px 0px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: 2px #214c2d solid;
+}
+.user {
+}
+
+.modify_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  background-color: #214c2d;
+  color: #fff;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.withdrawal_button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  background-color: transparent;
+  color: black;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: 2px solid #214c2d;
+  border-radius: 5px;
+}
+
+label {
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+
+.caution {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: #bf3e3e;
+  font-size: 14px;
+  word-wrap: break-word;
+}

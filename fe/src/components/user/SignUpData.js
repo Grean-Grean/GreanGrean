@@ -3,6 +3,8 @@ import axios from "axios";
 import classes from "./SignUpData.module.css";
 
 function SignUpData(props) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     userName: "",
     userNickName: "",
@@ -45,7 +47,7 @@ function SignUpData(props) {
 
     // Send userNickName to the server for checking
     axios
-      .post("http://172.30.1.23:8080/user/nickname", { userNickName })
+      .post(`/user/nickname`, { userNickName })
       .then((response) => {
         // Handle the response from the server here
         if (response.data.status === 0) {
@@ -70,7 +72,7 @@ function SignUpData(props) {
 
     // Send userNickName to the server for checking
     axios
-      .post("http://172.30.1.23:8080/user/email", { userEmail })
+      .post(`/user/email`, { userEmail })
       .then((response) => {
         // Handle the response from the server here
         if (response.data.status === 0) {
@@ -98,7 +100,7 @@ function SignUpData(props) {
 
     // Send data to the server using axios POST request
     axios
-      .post("http://172.30.1.23:8080/user/regist", formData)
+      .post(`/user/regist`, formData)
       .then((response) => {
         // Handle the response from the server here
         console.log(response.data);
@@ -127,8 +129,8 @@ function SignUpData(props) {
 
   return (
     <div className={classes.inner}>
-      <div className={classes.inner}>
-        <h1 className={classes.sign_header}>SIGN UP</h1>
+      <h1 className={classes.sign_header}>SIGN UP</h1>
+      <div>
         <div>
           <label htmlFor="userName">이름</label>
           <input
@@ -214,10 +216,10 @@ function SignUpData(props) {
           />
           <button className={classes.check_button}>확인</button>
         </div>
-        <button className={classes.sign_button} onClick={handleSignUp}>
-          가입하기
-        </button>
       </div>
+      <button className={classes.sign_button} onClick={handleSignUp}>
+        가입하기
+      </button>
     </div>
   );
 }

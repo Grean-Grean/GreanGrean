@@ -1,0 +1,10 @@
+.title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+.bar {
+  border-width: 2px 0 0 0;
+  border-color: #000;
+}

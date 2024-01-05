@@ -8,13 +8,19 @@
   align-items: center;
 }
 
+.inner label {
+  display: inline-block;
+  text-align: center;
+  width: 100px;
+}
+
 .sign_header {
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
   color: black;
   font-size: 54px;
   word-wrap: break-word;
-  margin: 50px 0px;
+  margin: 40px 0px;
   justify-content: center;
   align-items: center;
 }
@@ -72,7 +78,7 @@ input::placeholder {
   padding: 8px 15px;
   margin: 10px 0px;
   position: relative;
-  width: 350px;
+  width: 400px;
   text-align: center;
   color: #fff;
   border: none;

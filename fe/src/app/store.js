@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import isSignInReduxer from '../components/modals/SignInRedux'
+import { configureStore } from "@reduxjs/toolkit";
+import isSignInReduxer from "../components/modals/SignInRedux";
 
 export const store = configureStore({
   reducer: {
-    completed: isSignInReduxer
+    completed: isSignInReduxer,
   },
 });
+
+// 안쓰는 코드
