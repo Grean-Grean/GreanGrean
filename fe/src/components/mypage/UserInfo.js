@@ -152,81 +152,90 @@ const UserInfo = () => {
         <h2 className={styles.title}>마이페이지 - 회원 정보</h2>
         <hr className={styles.bar} />
         <div>
-          <label htmlFor="userName">이름</label>
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            value={userInfo.userName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="userNickName">닉네임</label>
-          <input
-            type="text"
-            id="userNickName"
-            name="userNickName"
-            value={userInfo.userNickName}
-            onChange={handleInputChange}
-          />
-          <button
-            className={styles.modify_button}
-            onClick={handleNickNameCheck}
-          >
-            중복확인
-          </button>
-          <p className={`${styles.alert} ${styles.caution}`}>
-            {nickNameExistsStatus}
-          </p>
-        </div>
-        <div>
-          <label htmlFor="userEmail">이메일</label>
-          <input
-            type="email"
-            id="userEmail"
-            name="userEmail"
-            value={userInfo.userEmail}
-            onChange={handleInputChange}
-          />
-          <button className={styles.modify_button} onClick={handleEmailCheck}>
-            인증하기
-          </button>
-          <br />
-          <p className={`${styles.alert} ${styles.caution}`}>
-            {emailExistsStatus}
-          </p>
-        </div>
+          <div>
+            <label htmlFor="userName">이름</label>
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={userInfo.userName}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="userNickName">닉네임</label>
+            <input
+              type="text"
+              id="userNickName"
+              name="userNickName"
+              value={userInfo.userNickName}
+              onChange={handleInputChange}
+            />
+            <button
+              className={styles.modify_button}
+              onClick={handleNickNameCheck}
+            >
+              중복확인
+            </button>
+            <p className={`${styles.alert} ${styles.caution}`}>
+              {nickNameExistsStatus}
+            </p>
+          </div>
+          <div>
+            <label htmlFor="userEmail">이메일</label>
+            <input
+              type="email"
+              id="userEmail"
+              name="userEmail"
+              value={userInfo.userEmail}
+              onChange={handleInputChange}
+            />
+            <button className={styles.modify_button} onClick={handleEmailCheck}>
+              인증하기
+            </button>
+            <br />
+            <p className={`${styles.alert} ${styles.caution}`}>
+              {emailExistsStatus}
+            </p>
+          </div>
 
-        <div className={styles.passwordContainer}>
-          <label htmlFor="userPassword">비밀번호</label>
-          <input
-            type={passwordVisible ? "text" : "password"}
-            id="userPassword"
-            name="userPassword"
-            placeholder="영어, 숫자, 특수문자를 포함한 8자리 이상"
-            value={userInfo.userPassword}
-            onChange={(e) => {
-              handlePasswordChange(e);
-            }}
-          />
-          <span onClick={togglePasswordVisibility}>
-            {passwordVisible ? (
-              <AiFillEye className="text-xl text-gray-700 cursor-pointer" />
-            ) : (
-              <AiFillEyeInvisible className="text-xl text-gray-700 cursor-pointer" />
+          <div className={styles.passwordContainer}>
+            <label htmlFor="userPassword">비밀번호</label>
+            <span>
+              <input
+                type={passwordVisible ? "text" : "password"}
+                id="userPassword"
+                name="userPassword"
+                placeholder="영어, 숫자, 특수문자를 포함한 8자리 이상"
+                value={userInfo.userPassword}
+                onChange={(e) => {
+                  handlePasswordChange(e);
+                }}
+              />
+              <span onClick={togglePasswordVisibility}>
+                {passwordVisible ? (
+                  <AiFillEye className="text-xl text-gray-700 cursor-pointer" />
+                ) : (
+                  <AiFillEyeInvisible className="text-xl text-gray-700 cursor-pointer" />
+                )}
+              </span>
+            </span>
+            {/* 비밀번호 유효성 검증 메시지 */}
+            {passwordValidationMessage && (
+              <div className={styles.caution}>{passwordValidationMessage}</div>
             )}
-          </span>
-        </div>
-        {/* 비밀번호 유효성 검증 메시지 */}
-        {passwordValidationMessage && (
-          <div style={{ color: "red" }}>{passwordValidationMessage}</div>
-        )}
-        <div>
-          <button className={styles.modify_button} onClick={userInfoUpdate}>
-            수정
-          </button>
-          <button onClick={handleDeleteUserInfo}>회원 탈퇴</button>
+          </div>
+          <div>
+            <button className={styles.modify_button} onClick={userInfoUpdate}>
+              수정
+            </button>
+            <button
+              className={styles.withdrawal_button}
+              onClick={handleDeleteUserInfo}
+            >
+              회원 탈퇴
+            </button>
+          </div>
         </div>
       </div>
     </Sidebar>
