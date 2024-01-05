@@ -34,9 +34,9 @@ function Header() {
                 <Link to="/mypage/orders">마이페이지</Link>
               </li>
               <li>
-                <a href="/" onClick={handleLogout}>
+                <Link to="/" onClick={handleLogout}>
                   로그아웃
-                </a>
+                </Link>
               </li>
             </>
           ) : (

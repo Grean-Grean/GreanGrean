@@ -12,16 +12,18 @@
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 800;
   color: white;
-  font-size: 22px;
+  font-size: 30px;
   text-decoration: none;
+  letter-spacing: 2px;
 }
 
 .header_nav ul li a {
   text-decoration: none;
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
-  font-size: 12px;
+  font-size: 15px;
+  letter-spacing: 1.5px;
 }
 
 .header_nav ul li {
