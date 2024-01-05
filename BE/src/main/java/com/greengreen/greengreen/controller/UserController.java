@@ -2,10 +2,7 @@ package com.greengreen.greengreen.controller;
 
 import com.amazonaws.Response;
 import com.greengreen.greengreen.dto.request.*;
-import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.dto.response.LoginResDto;
-import com.greengreen.greengreen.dto.response.ProductResDto;
-import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.dto.response.*;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -85,5 +82,23 @@ public class UserController {
                 .body(productResDtos);
     }
 
+
+    // 판매 접수 조회
+    @GetMapping("/orderhistory/{userId}")
+    public ResponseEntity<List<PurchaseHistoryResDto>> orderHistory(@PathVariable Long userId){
+        List<PurchaseHistoryResDto> purchaseOrderResDtos = userService.orderHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(purchaseOrderResDtos);
+    }
+
+    // 판매 완료 조회
+    @GetMapping("/accepthistory/{userId}")
+    public ResponseEntity<List<PurchaseHistoryResDto>> acceptHistory(@PathVariable Long userId){
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = userService.acceptHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(purchaseHistoryResDtos);
+    }
 
 }

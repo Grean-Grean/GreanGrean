@@ -3,10 +3,7 @@ package com.greengreen.greengreen.service;
 import com.greengreen.greengreen.dto.request.UserIdReqDto;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
-import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.dto.response.LoginResDto;
-import com.greengreen.greengreen.dto.response.ProductResDto;
-import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.dto.response.*;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
@@ -156,6 +153,56 @@ public class UserServiceImpl implements UserService{
         }
 
         return productResDtos;
+    }
+
+    @Override
+    public List<PurchaseHistoryResDto> orderHistory(Long userId) {
+        List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = new ArrayList<>();
+
+        for(Purchase purchase : purchaseList){
+            if(purchase.getPurchaseStatus() == PurchaseStatus.ORDER) {
+                Product product = purchase.getProduct();
+                PurchaseHistoryResDto p = PurchaseHistoryResDto.builder()
+                        .purchaseId(purchase.getPurchaseId())
+                        .purchaseName(purchase.getPurchaseName())
+                        .purchaseAddress(purchase.getPurchaseAddress())
+                        .purchaseNumber(purchase.getPurchaseNumber())
+                        .purchasePrice(product.getProductPrice() * purchase.getPurchaseNumber())
+                        .purchaseTime(purchase.getPurchaseTime())
+                        .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
+                        .productId(product.getProductId())
+                        .build();
+                purchaseHistoryResDtos.add(p);
+            }
+        }
+
+        return purchaseHistoryResDtos;
+    }
+
+    @Override
+    public List<PurchaseHistoryResDto> acceptHistory(Long userId) {
+        List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = new ArrayList<>();
+
+        for(Purchase purchase : purchaseList){
+            if(purchase.getPurchaseStatus() == PurchaseStatus.ACCEPT) {
+                Product product = purchase.getProduct();
+                PurchaseHistoryResDto p = PurchaseHistoryResDto.builder()
+                        .purchaseId(purchase.getPurchaseId())
+                        .purchaseName(purchase.getPurchaseName())
+                        .purchaseAddress(purchase.getPurchaseAddress())
+                        .purchaseNumber(purchase.getPurchaseNumber())
+                        .purchasePrice(product.getProductPrice() * purchase.getPurchaseNumber())
+                        .purchaseTime(purchase.getPurchaseTime())
+                        .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
+                        .productId(product.getProductId())
+                        .build();
+                purchaseHistoryResDtos.add(p);
+            }
+        }
+
+        return purchaseHistoryResDtos;
     }
 
 }
