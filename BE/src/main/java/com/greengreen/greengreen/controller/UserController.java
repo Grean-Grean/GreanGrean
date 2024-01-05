@@ -64,6 +64,16 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+
+    // 회원탈퇴
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<Void> userDelete(@PathVariable Long userId){
+        userService.deleteUser(userId);
+
+        return ResponseEntity.ok().build();
+    }
+
+
     // 주문 내역 조회
     @GetMapping("/purchasehistory/{userId}")
     public ResponseEntity<List<PurchaseResDto>> purchaseHistory(@PathVariable Long userId){

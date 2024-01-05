@@ -19,6 +19,8 @@ public interface UserService {
 
     public void modifyUser(UserModifyReqDto userModifyReqDto);
 
+    public void deleteUser(Long userId);
+
     List<PurchaseResDto> purchaseHistory(Long userId);
 
     List<ProductResDto> productHistory(Long userId);

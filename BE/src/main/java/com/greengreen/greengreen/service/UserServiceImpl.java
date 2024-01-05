@@ -102,7 +102,23 @@ public class UserServiceImpl implements UserService{
         user.modifyUser(userModifyReqDto);
     }
 
-    // 구매 내역 조회
+    // 회원탈퇴
+    @Override
+    public void deleteUser(Long userId){
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
+
+        // 등록한 상품 삭제
+
+        // 구매 접수, 수락 취소 처리
+
+        // 등록한 리뷰 삭제
+
+        userRepository.deleteByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
+    }
+
+    // 주문 내역 조회
     @Transactional(readOnly = true)
     @Override
     public List<PurchaseResDto> purchaseHistory(Long userId) {
@@ -130,6 +146,7 @@ public class UserServiceImpl implements UserService{
         return purchaseResDtos;
     }
 
+    // 판매 내역 조회
     @Transactional(readOnly = true)
     @Override
     public List<ProductResDto> productHistory(Long userId) {
@@ -155,6 +172,7 @@ public class UserServiceImpl implements UserService{
         return productResDtos;
     }
 
+    // 판매 접수 조회
     @Override
     public List<PurchaseHistoryResDto> orderHistory(Long userId) {
         List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
@@ -180,6 +198,7 @@ public class UserServiceImpl implements UserService{
         return purchaseHistoryResDtos;
     }
 
+    // 판매 완료 조회
     @Override
     public List<PurchaseHistoryResDto> acceptHistory(Long userId) {
         List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
