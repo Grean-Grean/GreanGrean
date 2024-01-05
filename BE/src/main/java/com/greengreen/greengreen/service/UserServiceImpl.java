@@ -6,8 +6,10 @@ import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.InfoValidationResDto;
 import com.greengreen.greengreen.dto.response.LoginResDto;
 import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.PurchaseStatus;
 import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -100,13 +102,15 @@ public class UserServiceImpl implements UserService{
     }
 
     // 구매 내역 조회
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<PurchaseResDto> purchaseHistory(Long userId) {
-        List<Purchase> purchaseList = purchaseRepository.findByUserId(userId);
+        List<Purchase> purchaseList = purchaseRepository.findAllByUserId(userId);
         List<PurchaseResDto> purchaseResDtos = new ArrayList<>();
 
         for(Purchase purchase : purchaseList){
+            PurchaseStatus purchaseStatus = PurchaseStatus.valueOf(String.valueOf(purchase.getPurchaseStatus()));
+            Product product = purchase.getProduct();
             PurchaseResDto p = PurchaseResDto.builder()
                             .purchaseId(purchase.getPurchaseId())
                             .purchaseName(purchase.getPurchaseName())
@@ -114,8 +118,10 @@ public class UserServiceImpl implements UserService{
                             .purchaseNumber(purchase.getPurchaseNumber())
                             .purchaseTime(purchase.getPurchaseTime())
                             .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
-                            .purchaseStatus(purchase.getPurchaseStatus())
-                            .product(purchase.getProduct())
+                            .purchaseStatus(purchaseStatus)
+                            .productId(product.getProductId())
+                            .productName(product.getProductName())
+                            .productImg(product.getProductImg())
                             .build();
             purchaseResDtos.add(p);
         }

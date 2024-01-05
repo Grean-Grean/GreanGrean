@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -33,6 +34,7 @@ public class User {
     private String userNickName;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Product> productList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

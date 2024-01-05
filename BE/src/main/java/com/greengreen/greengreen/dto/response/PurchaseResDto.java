@@ -19,5 +19,7 @@ public class PurchaseResDto {
     private LocalDateTime purchaseTime;
     private String purchasePhoneNumber;
     private PurchaseStatus purchaseStatus;
-    private Product product;
+    private Long productId;
+    private String productName;
+    private String productImg;
 }
