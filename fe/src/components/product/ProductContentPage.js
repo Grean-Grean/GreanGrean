@@ -4,7 +4,7 @@ const ProductContentPage = ({ productContent }) => {
 
     return (
         <div className="ProductContentPage">
-            <h2>{productContent}</h2>
+            <h2 className="Text">{productContent}</h2>
         </div>
     )
 

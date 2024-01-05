@@ -161,7 +161,7 @@ const ProductEdit = ({ state }) => {
 
             <div className="Text" style={{ fontSize: 20 }}>상세 설명 추가</div>
             <textarea
-                className="Text"
+                className="contentArea Text"
                 name='productContent'
                 value={item.productContent}
                 onChange={handleChangeItem}

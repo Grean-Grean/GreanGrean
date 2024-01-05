@@ -4,7 +4,8 @@ import SearchBar from "./SearchBar"
 import axios from "axios"; // Import Axios
 import "./shop.css"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 
 const SERVER_URL = "http://172.30.1.16:8080"
 
@@ -176,6 +177,7 @@ const dummyList = [
 
 const Shop = () => {
 
+    const user = useSelector(selectUser)
     const [data, setData] = useState([])
     const [search, setSearch] = useState('')
     const [choseCategory, setChoseCategory] = useState(
@@ -200,7 +202,6 @@ const Shop = () => {
     )
     const [isSearchButtonClick, setIsSearchButtonClick] = useState(false)
 
-    const isUserSignIn = useSelector(state => state.completed.iscompleted)
     const navigate = useNavigate()
     // /product/search?{query=query&where=category}
     const getData = async () => {
@@ -270,17 +271,17 @@ const Shop = () => {
             <div>
                 <ProductList productList={data} inputText={search} />
             </div>
-            {/* {isUserSignIn ? */}
-            <div className='SubmitButtonArea'>
-                <button className='SubmitButton' onClick={() => navigate('/shop/product/add')}>등록하기</button>
-            </div>
-            {/* // : */}
-            {/* // <div className='SubmitButtonArea'> */}
-            {/* //     <button className='SubmitButton' onClick={() => { */}
-            {/* //         alert("로그인을 먼저 해주세요") */}
-            {/* //     }}>등록하기</button> */}
-            {/* // </div> */}
-            {/* // } */}
+            {user.isLoggedIn ?
+                <div className='SubmitButtonArea'>
+                    <button className='SubmitButton' onClick={() => navigate('/shop/product/add')}>등록하기</button>
+                </div>
+                :
+                <div className='SubmitButtonArea'>
+                    <button className='SubmitButton' onClick={() => {
+                        alert("로그인을 먼저 해주세요")
+                    }}>등록하기</button>
+                </div>
+            }
         </div>
     )
 }
