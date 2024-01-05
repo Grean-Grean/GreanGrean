@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux'
 import ProductItem from './ProductItem'
 import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate } from "react-router-dom"
 import './ProductList.css'
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 // productId: 3,
 // productImg: '',
 // productName: '국화',
@@ -16,7 +17,8 @@ const ProductList = ({ productList, inputText }) => {
     // console.log(productList)
     const [cafilteredData, setFilteredData] = useState(productList)
 
-    const isUserSignIn = useSelector(state => state.completed.iscompleted)
+    const user = useSelector(selectUser)
+
     const navigate = useNavigate()
 
     //page

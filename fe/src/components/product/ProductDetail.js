@@ -4,6 +4,8 @@ import './ProductDetail.css'
 
 import ProductContentPage from "./ProductContentPage"
 import ProductReviewPage from "./ProductReviewPage"
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 import { TiLeaf } from "react-icons/ti"
 
 const SERVER_URL = "http://172.30.1.16:8080"
@@ -21,7 +23,7 @@ const dummyList =
         {
             id: 1,
             content: '내용',
-            userNickName: "예비유미학살자",
+            userNickName: "jina",
             reviewContent: "튤립으로 봄에 인테리어를 하니까 집이 확 살아요! "
         },
         {
@@ -41,7 +43,10 @@ const ProductDetail = () => {
     const locationState = location.state
     const [item, setItem] = useState([])
     const [number, setNumber] = useState(1)
+
     const navigate = useNavigate()
+
+    const user = useSelector(selectUser)
 
     const [isOpenContent, setIsOpenContent] = useState(false)
     const [isOpenReview, setIsOpenReview] = useState(false)
@@ -178,15 +183,28 @@ const ProductDetail = () => {
                             </text>
                             <TiLeaf color="#214C2D" size={40} />
                         </div>
-                        <div className="buyBottonArea">
 
-                            <div className="buyBotton Text" onClick={clickEditBotton} style={{ backgroundColor: "black" }}>
-                                수정하기
+
+                        {user.isLoggedIn ?
+                            <div className="buyBottonArea">
+                                <div className="buyBotton Text" onClick={clickEditBotton} style={{ backgroundColor: "black" }}>
+                                    수정하기
+                                </div>
+                                <div className="buyBotton Text" onClick={clickBuyBotton}>
+                                    구매하기
+                                </div>
                             </div>
-                            <div className="buyBotton Text" onClick={clickBuyBotton}>
-                                구매하기
+                            :
+                            <div className="buyBottonArea">
+                                <div className="buyBotton Text" onClick={() => {
+                                    alert("로그인을 먼저 해주세요")
+                                }}>
+                                    구매하기
+                                </div>
                             </div>
-                        </div>
+                        }
+
+
                     </div>
                 </div>
 

@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react"
 import './ProductReviewItem.css'
 import axios from "axios"
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 
 const SERVER_URL = ""
 
 const ProductReviewItem = ({ id, userNickName, reviewContent }) => {
+
+    const user = useSelector(selectUser);
 
     const day = "2023.08.09 21:31"
     const [imageSrc, setImageSrc] = useState('')
@@ -156,43 +160,50 @@ const ProductReviewItem = ({ id, userNickName, reviewContent }) => {
 
                 </div>
                 <div className="ReviewButtonArea">
-                    {isEdit
-                        ?
-                        (
-                            <>
-                                <div
-                                    className="ReviewBotton ReviewText" style={{ fontSize: 5 }}
-                                    onClick={handleQuitEdit}
-                                >
-                                    수정 취소하기
-                                </div>
-                                <div
-                                    className="ReviewBotton ReviewText" style={{ fontSize: 5 }}
-                                    onClick={handleEdit}
-                                >
-                                    수정 완료
-                                </div>
-                            </>
-                        )
+
+                    {userNickName === user.userNickName ?
+                        <div>
+                            {isEdit
+                                ?
+                                (
+                                    <div className="ReviewButtonArea">
+                                        <div
+                                            className="ReviewBotton ReviewText" style={{ fontSize: 5 }}
+                                            onClick={handleQuitEdit}
+                                        >
+                                            수정 취소하기
+                                        </div>
+                                        <div
+                                            className="ReviewBotton ReviewText" style={{ fontSize: 5 }}
+                                            onClick={handleEdit}
+                                        >
+                                            수정 완료
+                                        </div>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <div className="ReviewButtonArea">
+                                        <div
+                                            className="ReviewBotton ReviewText"
+                                            style={{ fontSize: 5 }}
+                                            onClick={toggleIsEdit}
+                                        >
+                                            수정
+                                        </div>
+                                        <div
+                                            className="ReviewBotton ReviewText"
+                                            style={{ fontSize: 5 }}
+                                            onClick={handleRemove}
+                                        >
+                                            삭제
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </div>
                         :
-                        (
-                            <>
-                                <div
-                                    className="ReviewBotton ReviewText"
-                                    style={{ fontSize: 5 }}
-                                    onClick={toggleIsEdit}
-                                >
-                                    수정
-                                </div>
-                                <div
-                                    className="ReviewBotton ReviewText"
-                                    style={{ fontSize: 5 }}
-                                    onClick={handleRemove}
-                                >
-                                    삭제
-                                </div>
-                            </>
-                        )
+                        <div></div>
                     }
                 </div>
             </div>
