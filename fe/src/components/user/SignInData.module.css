@@ -119,6 +119,15 @@ input::placeholder {
   background-position: center;
 }
 
+.password_toggle {
+  cursor: pointer;
+  color: #9a9a9a;
+  font-size: 1.25rem;
+  margin-left: -35px;
+  margin-top: 20px;
+  position: absolute;
+}
+
 .logo_else {
   width: 60px;
   height: 60px;

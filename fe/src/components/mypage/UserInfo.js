@@ -128,7 +128,7 @@ const UserInfo = () => {
     if (window.confirm("확인을 누르면 회원 정보가 삭제됩니다.")) {
       // axios
       //   .delete(
-      //     `${process.env.REACT_APP_PROXY_URL}/members/${parsed.memberId}`,
+      //     `/members/${parsed.memberId}`,
       //     {
       //       headers: {
       //         Authorization: 'Bearer ' + localStorage.getItem('ACCESS_TOKEN'),
@@ -214,9 +214,9 @@ const UserInfo = () => {
               />
               <span onClick={togglePasswordVisibility}>
                 {passwordVisible ? (
-                  <AiFillEye className="text-xl text-gray-700 cursor-pointer" />
+                  <AiFillEye className={styles.password_toggle} />
                 ) : (
-                  <AiFillEyeInvisible className="text-xl text-gray-700 cursor-pointer" />
+                  <AiFillEyeInvisible className={styles.password_toggle} />
                 )}
               </span>
             </span>

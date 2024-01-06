@@ -12,8 +12,7 @@ const Main = () => {
   };
 
   const user = useSelector(selectUser);
-  console.log(user.userNickName);
-  console.log(user.userID);
+  console.log(user);
 
   return (
     <div className="Main">

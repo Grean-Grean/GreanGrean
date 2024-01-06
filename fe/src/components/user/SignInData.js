@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import classes from "./SignInData.module.css";
 
@@ -16,6 +17,7 @@ function SignInData(props) {
     userPassword: "",
   });
   const [showCaution, setShowCaution] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,35 +27,45 @@ function SignInData(props) {
     });
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prev) => !prev);
+  };
+
   const handleSignUp = () => {
     // test code
-    dispatch(
-      setUser({
-        userID: 1,
-        userNickName: "jina",
-      })
-    );
-
-    navigate("/");
-
-    // axios
-    //   .post(`/user/login`, signInData)
-    //   .then((response) => {
-    //     // Handle the response from the server here
-    //     // console.log(response.data.userId);
-    //     // console.log(response.data.userNickName);
-    //     dispatch(
-    //       setUser({
-    //         userID: response.data.userId,
-    //         userNickName: response.data.userNickName,
-    //       })
-    //     );
+    // dispatch(
+    //   setUser({
+    //     userID: 1,
+    //     userNickName: "jina",
+    //     userPassword: "qwer",
+    //     userEmail: "asdf@asdf.com",
     //   })
-    //   .catch((error) => {
-    //     // Handle errors here
-    //     console.error(error);
-    //     setShowCaution(true);
-    //   });
+    // );
+
+    // navigate("/");
+
+    axios
+      .post(`/user/login`, signInData)
+      .then((response) => {
+        // Handle the response from the server here
+        // console.log(response.data.userId);
+        // console.log(response.data.userNickName);
+        dispatch(
+          setUser({
+            userID: response.data.userId,
+            userNickName: response.data.userNickName,
+            userEmail: signInData.userEmail,
+            userPassword: signInData.userPassword,
+          })
+        );
+
+        navigate("/");
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+        setShowCaution(true);
+      });
   };
 
   return (
@@ -71,13 +83,20 @@ function SignInData(props) {
         ></input>
         <div>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"}
             id="userPassword"
             name="userPassword"
             placeholder="Password"
             value={signInData.userPassword}
             onChange={handleInputChange}
           ></input>
+          <span onClick={togglePasswordVisibility}>
+            {passwordVisible ? (
+              <AiFillEye className={classes.password_toggle} />
+            ) : (
+              <AiFillEyeInvisible className={classes.password_toggle} />
+            )}
+          </span>
           {showCaution && (
             <p
               className={`${classes.caution} ${classes.vibration}`}

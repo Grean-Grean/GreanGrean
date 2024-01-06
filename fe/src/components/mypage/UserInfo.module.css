@@ -38,7 +38,14 @@
   border-radius: 7px;
   border: 2px #214c2d solid;
 }
-.user {
+
+.password_toggle {
+  cursor: pointer;
+  color: #9a9a9a;
+  font-size: 1.25rem;
+  margin-left: -35px;
+  margin-top: 20px;
+  position: absolute;
 }
 
 .modify_button {
