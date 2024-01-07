@@ -2,6 +2,7 @@ package com.greengreen.greengreen.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
+import com.greengreen.greengreen.enums.UserStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -33,19 +34,26 @@ public class User {
     @Column(name = "user_nick_name", length = 20, nullable = false)
     private String userNickName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Column(name = "user_status", nullable = false)
+    private UserStatus userStatus;
+
+    @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private List<Product> productList;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviewList;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user")
     private List<Purchase> purchaseList;
 
     public void modifyUser(UserModifyReqDto userModifyReqDto){
         this.userPassword = userModifyReqDto.getUserPassword();
         this.userName = userModifyReqDto.getUserName();
         this.userNickName = userModifyReqDto.getUserNickName();
+    }
+
+    public void unableUserStatus(){
+        this.userStatus = UserStatus.valueOf(String.valueOf(UserStatus.UNABLE));
     }
 }

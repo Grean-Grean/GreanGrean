@@ -5,11 +5,14 @@ import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.*;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
+import com.greengreen.greengreen.entity.Review;
 import com.greengreen.greengreen.entity.User;
 import com.greengreen.greengreen.enums.ProductCategory;
 import com.greengreen.greengreen.enums.PurchaseStatus;
+import com.greengreen.greengreen.enums.UserStatus;
 import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
+import com.greengreen.greengreen.repository.ReviewRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,7 @@ public class UserServiceImpl implements UserService{
     private final PasswordEncoder passwordEncoder;
     private final PurchaseRepository purchaseRepository;
     private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
 
     // 회원가입
     @Override
@@ -44,6 +48,7 @@ public class UserServiceImpl implements UserService{
                 .userPassword(encodedPassword)
                 .userName(userRegistReqDto.getUserName())
                 .userNickName(userRegistReqDto.getUserNickName())
+                .userStatus(UserStatus.valueOf(String.valueOf(UserStatus.ABLE)))
                 .build();
 
         userRepository.save(user);
@@ -77,6 +82,10 @@ public class UserServiceImpl implements UserService{
         User user = userRepository.findByUserEmail(userEmail)
                 .orElseThrow(() -> new RuntimeException("등록되지 않은 이메일입니다."));
 
+        if(user.getUserStatus() == UserStatus.UNABLE){
+            throw new RuntimeException("탈퇴한 회원입니다.");
+        }
+
         // 데이터베이스에서 가져온 암호화된 비밀번호와 사용자가 입력한 비밀번호 비교
         if (passwordEncoder.matches(userPassword, user.getUserPassword())) {
             // 비밀번호가 일치할 경우 로그인 성공
@@ -109,13 +118,31 @@ public class UserServiceImpl implements UserService{
                 .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
 
         // 등록한 상품 삭제
+        List<Product> productList = productRepository.findAllByUserId(userId);
+        for(Product product : productList){
+            // productStatus 판매중단으로 변경
+            product.deleteProduct(product.getProductId());
 
-        // 구매 접수, 수락 취소 처리
+            // purchaseStatus 거절로 변경
+            List<Purchase> purchaseList = purchaseRepository.findAllByProductId(product.getProductId());
+            for(Purchase purchase : purchaseList){
+                if(purchase.getPurchaseStatus() == PurchaseStatus.ORDER || purchase.getPurchaseStatus() == PurchaseStatus.ACCEPT)
+                    purchase.refusePurchaseStatus();
+            }
+        }
+
+        // 회원탈퇴 상태로 변경
+        user.unableUserStatus();
 
         // 등록한 리뷰 삭제
+//        List<Review> reviewList = reviewRepository.findAllByUserId(userId);
+//        for(Review review : reviewList){
+//            reviewRepository.deleteByReviewId(review.getReviewId())
+//                    .orElseThrow(()->new RuntimeException("ReviewId가 올바르지 않습니다."));
+//        }
 
-        userRepository.deleteByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
+//        userRepository.deleteByUserId(userId)
+//                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
     }
 
     // 주문 내역 조회
