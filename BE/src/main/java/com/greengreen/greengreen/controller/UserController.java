@@ -2,9 +2,7 @@ package com.greengreen.greengreen.controller;
 
 import com.amazonaws.Response;
 import com.greengreen.greengreen.dto.request.*;
-import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.dto.response.LoginResDto;
-import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.dto.response.*;
 import com.greengreen.greengreen.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +64,16 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+
+    // 회원탈퇴
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<Void> userDelete(@PathVariable Long userId){
+        userService.deleteUser(userId);
+
+        return ResponseEntity.ok().build();
+    }
+
+
     // 주문 내역 조회
     @GetMapping("/purchasehistory/{userId}")
     public ResponseEntity<List<PurchaseResDto>> purchaseHistory(@PathVariable Long userId){
@@ -75,5 +83,32 @@ public class UserController {
                 .body(purchaseResDtos);
     }
 
+    // 판매 내역 조회
+    @GetMapping("/producthistory/{userId}")
+    public ResponseEntity<List<ProductResDto>> productHistory(@PathVariable Long userId){
+        List<ProductResDto> productResDtos = userService.productHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(productResDtos);
+    }
+
+
+    // 판매 접수 조회
+    @GetMapping("/orderhistory/{userId}")
+    public ResponseEntity<List<PurchaseHistoryResDto>> orderHistory(@PathVariable Long userId){
+        List<PurchaseHistoryResDto> purchaseOrderResDtos = userService.orderHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(purchaseOrderResDtos);
+    }
+
+    // 판매 완료 조회
+    @GetMapping("/accepthistory/{userId}")
+    public ResponseEntity<List<PurchaseHistoryResDto>> acceptHistory(@PathVariable Long userId){
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = userService.acceptHistory(userId);
+
+        return ResponseEntity.ok()
+                .body(purchaseHistoryResDtos);
+    }
 
 }

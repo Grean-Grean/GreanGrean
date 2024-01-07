@@ -1,5 +1,6 @@
 package com.greengreen.greengreen.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.greengreen.greengreen.dto.request.ProductModifyReqDto;
 import com.greengreen.greengreen.enums.ProductStatus;
 import lombok.*;
@@ -50,6 +51,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @OneToMany(mappedBy="product", cascade=CascadeType.ALL)

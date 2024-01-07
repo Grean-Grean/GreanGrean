@@ -22,6 +22,4 @@ public class ReviewResDto {
     private LocalDateTime reviewCreateTime;
     private LocalDateTime reviewModifyTime;
     private String reviewImg;
-    private User user;
-    private Product product;
 }

@@ -1,8 +1,10 @@
 package com.greengreen.greengreen.service;
 
+import com.greengreen.greengreen.dto.request.ProductIdReqDto;
 import com.greengreen.greengreen.dto.request.ReviewIdReqDto;
 import com.greengreen.greengreen.dto.request.ReviewModifyReqDto;
 import com.greengreen.greengreen.dto.request.ReviewRegistReqDto;
+import com.greengreen.greengreen.dto.response.ReviewResDto;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.Review;
@@ -17,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -59,24 +63,24 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     // 리뷰 조회
-//    @Override
-//    public List<ReviewResDto> listReview(ProductIdReqDto productIdReqDto) {
-//        List<Review> reviewList = reviewRepository.findAllByProductId(productIdReqDto.getProductId());
-//        List<ReviewResDto> reviewResDtos = new ArrayList<>();
-//
-//        for (Review review : reviewList){
-//            ReviewResDto r = ReviewResDto.builder()
-//                    .reviewId(review.getReviewId())
-//                    .reviewContent(review.getReviewContent())
-//                    .reviewCreateTime(review.getReviewCreateTime())
-//                    .reviewModifyTime(review.getReviewModifyTime())
-//                    .reviewImg(review.getReviewImg())
-//                    .build();
-//            reviewResDtos.add(r);
-//        }
-//
-//        return reviewResDtos;
-//    }
+    @Override
+    public List<ReviewResDto> listReview(ProductIdReqDto productIdReqDto) {
+        List<Review> reviewList = reviewRepository.findAllByProductId(productIdReqDto.getProductId());
+        List<ReviewResDto> reviewResDtos = new ArrayList<>();
+
+        for (Review review : reviewList){
+            ReviewResDto r = ReviewResDto.builder()
+                    .reviewId(review.getReviewId())
+                    .reviewContent(review.getReviewContent())
+                    .reviewCreateTime(review.getReviewCreateTime())
+                    .reviewModifyTime(review.getReviewModifyTime())
+                    .reviewImg(review.getReviewImg())
+                    .build();
+            reviewResDtos.add(r);
+        }
+
+        return reviewResDtos;
+    }
 
     // 리뷰 수정
     @Override

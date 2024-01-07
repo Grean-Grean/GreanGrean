@@ -3,11 +3,13 @@ package com.greengreen.greengreen.service;
 import com.greengreen.greengreen.dto.request.UserIdReqDto;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
-import com.greengreen.greengreen.dto.response.InfoValidationResDto;
-import com.greengreen.greengreen.dto.response.LoginResDto;
-import com.greengreen.greengreen.dto.response.PurchaseResDto;
+import com.greengreen.greengreen.dto.response.*;
+import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.PurchaseStatus;
+import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final PurchaseRepository purchaseRepository;
+    private final ProductRepository productRepository;
 
     // 회원가입
     @Override
@@ -81,6 +84,7 @@ public class UserServiceImpl implements UserService{
             return LoginResDto.builder()
                     .userId(user.getUserId())
                     .userNickName(user.getUserNickName())
+                    .userName(user.getUserName())
                     .build();
         } else {
             // 비밀번호가 일치하지 않을 경우 로그인 실패
@@ -99,14 +103,32 @@ public class UserServiceImpl implements UserService{
         user.modifyUser(userModifyReqDto);
     }
 
-    // 구매 내역 조회
-    @Transactional
+    // 회원탈퇴
+    @Override
+    public void deleteUser(Long userId){
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
+
+        // 등록한 상품 삭제
+
+        // 구매 접수, 수락 취소 처리
+
+        // 등록한 리뷰 삭제
+
+        userRepository.deleteByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("userId가 올바르지 않습니다."));
+    }
+
+    // 주문 내역 조회
+    @Transactional(readOnly = true)
     @Override
     public List<PurchaseResDto> purchaseHistory(Long userId) {
-        List<Purchase> purchaseList = purchaseRepository.findByUserId(userId);
+        List<Purchase> purchaseList = purchaseRepository.findAllByUserId(userId);
         List<PurchaseResDto> purchaseResDtos = new ArrayList<>();
 
         for(Purchase purchase : purchaseList){
+            PurchaseStatus purchaseStatus = PurchaseStatus.valueOf(String.valueOf(purchase.getPurchaseStatus()));
+            Product product = purchase.getProduct();
             PurchaseResDto p = PurchaseResDto.builder()
                             .purchaseId(purchase.getPurchaseId())
                             .purchaseName(purchase.getPurchaseName())
@@ -114,13 +136,93 @@ public class UserServiceImpl implements UserService{
                             .purchaseNumber(purchase.getPurchaseNumber())
                             .purchaseTime(purchase.getPurchaseTime())
                             .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
-                            .purchaseStatus(purchase.getPurchaseStatus())
-                            .product(purchase.getProduct())
+                            .purchaseStatus(purchaseStatus)
+                            .productId(product.getProductId())
+                            .productName(product.getProductName())
+                            .productImg(product.getProductImg())
                             .build();
             purchaseResDtos.add(p);
         }
 
         return purchaseResDtos;
+    }
+
+    // 판매 내역 조회
+    @Transactional(readOnly = true)
+    @Override
+    public List<ProductResDto> productHistory(Long userId) {
+        List<Product> productList = productRepository.findAllByUserId(userId);
+        List<ProductResDto> productResDtos = new ArrayList<>();
+
+        for(Product product : productList){
+            ProductStatus productCategory = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+            ProductResDto p = ProductResDto.builder()
+                    .productId(product.getProductId())
+                    .productName(product.getProductName())
+                    .productContent(product.getProductContent())
+                    .productNumber(product.getProductNumber())
+                    .productPrice(product.getProductPrice())
+                    .productImg(product.getProductImg())
+                    .productCreateTime(product.getProductCreateTime())
+                    .productModifyTime(product.getProductModifyTime())
+                    .productCategory(productCategory)
+                    .build();
+            productResDtos.add(p);
+        }
+
+        return productResDtos;
+    }
+
+    // 판매 접수 조회
+    @Override
+    public List<PurchaseHistoryResDto> orderHistory(Long userId) {
+        List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = new ArrayList<>();
+
+        for(Purchase purchase : purchaseList){
+            if(purchase.getPurchaseStatus() == PurchaseStatus.ORDER) {
+                Product product = purchase.getProduct();
+                PurchaseHistoryResDto p = PurchaseHistoryResDto.builder()
+                        .purchaseId(purchase.getPurchaseId())
+                        .purchaseName(purchase.getPurchaseName())
+                        .purchaseAddress(purchase.getPurchaseAddress())
+                        .purchaseNumber(purchase.getPurchaseNumber())
+                        .purchasePrice(product.getProductPrice() * purchase.getPurchaseNumber())
+                        .purchaseTime(purchase.getPurchaseTime())
+                        .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
+                        .productId(product.getProductId())
+                        .build();
+                purchaseHistoryResDtos.add(p);
+            }
+        }
+
+        return purchaseHistoryResDtos;
+    }
+
+    // 판매 완료 조회
+    @Override
+    public List<PurchaseHistoryResDto> acceptHistory(Long userId) {
+        List<Purchase> purchaseList = userRepository.findAllByPurchaseId(userId);
+        List<PurchaseHistoryResDto> purchaseHistoryResDtos = new ArrayList<>();
+
+        for(Purchase purchase : purchaseList){
+            if(purchase.getPurchaseStatus() == PurchaseStatus.ACCEPT) {
+                Product product = purchase.getProduct();
+                PurchaseHistoryResDto p = PurchaseHistoryResDto.builder()
+                        .purchaseId(purchase.getPurchaseId())
+                        .purchaseName(purchase.getPurchaseName())
+                        .purchaseAddress(purchase.getPurchaseAddress())
+                        .purchaseNumber(purchase.getPurchaseNumber())
+                        .purchasePrice(product.getProductPrice() * purchase.getPurchaseNumber())
+                        .purchaseTime(purchase.getPurchaseTime())
+                        .purchasePhoneNumber(purchase.getPurchasePhoneNumber())
+                        .productId(product.getProductId())
+                        .build();
+                purchaseHistoryResDtos.add(p);
+            }
+        }
+
+        return purchaseHistoryResDtos;
     }
 
 }
