@@ -11,5 +11,6 @@ public class LoginResDto {
 
     private Long userId;
     private String userNickName;
+    private String userName;
 
 }

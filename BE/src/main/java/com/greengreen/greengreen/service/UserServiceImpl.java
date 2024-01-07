@@ -84,6 +84,7 @@ public class UserServiceImpl implements UserService{
             return LoginResDto.builder()
                     .userId(user.getUserId())
                     .userNickName(user.getUserNickName())
+                    .userName(user.getUserName())
                     .build();
         } else {
             // 비밀번호가 일치하지 않을 경우 로그인 실패
