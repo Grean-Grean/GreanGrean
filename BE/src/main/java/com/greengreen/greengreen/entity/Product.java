@@ -2,6 +2,7 @@ package com.greengreen.greengreen.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.greengreen.greengreen.dto.request.ProductModifyReqDto;
+import com.greengreen.greengreen.enums.ProductCategory;
 import com.greengreen.greengreen.enums.ProductStatus;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
@@ -47,7 +48,10 @@ public class Product {
     private LocalDateTime productModifyTime;
 
     @Column(name = "product_category", nullable = false)
-    private ProductStatus productCategory;
+    private ProductCategory productCategory;
+
+    @Column(name = "product_status", nullable = false)
+    private ProductStatus productStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -67,7 +71,11 @@ public class Product {
         this.productPrice = productModifyReqDto.getProductPrice();
         this.productImg = productModifyReqDto.getProductImg();
         this.productModifyTime = LocalDateTime.now();
-        this.productCategory = ProductStatus.valueOf(String.valueOf(productModifyReqDto.getProductCategory()));
+        this.productCategory = ProductCategory.valueOf(String.valueOf(productModifyReqDto.getProductCategory()));
+    }
+
+    public void deleteProduct(Long productId){
+        this.productStatus = ProductStatus.valueOf(String.valueOf(ProductStatus.DISCON));
     }
 
     public void minusProductNumber(Integer purchaseNumber){

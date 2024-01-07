@@ -14,4 +14,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
     @Query("select p from Purchase p where p.user.userId = :userId")
     List<Purchase> findAllByUserId(Long userId);
+
+    @Query("select p from Purchase p where p.product.productId = :productId")
+    List<Purchase> findAllByProductId(Long productId);
 }

@@ -66,8 +66,8 @@ public class UserController {
 
 
     // 회원탈퇴
-    @DeleteMapping("/delete/{userId}")
-    public ResponseEntity<Void> userDelete(@PathVariable Long userId){
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> userDelete(@RequestParam Long userId){
         userService.deleteUser(userId);
 
         return ResponseEntity.ok().build();

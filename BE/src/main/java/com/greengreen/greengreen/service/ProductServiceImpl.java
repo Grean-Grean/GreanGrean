@@ -4,9 +4,13 @@ import com.greengreen.greengreen.dto.request.*;
 import com.greengreen.greengreen.dto.response.ProductDetailResDto;
 import com.greengreen.greengreen.dto.response.ProductResDto;
 import com.greengreen.greengreen.entity.Product;
+import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
+import com.greengreen.greengreen.enums.ProductCategory;
 import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.PurchaseStatus;
 import com.greengreen.greengreen.repository.ProductRepository;
+import com.greengreen.greengreen.repository.PurchaseRepository;
 import com.greengreen.greengreen.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +29,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService{
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final PurchaseRepository purchaseRepository;
 
     // 상품 등록
     @Override
@@ -32,7 +37,8 @@ public class ProductServiceImpl implements ProductService{
         User user = userRepository.findByUserId(productRegistReqDto.getUserId())
                 .orElseThrow(()->new RuntimeException("유효하지 않은 user입니다."));
 
-        ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(productRegistReqDto.getProductCategory()));
+        ProductCategory productCategory = ProductCategory.valueOf(String.valueOf(productRegistReqDto.getProductCategory()));
+        ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(ProductStatus.SALE));
         LocalDateTime localDateTime = LocalDateTime.now();
 
         Product product = Product.builder()
@@ -42,7 +48,8 @@ public class ProductServiceImpl implements ProductService{
                 .productPrice(productRegistReqDto.getProductPrice())
                 .productImg(productRegistReqDto.getProductImg())
                 .productCreateTime(localDateTime)
-                .productCategory(productStatus)
+                .productCategory(productCategory)
+                .productStatus(productStatus)
                 .user(user)
                 .build();
 
@@ -57,20 +64,21 @@ public class ProductServiceImpl implements ProductService{
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
-            ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
-
-            ProductResDto p = ProductResDto.builder()
-                    .productId(product.getProductId())
-                    .productName(product.getProductName())
-                    .productContent(product.getProductContent())
-                    .productNumber(product.getProductNumber())
-                    .productPrice(product.getProductPrice())
-                    .productImg(product.getProductImg())
-                    .productCreateTime(product.getProductCreateTime())
-                    .productModifyTime(product.getProductModifyTime())
-                    .productCategory(productStatus)
-                    .build();
-            productResDtos.add(p);
+            ProductCategory productCategory = ProductCategory.valueOf(String.valueOf(product.getProductCategory()));
+            if(product.getProductStatus() == ProductStatus.SALE) {
+                ProductResDto p = ProductResDto.builder()
+                        .productId(product.getProductId())
+                        .productName(product.getProductName())
+                        .productContent(product.getProductContent())
+                        .productNumber(product.getProductNumber())
+                        .productPrice(product.getProductPrice())
+                        .productImg(product.getProductImg())
+                        .productCreateTime(product.getProductCreateTime())
+                        .productModifyTime(product.getProductModifyTime())
+                        .productCategory(productCategory)
+                        .build();
+                productResDtos.add(p);
+            }
         }
 
         return productResDtos;
@@ -83,7 +91,11 @@ public class ProductServiceImpl implements ProductService{
         Product product = productRepository.findByProductId(productId)
                 .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
 
-        ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+        if(product.getProductStatus() == ProductStatus.DISCON){
+            throw new RuntimeException("판매종료된 상품입니다.");
+        }
+
+        ProductCategory productCategory = ProductCategory.valueOf(String.valueOf(product.getProductCategory()));
 
         ProductDetailResDto productDetailResDto = ProductDetailResDto.builder()
                 .sellerId(product.getUser().getUserId())
@@ -95,7 +107,7 @@ public class ProductServiceImpl implements ProductService{
                 .productImg(product.getProductImg())
                 .productCreateTime(product.getProductCreateTime())
                 .productModifyTime(product.getProductModifyTime())
-                .productCategory(productStatus)
+                .productCategory(productCategory)
                 .build();
 
         return productDetailResDto;
@@ -134,26 +146,28 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<ProductResDto> searchQuery(String query, String category) {
         // category 값을 열거형 상수와 일치하도록 수정
-        ProductStatus productStatus = ProductStatus.valueOf(category); // 이 부분 수정
+        ProductCategory productCategory = ProductCategory.valueOf(category); // 이 부분 수정
 
         List<Product> productList = productRepository.findAllByProductNameContainsAndProductCategory(
-                query, productStatus);
+                query, productCategory);
 
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
-            ProductResDto p = ProductResDto.builder()
-                    .productId(product.getProductId())
-                    .productName(product.getProductName())
-                    .productContent(product.getProductContent())
-                    .productNumber(product.getProductNumber())
-                    .productPrice(product.getProductPrice())
-                    .productImg(product.getProductImg())
-                    .productCreateTime(product.getProductCreateTime())
-                    .productModifyTime(product.getProductModifyTime())
-                    .productCategory(productStatus) // 열거형 상수로 설정
-                    .build();
-            productResDtos.add(p);
+            if(product.getProductStatus() == ProductStatus.SALE) {
+                ProductResDto p = ProductResDto.builder()
+                        .productId(product.getProductId())
+                        .productName(product.getProductName())
+                        .productContent(product.getProductContent())
+                        .productNumber(product.getProductNumber())
+                        .productPrice(product.getProductPrice())
+                        .productImg(product.getProductImg())
+                        .productCreateTime(product.getProductCreateTime())
+                        .productModifyTime(product.getProductModifyTime())
+                        .productCategory(productCategory) // 열거형 상수로 설정
+                        .build();
+                productResDtos.add(p);
+            }
         }
 
         return productResDtos;
@@ -172,13 +186,23 @@ public class ProductServiceImpl implements ProductService{
 
     // 상품 삭제
     @Override
-    public void deleteProduct(Long productId, Long userId) {
-        Product product = productRepository.findByProductId(productId)
+    public void deleteProduct(ProductDeleteReqDto productDeleteReqDto) {
+        Product product = productRepository.findByProductId(productDeleteReqDto.getProductId())
                 .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
 
-        if(product.getUser().getUserId().equals(userId)){
-            productRepository.deleteByProductId(product.getProductId())
-                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
+        if(product.getUser().getUserId().equals(productDeleteReqDto.getUserId())){
+            // productStatus 판매중단으로 변경
+            product.deleteProduct(product.getProductId());
+
+            // purchaseStatus 거절로 변경
+            List<Purchase> purchaseList = purchaseRepository.findAllByProductId(product.getProductId());
+            for(Purchase purchase : purchaseList){
+                if(purchase.getPurchaseStatus() == PurchaseStatus.ORDER || purchase.getPurchaseStatus() == PurchaseStatus.ACCEPT)
+                    purchase.refusePurchaseStatus();
+            }
+
+//            productRepository.deleteByProductId(product.getProductId())
+//                    .orElseThrow(()->new RuntimeException("ProductId가 올바르지 않습니다."));
         }else{
             throw new RuntimeException("상품 판매자만 삭제할 수 있습니다");
         }
@@ -192,7 +216,7 @@ public class ProductServiceImpl implements ProductService{
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for (Product product : productList) {
-            ProductStatus productStatus = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+            ProductCategory productCategory = ProductCategory.valueOf(String.valueOf(product.getProductCategory()));
 
             ProductResDto p = ProductResDto.builder()
                     .productId(product.getProductId())
@@ -203,7 +227,7 @@ public class ProductServiceImpl implements ProductService{
                     .productImg(product.getProductImg())
                     .productCreateTime(product.getProductCreateTime())
                     .productModifyTime(product.getProductModifyTime())
-                    .productCategory(productStatus)
+                    .productCategory(productCategory)
                     .build();
             productResDtos.add(p);
         }

@@ -1,6 +1,5 @@
 package com.greengreen.greengreen.dto.request;
 
-import com.greengreen.greengreen.enums.ProductCategory;
 import lombok.*;
 
 @Getter
@@ -8,6 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductCategoryReqDto {
-    ProductCategory queryCategory;
+public class ProductDeleteReqDto {
+    private Long productId;
+    private Long userId;
 }

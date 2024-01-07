@@ -3,12 +3,14 @@ package com.greengreen.greengreen.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+
 @Getter
 @AllArgsConstructor
-public enum ProductStatus {
-    SALE("판매중"),
-    SOLDOUT("품절"),
-    DISCON("판매중단");
+public enum ProductCategory {
+    SPRING("봄"),
+    SUMMER("여름"),
+    FALL("가을"),
+    WINTER("겨울");
 
     private final String status;
 

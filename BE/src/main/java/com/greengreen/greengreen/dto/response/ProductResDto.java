@@ -1,6 +1,6 @@
 package com.greengreen.greengreen.dto.response;
 
-import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.ProductCategory;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,5 +20,5 @@ public class ProductResDto {
     private String productImg;
     private LocalDateTime productCreateTime;
     private LocalDateTime productModifyTime;
-    private ProductStatus productCategory;
+    private ProductCategory productCategory;
 }

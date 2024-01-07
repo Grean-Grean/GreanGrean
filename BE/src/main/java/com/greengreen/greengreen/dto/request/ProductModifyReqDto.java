@@ -1,12 +1,10 @@
 package com.greengreen.greengreen.dto.request;
 
-import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.ProductCategory;
 import lombok.*;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -34,6 +32,6 @@ public class ProductModifyReqDto {
     @NotBlank(message = "상품 이미지을 입력해야 합니다.")
     private String productImg;
 
-    private ProductStatus productCategory;
+    private ProductCategory productCategory;
 
 }

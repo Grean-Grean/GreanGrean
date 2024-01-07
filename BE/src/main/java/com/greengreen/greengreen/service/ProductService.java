@@ -12,7 +12,7 @@ public interface ProductService {
     ProductDetailResDto detailProduct(Long productId);
     List<ProductResDto> searchQuery(String query, String category);
     void modifyProduct(ProductModifyReqDto productModifyReqDto);
-    void deleteProduct(Long productId, Long userId);
+    void deleteProduct(ProductDeleteReqDto productDeleteReqDto);
 
     List<ProductResDto> queryProduct(String query);
 

@@ -1,10 +1,9 @@
 package com.greengreen.greengreen.dto.response;
 
 import com.greengreen.greengreen.entity.Review;
-import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.ProductCategory;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,6 +23,6 @@ public class ProductDetailResDto {
     private String productImg;
     private LocalDateTime productCreateTime;
     private LocalDateTime productModifyTime;
-    private ProductStatus productCategory;
+    private ProductCategory productCategory;
     private List<Review> review;
 }

@@ -1,6 +1,6 @@
 package com.greengreen.greengreen.dto.request;
 
-import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.ProductCategory;
 import lombok.*;
 
 @Getter
@@ -10,5 +10,5 @@ import lombok.*;
 @AllArgsConstructor
 public class ProductQueryReqDto {
     private String query;
-    private ProductStatus category;
+    private ProductCategory category;
 }

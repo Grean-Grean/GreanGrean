@@ -70,9 +70,9 @@ public class ProductController {
     }
 
     // 상품 삭제
-    @DeleteMapping("/delete/{productId}/{userId}")
-    public ResponseEntity<Void> productDelete(@PathVariable Long productId, @PathVariable Long userId){
-        productService.deleteProduct(productId, userId);
+    @PutMapping("/delete")
+    public ResponseEntity<Void> productDelete(@Valid @RequestBody ProductDeleteReqDto productDeleteReqDto){
+        productService.deleteProduct(productDeleteReqDto);
 
         return ResponseEntity.ok().build();
     }

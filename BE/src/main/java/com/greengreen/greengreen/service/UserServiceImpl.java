@@ -1,13 +1,12 @@
 package com.greengreen.greengreen.service;
 
-import com.greengreen.greengreen.dto.request.UserIdReqDto;
 import com.greengreen.greengreen.dto.request.UserModifyReqDto;
 import com.greengreen.greengreen.dto.request.UserRegistReqDto;
 import com.greengreen.greengreen.dto.response.*;
 import com.greengreen.greengreen.entity.Product;
 import com.greengreen.greengreen.entity.Purchase;
 import com.greengreen.greengreen.entity.User;
-import com.greengreen.greengreen.enums.ProductStatus;
+import com.greengreen.greengreen.enums.ProductCategory;
 import com.greengreen.greengreen.enums.PurchaseStatus;
 import com.greengreen.greengreen.repository.ProductRepository;
 import com.greengreen.greengreen.repository.PurchaseRepository;
@@ -155,7 +154,7 @@ public class UserServiceImpl implements UserService{
         List<ProductResDto> productResDtos = new ArrayList<>();
 
         for(Product product : productList){
-            ProductStatus productCategory = ProductStatus.valueOf(String.valueOf(product.getProductCategory()));
+            ProductCategory productCategory = ProductCategory.valueOf(String.valueOf(product.getProductCategory()));
             ProductResDto p = ProductResDto.builder()
                     .productId(product.getProductId())
                     .productName(product.getProductName())
