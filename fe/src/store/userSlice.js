@@ -6,6 +6,7 @@ const userSlice = createSlice({
   initialState: {
     userID: null,
     userNickName: null,
+    userName: null,
     userEmail: null,
     userPassword: null,
     isLoggedIn: false,
@@ -14,6 +15,7 @@ const userSlice = createSlice({
     setUser(state, action) {
       state.userID = action.payload.userID;
       state.userNickName = action.payload.userNickName;
+      state.userName = action.payload.userName;
       state.userEmail = action.payload.userEmail;
       state.userPassword = action.payload.userPassword;
       state.isLoggedIn = true;
@@ -21,6 +23,7 @@ const userSlice = createSlice({
     clearUser(state) {
       state.userID = null;
       state.userNickName = null;
+      state.userName = null;
       state.userEmail = null;
       state.userPassword = null;
       state.isLoggedIn = false;

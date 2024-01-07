@@ -23,7 +23,8 @@
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
   color: #bf3e3e;
-  font-size: 10px;
+  font-size: 13px;
+  margin-left: 5px;
   word-wrap: break-word;
   /* display: flex;
   justify-content: center;

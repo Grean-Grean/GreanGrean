@@ -41,6 +41,7 @@ const SellList = ({ sellData }) => {
             <th>상품 코드</th>
             <th>주문 날짜</th>
             <th>주문 수량</th>
+            <th>결제 금액</th>
             <th>주문자명</th>
             <th>배송지</th>
             <th>전화번호</th>
@@ -56,6 +57,7 @@ const SellList = ({ sellData }) => {
               <td>{sell.productId}</td>
               <td>{sell.purchaseTime}</td>
               <td>{sell.purchaseNumber} 개</td>
+              <td>{sell.purchasePrice * sell.purchaseNumber} 원</td>
               <td>{sell.purchaseName}</td>
               <td>{sell.purchaseAddress}</td>
               <td>{sell.purchasePhoneNumber}</td>

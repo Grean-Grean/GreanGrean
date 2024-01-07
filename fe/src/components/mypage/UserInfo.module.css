@@ -9,6 +9,17 @@
   margin-bottom: 20px;
 }
 
+.inner input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 350px;
+  padding: 8px 15px;
+  margin-top: 15px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: 2px #214c2d solid;
+}
+
 .passwordIcon {
   position: absolute;
   right: 10px;
@@ -76,10 +87,18 @@ label {
   width: 80px;
 }
 
-.caution {
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 500;
+.alert.caution {
   color: #bf3e3e;
-  font-size: 14px;
+}
+
+.alert.pass {
+  color: #214c2d;
+}
+
+.alert {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
   word-wrap: break-word;
+  margin-left: 95px;
 }

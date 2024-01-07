@@ -1,26 +1,15 @@
 import { useState, useEffect } from "react";
 import styles from "./OrderDetail.module.css";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice";
 
 function OrderDetail({ orderData }) {
+  axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+  const user = useSelector(selectUser);
   const [productDetails, setProductDetails] = useState([]);
 
-  useEffect(() => {
-    axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-    const fetchData = async () => {
-      const details = [];
-      for (const order of orderData) {
-        try {
-          const response = await axios.get(`/product/${order.productId}`);
-          details.push(response.data);
-        } catch (error) {
-          console.error("Error fetching product details:", error);
-        }
-      }
-      setProductDetails(details);
-    };
-    fetchData();
-  }, [orderData]);
+  console.log(user.userID);
 
   return (
     <>

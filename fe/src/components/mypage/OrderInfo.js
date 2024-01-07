@@ -15,40 +15,47 @@ function OrderInfo() {
   console.log(user.userNickName);
   console.log(user.userID);
 
-  // const [orderData, setOrderData] = useState([]);
+  const [orderData, setOrderData] = useState([]);
 
-  // useEffect(() => {
-  //   axios.get(`/user/purchasehistory`).then((response) => {
-  //     setOrderData(response.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(`/user/purchasehistory/${user.userID}`)
+      .then((response) => {
+        setOrderData(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
-  const orderData = [
-    {
-      userId: 1,
-      productId: 123,
-      purchaseName: "최진아",
-      purchaseAddress: "대전 유성구 원내동 92-6번지 501호",
-      purchaseNumber: 1,
-      purchasePhoneNumber: "010-1111-2222",
-    },
-    {
-      userId: 1,
-      productId: 124,
-      purchaseName: "이혜진",
-      purchaseAddress: "대전 유성구 00동 00번지 0000호",
-      purchaseNumber: 2,
-      purchasePhoneNumber: "010-1111-3333",
-    },
-    {
-      userId: 1,
-      productId: 125,
-      purchaseName: "박재현",
-      purchaseAddress: "대전 서구 00번로 00 503호",
-      purchaseNumber: 3,
-      purchasePhoneNumber: "010-1111-4444",
-    },
-  ];
+  console.log(orderData);
+
+  // const orderData = [
+  //   {
+  //     userId: 1,
+  //     productId: 123,
+  //     purchaseName: "최진아",
+  //     purchaseAddress: "대전 유성구 원내동 92-6번지 501호",
+  //     purchaseNumber: 1,
+  //     purchasePhoneNumber: "010-1111-2222",
+  //   },
+  //   {
+  //     userId: 1,
+  //     productId: 124,
+  //     purchaseName: "이혜진",
+  //     purchaseAddress: "대전 유성구 00동 00번지 0000호",
+  //     purchaseNumber: 2,
+  //     purchasePhoneNumber: "010-1111-3333",
+  //   },
+  //   {
+  //     userId: 1,
+  //     productId: 125,
+  //     purchaseName: "박재현",
+  //     purchaseAddress: "대전 서구 00번로 00 503호",
+  //     purchaseNumber: 3,
+  //     purchasePhoneNumber: "010-1111-4444",
+  //   },
+  // ];
 
   return (
     <Sidebar>

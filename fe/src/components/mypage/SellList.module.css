@@ -1,8 +1,9 @@
 body {
   color: black;
-  font: 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
+  font: 16px/26px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light",
     "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
 }
+
 table {
   border-collapse: separate;
   border-spacing: 0;

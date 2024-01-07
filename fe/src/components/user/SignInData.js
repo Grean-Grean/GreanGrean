@@ -54,6 +54,7 @@ function SignInData(props) {
           setUser({
             userID: response.data.userId,
             userNickName: response.data.userNickName,
+            userName: response.data.userName,
             userEmail: signInData.userEmail,
             userPassword: signInData.userPassword,
           })

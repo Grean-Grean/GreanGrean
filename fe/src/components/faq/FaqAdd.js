@@ -15,8 +15,6 @@ function FaqAdd() {
     userNickName: "admin",
   });
 
-  console.log(faqData);
-
   const handleInputChange = (e) => {
     const { id, value } = e.target; // "id"와 "value"를 가져옵니다.
     setFaqData({
