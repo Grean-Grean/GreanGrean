@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProductAdd.css";
 
 const SERVER_URL = process.env.REACT_APP_API_URL;
 
 const ProductAdd = () => {
+  const navigate = useNavigate();
+
   const [file, setFile] = useState(null);
   const [imageSrc, setImageSrc] = useState("");
   const filename = "";
@@ -76,6 +79,7 @@ const ProductAdd = () => {
 
       if (response.ok) {
         alert("상품 등록 성공");
+        navigate(-1);
       } else {
         alert("상품 등록 실패");
       }

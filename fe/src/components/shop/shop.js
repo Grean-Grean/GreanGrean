@@ -256,7 +256,6 @@ const Shop = () => {
 
   return (
     <div className="shop">
-      <h2>Shop page</h2>
       <div className="SearchBarArea">
         <SearchBar
           setSearch={setSearch}

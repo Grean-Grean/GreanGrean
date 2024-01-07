@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AddressSearch from "./AddressSearch";
 import "./ProductBuy.css";
 import axios from "axios";
@@ -18,6 +18,7 @@ const SERVER_URL = process.env.REACT_APP_API_URL;
 const ProductBuy = ({ number }) => {
   const location = useLocation();
   const locationState = location.state;
+  const navigate = useNavigate();
 
   //구매 숫자
   console.log(locationState.number);
@@ -71,6 +72,7 @@ const ProductBuy = ({ number }) => {
       .post(`${SERVER_URL}/purchase/order`, returndata)
       .then((response) => {
         console.log("성공");
+        // navigate(`/shop`);
         // if (response.ok) {
         //     alert('상품 구매 성공');
         // } else {
