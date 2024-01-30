@@ -8,16 +8,21 @@
 }
 
 /* 공통 label 스타일 */
-.label {
-  font-family: Noto Sans;
-  font-size: 20px;
-  font-style: normal;
+.contentcontainer label {
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 600;
-  line-height: normal;
+  font-size: 20px;
   letter-spacing: 1.2px;
-  text-align: left; /* label 텍스트를 왼쪽 정렬 */
-  margin-right: 20px; /* label과 input 사이 간격 설정 */
+  margin-right: 20px;
   padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.contentcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 /* 공통 input 스타일 */
@@ -26,13 +31,16 @@
   border-radius: 5px;
   border: 1.5px solid var(--Main-Green, #214c2d);
   background: var(--white, #fff);
-  width: 100%; /* 가로로 꽉 채우기 */
   padding: 10px; /* 내용 input 필드에 대한 패딩 설정 */
+  justify-content: space-between;
+  white-space: nowrap;
 }
 
-/* 내용 label 및 내용 input 필드 스타일 */
-.faq_content {
-  margin-top: 20px; /* 내용 input 필드 위에 20px 패딩 추가 */
+.faq_title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  width: 600px;
 }
 
 .faqadd_button {

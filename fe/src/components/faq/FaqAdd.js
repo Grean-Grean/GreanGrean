@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Styles from "./FaqAdd.module.css";
+import styles from "./FaqAdd.module.css";
 
 function FaqAdd() {
   axios.defaults.baseURL = process.env.REACT_APP_API_URL;
@@ -40,35 +40,38 @@ function FaqAdd() {
     navigate("/faq");
   };
   return (
-    <div className={Styles.faqadd_background}>
-      <div>
-        <label className={Styles.label} htmlFor="faqtitle">
-          제목
-        </label>
-        <input
-          className={Styles.faq_title}
-          type="text"
-          id="faqTitle"
-          placeholder="제목을 입력하세요."
-          value={faqData.faqTitle}
-          onChange={handleInputChange}
-        ></input>
+    <div className={styles.faqadd_background}>
+      <div className={styles.contentcontainer}>
+        <div>
+          <label className={styles.label} htmlFor="faqtitle">
+            제목
+          </label>
+          <input
+            className={styles.faq_title}
+            type="text"
+            id="faqTitle"
+            placeholder="제목을 입력하세요."
+            value={faqData.faqTitle}
+            onChange={handleInputChange}
+          ></input>
+        </div>
+        <div>
+          <label className={styles.label} htmlFor="faqcontent">
+            내용
+          </label>
+          <input
+            className={styles.faq_content}
+            type="text"
+            id="faqContent"
+            name="faqContent"
+            placeholder="내용을 추가하세요."
+            value={faqData.faqContent}
+            onChange={handleInputChange}
+          ></input>
+        </div>
       </div>
-      <div>
-        <label className={Styles.label} htmlFor="faqcontent">
-          내용
-        </label>
-        <input
-          className={Styles.faq_content}
-          type="text"
-          id="faqContent"
-          name="faqContent"
-          placeholder="내용을 추가하세요."
-          value={faqData.faqContent}
-          onChange={handleInputChange}
-        ></input>
-      </div>
-      <button className={Styles.faqadd_button} onClick={handleFaqAdd}>
+
+      <button className={styles.faqadd_button} onClick={handleFaqAdd}>
         추가하기
       </button>
     </div>

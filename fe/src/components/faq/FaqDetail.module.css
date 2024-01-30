@@ -10,6 +10,7 @@
 .faq-content {
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
+  white-space: nowrap;
 }
 
 .faq-title {
@@ -18,6 +19,7 @@
   font-size: 18px;
   display: flex;
   justify-content: space-between;
+  white-space: nowrap;
 }
 
 /* 아코디언 아이콘의 스타일 */
@@ -28,21 +30,25 @@
 /* 기본 가로선 스타일 */
 .faq-divider {
   border-bottom: 1px solid #ccc;
+  white-space: nowrap;
 }
 
 /* 활성화된 가로선 스타일 */
 .faq-divider.active {
   border-bottom: 2px solid #000; /* 두꺼운 가로선 스타일 */
+  white-space: nowrap;
 }
 
 /* 타이틀 위의 가로선 스타일 */
 .faq-title-divider {
   border-top: 1px solid #ccc;
+  white-space: nowrap;
 }
 
 /* 타이틀-콘텐츠 사이의 두꺼운 가로선 스타일 */
 .faq-title-content-divider {
   border-top: 2px solid #000; /* 두꺼운 가로선 스타일 */
+  white-space: nowrap;
 }
 
 .gray-box button {
@@ -54,14 +60,17 @@
   margin: 7px 0px 20px 7px;
   border: none;
   border-radius: 3px;
+  white-space: nowrap;
 }
 
 .gray-box {
   text-align: right;
+  white-space: nowrap;
 }
 
 .gray-box button:active {
   outline: 2px solid #696969; /* 원하는 스타일 및 색상을 적용합니다 */
+  white-space: nowrap;
 }
 
 textarea {

@@ -152,7 +152,7 @@ function FaqDetail({ faqData }) {
   return (
     <div className={styles["faq-container"]}>
       {faqData.map((faq, index) => (
-        <div key={faq.faqid}>
+        <div>
           <div className={styles["faq-title-content-divider"]} />
           <div className={styles["faq-title"]}>
             <span onClick={() => toggleAccordion(index)}>{faq.faqTitle}</span>
